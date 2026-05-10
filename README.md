@@ -1,2 +1,2 @@
-# CineMaxGrupo7CO-LabA
+# CineMaxGruppo7CO-LabA
 Progetto CineMax del gruppo 7 
