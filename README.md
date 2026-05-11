@@ -1,2 +1,2 @@
 # CineMaxGruppo7CO-LabA
-Progetto CineMax del gruppo 7 
+Progetto Menu del gruppo 7 

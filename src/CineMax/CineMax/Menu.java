@@ -1,12 +1,13 @@
-import prog.io.*;
-import prog.utili.*;
+package CineMax;
 
-public class CineMax {
+import prog.io.*;
+
+public class Menu {
     public void main(String[] args) {
         ConsoleOutputManager out = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
 
-        int scelta = in.readInt("Buon giorno! Sceigli como voule logare: \n 1.Clienti\n2.Proiezionista\n3.bigliettai\n4.Non registrati\n");
+        int scelta = in.readInt("Buon giorno! Sceigli como voule logare: \n 1.Clienti\n2.Proiezionista\n3.bigliettai\n4.Guest\n");
         // Scelta diversa
         if ((scelta != 1) & (scelta != 2) & (scelta != 3) & (scelta != 4)){
             out.println("scelta non valida");

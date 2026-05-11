@@ -1,11 +1,13 @@
+package CineMax;
+
 import prog.io.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class Utenti {
+public class CoseFile {
 
 
-    public Utenti() throws IOException {
+    public CoseFile() throws IOException {
     }
 
     public static void main(String[] args) throws IOException {
@@ -27,5 +29,3 @@ public class Utenti {
         writer.close();
     }
 }
-
-
