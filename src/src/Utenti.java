@@ -7,8 +7,8 @@ public class Utenti {
     public static void main(String[] args) throws FileNotFoundException {
         ConsoleOutputManager out = new ConsoleOutputManager();
 
-    File files = new File("D:\\IntelliJ\\Projetos\\CineMaxGrupo7CO-LabA\\src\\src");
-    Scanner scan = new Scanner(files);
+    File file = new File("D:\\IntelliJ\\Projetos\\CineMaxGrupo7CO-LabA\\src\\src");
+    Scanner scan = new Scanner(file);
 
     out.println(scan.nextLine());
 
