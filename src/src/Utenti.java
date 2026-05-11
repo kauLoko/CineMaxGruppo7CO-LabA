@@ -1,19 +1,32 @@
 import prog.io.*;
-import prog.utili.*;
+
 import java.io.*;
 import java.util.Scanner;
 
 public class Utenti {
-    public static void main(String[] args) throws FileNotFoundException {
+
+
+    public Utenti() throws IOException {
+    }
+
+    public static void main(String[] args) throws IOException {
         ConsoleOutputManager out = new ConsoleOutputManager();
+        ConsoleInputManager in = new ConsoleInputManager();
 
-    File file = new File("D:\\IntelliJ\\Projetos\\CineMaxGrupo7CO-LabA\\src\\src\\UntentiIInfo.txt");
-    Scanner scan = new Scanner(file);
+        File file = new File("UntentiIInfo2.txt");
+        Scanner scan = new Scanner(file);
+        String fileContent = in.readLine();
 
-    while(scan.hasNextLine()){
-    out.println(scan.nextLine());}
+        while (scan.hasNextLine()) {
+            fileContent = fileContent.concat(scan.nextLine() + "\n");
+        }
+        out.println(fileContent);
 
 
+        BufferedWriter writer = new BufferedWriter(new FileWriter("UntentiIInfo2.txt"));
+        writer.write("\n" + fileContent);
+        writer.close();
     }
 }
+
 
