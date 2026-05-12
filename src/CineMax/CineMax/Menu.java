@@ -2,7 +2,7 @@ package CineMax;
 
 import prog.io.*;
 
-import java.io.BufferedReader;
+import java.io.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,11 +31,27 @@ public class Menu{
                 String passLog = in.readLine("Passoword: ");
 
                 File file = new File("UntentiIInfo2.txt");
-                BufferedReader reader = new BufferedReader(new FileReader(file));
                 Scanner scan = new Scanner(file);
+                String fileContent = "";
+
+                while (scan.hasNextLine()) {
+                    fileContent = fileContent.concat(scan.nextLine() + "\n");
+                }
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("UntentiIInfo2.txt"));
+                writer.write(fileContent);
+                writer.close();
+
+                String perLeggere = "";
 
                 while(scan.hasNextLine()){
-
+                    writer.write(perLeggere + "\n");
+                    if(perLeggere.contains(userLog) && perLeggere.contains(passLog)){
+                        out.println("Login Sucesso!");
+                    }
+                    else {
+                        out.println("Username o Password sbagliato");
+                    }
                 }
 
             }

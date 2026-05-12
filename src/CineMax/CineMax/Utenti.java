@@ -18,7 +18,7 @@ public class Utenti {
 
     //Construtore
 
-    public Utenti(String na,String cg,String user,int ps, String nsct,String dom,String ro){
+    public Utenti(String na,String cg,String user,int ps, String nsct,String dom,String ro) {
         nome = na;
         cognome = cg;
         username = user;
