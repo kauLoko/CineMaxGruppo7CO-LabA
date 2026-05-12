@@ -2,8 +2,10 @@ package CineMax;
 
 import prog.io.*;
 
+import java.io.IOException;
+
 public class Menu{
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException {
         ConsoleOutputManager out = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
 
@@ -24,15 +26,16 @@ public class Menu{
             }
             if (scelta == 2) {
                 //Registrare
-                String nome = in.readLine("Tuo nome:\n");
-                String cognome = in.readLine("\nTuo cognome:\n");
-                String username = in.readLine("\nTuo username:\n");
-                int password= in.readInt("\nTua password(Solo Numero):\n");
-                String nascista = in.readLine("\nTua nascita:\n");
-                String domicilio  = in.readLine("\nTuo Domiciolio:\n");
-                char role = in.readChar("\nTuo Role(Solo la prima lettera):\nc:clienti\np:proiezionista\nb:bigliettaio");
+                String nome = in.readLine("Tuo nome: ");
+                String cognome = in.readLine("\nTuo cognome: ");
+                String username = in.readLine("\nTuo username: ");
+                int password= in.readInt("\nTua password(Solo Numero): ");
+                String nascista = in.readLine("\nTua nascita: ");
+                String domicilio  = in.readLine("\nTuo Domiciolio: ");
+                String role = in.readLine("\nTuo Role(Solo la prima lettera):\nc:clienti\np:proiezionista\nb:bigliettaio\n");
 
                Utenti nuovoUtenti = new Utenti(nome,cognome,username,password,nascista,domicilio,role);
+               nuovoUtenti.registraCliente();
                out.println(nuovoUtenti.toString());
             }
         }
