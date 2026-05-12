@@ -43,14 +43,6 @@ public class Utenti {
         writer.close();
     }
 
-    public void usernameLogin(){
-        String userLog = username;
-    }
-
-    public void passwordLogin(){
-        int passLog = password;
-    }
-
     public String toString(){
         return "\nIl tuo  è Utenti:" + nome + " " + cognome +"\nUsername: "+ username + "\nPassword: " + String.valueOf(password)
                 + "\nNascita: " + nascista + "\nDomicilio: " + domicilio + "\nRole: " + role;

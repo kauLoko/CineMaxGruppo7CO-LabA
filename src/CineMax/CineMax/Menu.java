@@ -2,7 +2,11 @@ package CineMax;
 
 import prog.io.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Menu{
     public static void main (String[] args) throws IOException {
@@ -25,6 +29,9 @@ public class Menu{
                 //fare login
                 String userLog = in.readLine("Username: ");
                 String passLog = in.readLine("Passoword: ");
+
+                File file = new File("UntentiIInfo2.txt");
+                BufferedReader reader = new BufferedReader(new FileReader(file));
 
             }
             if (scelta == 2) {
