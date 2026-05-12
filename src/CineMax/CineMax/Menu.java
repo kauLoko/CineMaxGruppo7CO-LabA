@@ -26,7 +26,6 @@ public class Menu{
                 String userLog = in.readLine("Username: ");
                 String passLog = in.readLine("Passoword: ");
 
-
             }
             if (scelta == 2) {
                 //Registrare
