@@ -32,6 +32,11 @@ public class Menu{
 
                 File file = new File("UntentiIInfo2.txt");
                 BufferedReader reader = new BufferedReader(new FileReader(file));
+                Scanner scan = new Scanner(file);
+
+                while(scan.hasNextLine()){
+
+                }
 
             }
             if (scelta == 2) {
