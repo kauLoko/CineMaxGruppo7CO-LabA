@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static CineMax.Proiezioni.*;
 import static CineMax.Utenti.*;
 
 public class Menu
@@ -36,16 +37,11 @@ public class Menu
         }
         if (scelta == 3) 
         {
+            aggiungiProiezione(scanner); //Testing
             //accesso come ospite
 
         }
-        
-
-        //Guest
-        if (scelta == 2) {
-
-            }
-        }
-
-
     }
+
+
+}
