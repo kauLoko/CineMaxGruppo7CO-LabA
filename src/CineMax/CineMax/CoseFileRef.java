@@ -1,6 +1,6 @@
 package CineMax;
 
-import prog.io.*;
+/*import prog.io.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -27,3 +27,4 @@ public class CoseFile {
         writer.close();
     }
 }
+*/

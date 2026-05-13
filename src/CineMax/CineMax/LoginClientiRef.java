@@ -1,6 +1,6 @@
 package CineMax;
 
-import java.io.*;
+/*import java.io.*;
 import java.util.Scanner;
 
 public class LoginClienti {
@@ -69,3 +69,4 @@ public class LoginClienti {
         }
     }
 
+*/

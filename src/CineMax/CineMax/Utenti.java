@@ -1,5 +1,7 @@
 package CineMax;
 
+import prog.io.ConsoleInputManager;
+import prog.io.ConsoleOutputManager;
 import java.io.*;
 import java.util.Scanner;
 
@@ -29,7 +31,7 @@ public class Utenti {
     //Metodi
 
     //RegistraClienti
-    public static void registrareCliente(Scanner scanner) {
+    public static void registrareCliente(Scanner scanner) throws IOException {
 
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -46,11 +48,23 @@ public class Utenti {
         System.out.print("role: ");
         String role = scanner.nextLine();
 
+        ConsoleOutputManager ou = new ConsoleOutputManager();
+        ConsoleInputManager in = new ConsoleInputManager();
+
+        File file = new File("UtentiInfo.txt");
+        Scanner scan = new Scanner(file);
+        String fileContent = "";
+
+        while (scan.hasNextLine()) {
+            fileContent = fileContent.concat(scan.nextLine() +"\n");
+        }
+
         try (FileWriter fw = new FileWriter(fileUtenti);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
+
             // Salvare
-            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + role);
+            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + role + "\n" + fileContent);
             System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
