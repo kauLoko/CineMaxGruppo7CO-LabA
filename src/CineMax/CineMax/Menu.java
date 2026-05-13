@@ -32,7 +32,7 @@ public class Menu
         if (scelta == 2) 
         {
             //registrare
-            registrareCliente(scanner);
+            registrareUtente(scanner);
         }
         if (scelta == 3) 
         {
