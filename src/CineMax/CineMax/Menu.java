@@ -9,33 +9,37 @@ import java.util.Scanner;
 
 import static CineMax.Utenti.*;
 
-public class Menu{
-    public static void main (String[] args) throws IOException {
+public class Menu
+{
+    public static void main (String[] args) throws IOException 
+    {
         ConsoleOutputManager out = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
         Scanner scanner = new Scanner(System.in);
 
-        int scelta = in.readInt("Buon giorno! Sceigli como voule logare: \n1.Log In\n2.Guest\n");
+        int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
         // Scelta diversa
-        if ((scelta != 1) && (scelta != 2)){
-            out.println("scelta non valida");
+        if ((scelta != 1) && (scelta != 2) && (scelta != 3)){
+            out.println("Scelta non valida");
         }
 
-        //LogIn
-        if (scelta == 1) {
-            scelta = in.readInt("Scegli:\n 1.login\n 2.Registrare\n");
-            if ((scelta != 1) & (scelta != 2)){
-                out.println("scelta non valida");
-            }
-            if (scelta == 1) {
-                //fare login
-                fareLogin(scanner);
-            }
-            if (scelta == 2) {
-                //Registrare
-                registrareCliente(scanner);
-            }
+       
+        if (scelta == 1) 
+        {
+            //login
+            fareLogin(scanner);
         }
+        if (scelta == 2) 
+        {
+            //registrare
+            registrareCliente(scanner);
+        }
+        if (scelta == 3) 
+        {
+            //accesso come ospite
+
+        }
+        
 
         //Guest
         if (scelta == 2) {

@@ -12,42 +12,44 @@ public class LoginClienti {
             Scanner scanner = new Scanner(System.in);
             System.out.println("1 - Registrare\n2 - Login");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar buffer
+            scanner.nextLine(); //Cancella il buffer
 
-            if (opcao == 1) {
+            if (opcao == 1) 
+            {
                 registraCliente(scanner);
-            } else if (opcao == 2) {
+            } else if (opcao == 2) 
+            {
                 fazerLogin(scanner);
             }
         }
 
-        // Método para cadastrar usuário e senha no arquivo
+        // Metodo per registrare nome utente e password nel file
 
         public static void registraCliente(Scanner scanner) {
-            System.out.print("Nome de usuário: ");
+            System.out.print("Nome utente: ");
             String user = scanner.nextLine();
-            System.out.print("Senha: ");
+            System.out.print("Password: ");
             String pass = scanner.nextLine();
 
             try (FileWriter fw = new FileWriter(ARQUIVO_USUARIOS, true);
                  BufferedWriter bw = new BufferedWriter(fw);
                  PrintWriter out = new PrintWriter(bw)) {
-                // Salva no formato: usuario,senha
+                // Salvato nel formato: nomeutente, password
                 out.println(user + "," + pass);
-                System.out.println("Usuário cadastrado com sucesso!");
+                System.out.println("Utente registrato con successo!");
             } catch (IOException e) {
-                System.out.println("Erro ao salvar arquivo: " + e.getMessage());
+                System.out.println("Errore durante il salvataggio del file: " + e.getMessage());
             }
         }
 
-        // Método para ler o arquivo e verificar o login
+        // Metodo per leggere il file e verificare l'accesso
         public static void fazerLogin(Scanner scanner) {
-            System.out.print("Usuário: ");
+            System.out.print("Utente: ");
             String user = scanner.nextLine();
-            System.out.print("Senha: ");
+            System.out.print("Password: ");
             String pass = scanner.nextLine();
 
-            boolean autenticado = false;
+            boolean autenticazione = false;
             try (Scanner fileScanner = new Scanner(new File(ARQUIVO_USUARIOS))) {
                 while (fileScanner.hasNextLine()) {
                     String linha = fileScanner.nextLine();
@@ -58,13 +60,13 @@ public class LoginClienti {
                     }
                 }
             } catch (FileNotFoundException e) {
-                System.out.println("Nenhum usuário cadastrado ainda.");
+                System.out.println("Ancora nessun utente registrato");
             }
 
             if (autenticado) {
-                System.out.println("Login bem-sucedido!");
+                System.out.println("Login effettuato con successo!");
             } else {
-                System.out.println("Usuário ou senha incorretos.");
+                System.out.println("Nome utente o password errati");
             }
         }
     }
