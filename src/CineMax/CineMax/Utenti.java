@@ -3,6 +3,7 @@ package CineMax;
 import prog.io.ConsoleInputManager;
 import prog.io.ConsoleOutputManager;
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utenti {
@@ -39,8 +40,21 @@ public class Utenti {
         String cognome = scanner.nextLine();
         System.out.print("Username: ");
         String username = scanner.nextLine();
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
+        //vedi se la password é un numero
+        int password = 0;
+        boolean entrataValida = false;
+        while (!entrataValida) {
+            try {
+                System.out.print("Password: ");
+                password = scanner.nextInt(); // Prova a leggere un Int
+                scanner.nextLine();
+                entrataValida = true; // Se leggi, usce dell loop
+            } catch (InputMismatchException e) {
+                // 2. Errore e non esci dell loop
+                System.out.println("Errore:Password solo numeri.");
+                scanner.next();
+            }
+        }
         System.out.print("Nascista: ");
         String nascista = scanner.nextLine();
         System.out.print("Domicilio: ");
