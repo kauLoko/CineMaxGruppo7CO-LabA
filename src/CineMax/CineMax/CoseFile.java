@@ -21,8 +21,6 @@ public class CoseFile {
         while (scan.hasNextLine()) {
             fileContent = fileContent.concat(scan.nextLine() + "\n");
         }
-        out.println(fileContent);
-
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("UntentiIInfo2.txt"));
         writer.write("\n" + fileContent);

@@ -1,9 +1,6 @@
 package CineMax;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Utenti {
@@ -15,6 +12,7 @@ public class Utenti {
     private String nascista;
     private String domicilio;
     private String role;
+    private static final String fileUtenti = "UtentiInfo.txt";
 
     //Construtore
 
@@ -30,17 +28,61 @@ public class Utenti {
 
     //Metodi
 
-    public void registraCliente() throws IOException {
-        File file = new File("UntentiIInfo2.txt");
-        Scanner scan = new Scanner(file);
-        String fileContent = "" ;
+    //RegistraClienti
+    public static void registrareCliente(Scanner scanner) {
 
-        while (scan.hasNextLine()) {
-            fileContent = fileContent.concat(scan.nextLine() + "\n");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("cognome: ");
+        String cognome = scanner.nextLine();
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+        System.out.print("Nascista: ");
+        String nascista = scanner.nextLine();
+        System.out.print("domicilio: ");
+        String domicilio = scanner.nextLine();
+        System.out.print("role: ");
+        String role = scanner.nextLine();
+
+        try (FileWriter fw = new FileWriter(fileUtenti);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            // Salvare
+            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + role);
+            System.out.println("Registrato con sucesso!");
+        } catch (IOException e) {
+            System.out.println("Errore in salvare file: " + e.getMessage());
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter("UntentiIInfo2.txt"));
-        writer.write(fileContent + nome + " " + cognome + " "  + username + " " + password + " " + nascista + " " +domicilio + " " + role);
-        writer.close();
+    }
+
+    //Login
+    public static void fareLogin(Scanner scanner) {
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        boolean autenticado = false;
+        try (Scanner fileScanner = new Scanner(new File(fileUtenti))) {
+            while (fileScanner.hasNextLine()) {
+                String linha = fileScanner.nextLine();
+                String[] dados = linha.split(",");
+                if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
+                    autenticado = true;
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Non registrato.");
+        }
+
+        if (autenticado) {
+            System.out.println("Login bene-sucedido!");
+        } else {
+            System.out.println("Username o password incorrect.");
+        }
     }
 
     public String toString(){
