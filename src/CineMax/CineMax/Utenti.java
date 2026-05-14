@@ -40,9 +40,11 @@ public class Utenti {
         String cognome = scanner.nextLine();
         System.out.print("Username: ");
         String username = scanner.nextLine();
-        //vedi se la password é un numero
+        //vedi se la password é un numer
         int password = 0;
+
         boolean entrataValida = false;
+
         while (!entrataValida) {
             try {
                 System.out.print("Password: ");
