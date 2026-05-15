@@ -2,10 +2,7 @@ package CineMax;
 
 import prog.io.*;
 import java.io.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 import static CineMax.Proiezioni.*;
 import static CineMax.Utenti.*;
@@ -29,6 +26,8 @@ public class Menu
         {
             //login
             fareLogin(scanner);
+
+
         }
         if (scelta == 2) 
         {

@@ -1,3 +1,6 @@
+l,l,l,2,l,l,Balconista
+k,k,k,4,k,k,Proiezionista
+k,k,k,6,k,k,Clienti
 k,k,k,5,gt,g,g
 k,k,k,3,4,5,3
 k,k,k,3,,2,2
@@ -6,6 +9,9 @@ t,t,t,t,t,t,t
 h,h,h,h,h,h,h
 j,j,j,j,j,j,j
 k,k,k,k,k,k,k
+
+
+
 
 
 

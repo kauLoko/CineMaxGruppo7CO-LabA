@@ -1,10 +1,9 @@
 package CineMax;
 
-import prog.io.ConsoleInputManager;
-import prog.io.ConsoleOutputManager;
+import prog.io.*;
 import java.io.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class Utenti {
     //Campi
@@ -14,12 +13,12 @@ public class Utenti {
     private int password;
     private String nascita;
     private String domicilio;
-    private String ruolo;
+    private int ruolo;
     private static final String fileUtenti = "InfoUtenti.txt";
 
     //Construtore
 
-    public Utenti(String nome, String cognome, String username, int password, String nascita, String domicilio, String ruolo) {
+    public Utenti(String nome, String cognome, String username, int password, String nascita, String domicilio, int ruolo) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
@@ -61,8 +60,36 @@ public class Utenti {
         String nascista = scanner.nextLine();
         System.out.print("Domicilio: ");
         String domicilio = scanner.nextLine();
-        System.out.print("Ruolo: ");
-        String role = scanner.nextLine();
+
+        String nomeRuolo = "";
+        entrataValida = true;
+        while(entrataValida) {
+            try {
+            System.out.print("Ruolo:(1.Clienti/2.Proiezionista/3.Balconista) SOLO IL NUMERO: ");
+            int role = scanner.nextInt();
+            if (role == 1) {
+                nomeRuolo = "Clienti";
+                entrataValida = false;
+                scanner.nextLine();
+            }
+            else if (role == 2) {
+                nomeRuolo = "Proiezionista";
+                entrataValida = false;
+                scanner.nextLine();
+            }
+            else if (role == 3) {
+                nomeRuolo = "Balconista";
+                entrataValida = false;
+                scanner.nextLine();
+            } else {
+                System.out.print("Entrata non Valida\n");
+                scanner.next();
+            }
+            } catch (InputMismatchException e) {
+                System.out.print("Entrata non Valida\n");
+                scanner.next();
+            }
+        }
 
         ConsoleOutputManager ou = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
@@ -80,7 +107,7 @@ public class Utenti {
              PrintWriter out = new PrintWriter(bw)) {
 
             // Salvare
-            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + role + "\n" + fileContent);
+            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + nomeRuolo + "\n" + fileContent);
             System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
@@ -99,6 +126,7 @@ public class Utenti {
             while (fileScanner.hasNextLine()) {
                 String linha = fileScanner.nextLine();
                 String[] dados = linha.split(",");
+                String tipoLogin = "";
                 if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
                     autenticazione  = true;
                     break;
@@ -109,7 +137,7 @@ public class Utenti {
         }
 
         if (autenticazione ) {
-            System.out.println("Login bene-sucedido!");
+            System.out.println("Login bene-sucedido! Bene-venuto " + username);
         } else {
             System.out.println("Username o password incorrect.");
         }
