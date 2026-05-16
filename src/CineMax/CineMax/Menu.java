@@ -61,7 +61,19 @@ public class Menu
                         if (dados[2].equals(username) && dados[3].equals(password)) {
                             //Tipo Menu:Clienti
                             if (dados[6].equals("Clienti")){
-                                out.println("Clienti");
+                                int sceltaClienti = 0;
+                                boolean continua = true;
+                                while(continua) {
+                                    sceltaClienti = in.readInt("1.Cercare proiezioni\n2.Visualizzare le proprie prenotazioni\n3.Modificare e cancellare le proprie prenotazioni\n4.Logout\n");
+                                    if (sceltaClienti == 1 || sceltaClienti == 2 || sceltaClienti == 3 || sceltaClienti == 4){
+                                        continua = false;
+                                    }
+                                    else{
+                                        out.println("\nScelta non valida!");
+                                    }
+                                }
+
+
 
 
                             }
