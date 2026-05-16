@@ -14,6 +14,7 @@ public class Menu
         ConsoleOutputManager out = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
         Scanner scanner = new Scanner(System.in);
+        String fileUtenti = "InfoUtenti.txt";
 
         int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
         // Scelta diversa
@@ -25,11 +26,67 @@ public class Menu
         if (scelta == 1) 
         {
             //login
-            fareLogin(scanner);
+           // fareLogin(scanner);
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            Scanner fileScanner = new Scanner(new File(fileUtenti));
+            String linha = "";
+            String[] dados = new String[0];
+            String tipoLogin = "";
+
+            boolean autenticazione  = false;
+            try (fileScanner) {
+                while (fileScanner.hasNextLine()) {
+                    linha = fileScanner.nextLine();
+                    dados = linha.split(",");
+
+                    if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
+                        autenticazione  = true;
+                        break;
+                    }
+                }
+            }
+
+            //Acesso autorizato
+            if (autenticazione ) {
+                out.println("Login bene-sucedido! Bene-venuto " + username);
+
+                //tipo di Menu a Aprire
+                try (fileScanner) {
+                    {
+
+                        if (dados[2].equals(username) && dados[3].equals(password)) {
+                            //Tipo Menu:Clienti
+                            if (dados[6].equals("Clienti")){
+                                out.println("Clienti");
+
+
+                            }
+
+                            //Tipo Menu:Proiezionista
+                            else if (dados[6].equals("Proiezionista")){
+                                out.println("Proiezionista");
+
+                            }
+
+                            //Tipo Menu:Balconista
+                            else if (dados[6].equals("Balconista")){
+                                out.println("Balconista");
+
+                            }
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Username o password incorrect.");
+            }
 
 
         }
-        if (scelta == 2) 
+        if (scelta == 2)
         {
             //registrare
             registrareUtente(scanner);

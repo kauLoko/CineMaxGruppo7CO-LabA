@@ -115,7 +115,7 @@ public class Utenti {
     }
 
     //Login
-    public static void fareLogin(Scanner scanner) {
+    /*public static void fareLogin(Scanner scanner) {
         System.out.print("Username: ");
         String username = scanner.nextLine();
         System.out.print("Password: ");
@@ -141,7 +141,7 @@ public class Utenti {
         } else {
             System.out.println("Username o password incorrect.");
         }
-    }
+    }*/
 
     public String toString(){
         return "\nIl tuo  è Utenti:" + nome + " " + cognome +"\nUsername: "+ username + "\nPassword: " + String.valueOf(password)
