@@ -114,35 +114,6 @@ public class Utenti {
         }
     }
 
-    //Login
-    /*public static void fareLogin(Scanner scanner) {
-        System.out.print("Username: ");
-        String username = scanner.nextLine();
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
-
-        boolean autenticazione  = false;
-        try (Scanner fileScanner = new Scanner(new File(fileUtenti))) {
-            while (fileScanner.hasNextLine()) {
-                String linha = fileScanner.nextLine();
-                String[] dados = linha.split(",");
-                String tipoLogin = "";
-                if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
-                    autenticazione  = true;
-                    break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Non registrato.");
-        }
-
-        if (autenticazione ) {
-            System.out.println("Login bene-sucedido! Bene-venuto " + username);
-        } else {
-            System.out.println("Username o password incorrect.");
-        }
-    }*/
-
     public String toString(){
         return "\nIl tuo  è Utenti:" + nome + " " + cognome +"\nUsername: "+ username + "\nPassword: " + String.valueOf(password)
                 + "\nNascita: " + nascita + "\nDomicilio: " + domicilio + "\nRole: " + ruolo;
