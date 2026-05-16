@@ -160,7 +160,6 @@ public class Menu
                 System.out.println("Username o password incorrect.");
             }
 
-
         }
         if (scelta == 2)
         {
@@ -174,6 +173,5 @@ public class Menu
 
         }
     }
-
 
 }
