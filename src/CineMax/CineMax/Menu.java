@@ -82,7 +82,7 @@ public class Menu
                                         }
                                         //Logout
                                         else if(sceltaClienti == 4){
-
+                                            break;
                                         }
                                     }
                                     else{
@@ -114,7 +114,7 @@ public class Menu
                                         }
                                         //Logout
                                         else if(sceltaProiezionista == 4){
-
+                                            break;
                                         }
 
                                     //Scelta non valida
@@ -144,7 +144,7 @@ public class Menu
                                         }
                                         //Logout
                                         else if(sceltaBalconista == 3){
-
+                                            break;
                                         }
 
                                     //Scelta non valida
