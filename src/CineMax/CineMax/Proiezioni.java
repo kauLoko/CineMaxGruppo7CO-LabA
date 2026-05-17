@@ -59,10 +59,10 @@ public class Proiezioni {
 
         try (FileWriter fw = new FileWriter(fileProiezioni);
              BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
+             PrintWriter pw = new PrintWriter(bw)) {
 
             // Salvare
-            out.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
+            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
             System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());

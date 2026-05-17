@@ -15,6 +15,7 @@ public class Menu
         ConsoleInputManager in = new ConsoleInputManager();
         Scanner scanner = new Scanner(System.in);
         String fileUtenti = "InfoUtenti.txt";
+        String fileProizioni = "Proiezione.txt";
 
         int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
         // Scelta diversa
@@ -32,15 +33,15 @@ public class Menu
             System.out.print("Password: ");
             String password = scanner.nextLine();
 
-            Scanner fileScanner = new Scanner(new File(fileUtenti));
+            Scanner fileScannerU = new Scanner(new File(fileUtenti));
+            Scanner fileScannerP = new Scanner(new File(fileProizioni));
             String linha = "";
             String[] dados = new String[0];
-            String tipoLogin = "";
 
             boolean autenticazione  = false;
-            try (fileScanner) {
-                while (fileScanner.hasNextLine()) {
-                    linha = fileScanner.nextLine();
+            try (fileScannerU) {
+                while (fileScannerU.hasNextLine()) {
+                    linha = fileScannerU.nextLine();
                     dados = linha.split(",");
 
                     if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
@@ -55,7 +56,7 @@ public class Menu
                 out.println("Login bene-sucedido!\n\nBene-venuto " + username + "!!");
 
                 //Tipo di Menu a Aprire
-                try (fileScanner) {
+                try (fileScannerU) {
                     {
                         if (dados[2].equals(username) && dados[3].equals(password)) {
 
@@ -64,12 +65,43 @@ public class Menu
                                 int sceltaClienti = 0;
                                 boolean continua = true;
                                 while(continua) {
-                                    sceltaClienti = in.readInt("1.Cercare proiezioni\n2.Visualizzare le proprie prenotazioni\n3.Modificare e cancellare le proprie prenotazioni\n4.Logout\n");
+                                    sceltaClienti = in.readInt("1.Cercare proiezioni e fare Prenotazione\n2.Visualizzare le proprie prenotazioni\n3.Modificare e cancellare le proprie prenotazioni\n4.Logout\n");
                                     if (sceltaClienti == 1 || sceltaClienti == 2 || sceltaClienti == 3 || sceltaClienti == 4){
                                         continua = false;
 
-                                        //Cercare proiezioni
+                                        //Cercare proiezioni e fare Prenotazione
                                         if(sceltaClienti == 1){
+                                            int sceltaMenuCerca = 0;
+                                            continua = true;
+                                            while(continua) {
+                                                sceltaMenuCerca = in.readInt("1.Tutti gli Proiezioni\n2.Cercare per nome\n3.Filtri\n");
+                                                if (sceltaMenuCerca == 1 || sceltaMenuCerca == 2 || sceltaMenuCerca == 3) {
+                                                    continua = false;
+
+                                                    //Tutte Proiezioni
+                                                    if(sceltaMenuCerca == 1){
+                                                        String linhaProiezione = "";
+                                                        String[] dadosProiezione = new String[0];
+                                                        String tuttiProizione = "";
+                                                        try (fileScannerP) {
+                                                            while (fileScannerP.hasNextLine()) {
+                                                                tuttiProizione = tuttiProizione.concat(fileScannerP.nextLine() +"\n");
+                                                            }
+                                                            out.println(tuttiProizione);
+                                                        }
+
+
+                                                    }
+                                                }
+
+                                                else{
+                                                    out.println("Scelta non valida!\n");
+                                                }
+                                            }
+
+
+                                            //farePrenotazione
+
 
                                         }
                                         //Visualizzare le proprie prenotazioni
