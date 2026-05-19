@@ -1,6 +1,6 @@
 package CineMax;
 
-import prog.io.*;
+
 import java.io.*;
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class Menu
         ConsoleInputManager in = new ConsoleInputManager();
         Scanner scanner = new Scanner(System.in);
         String fileUtenti = "InfoUtenti.txt";
-        String fileProizioni = "Proiezione.txt";
+        String fileProiezioni = "Proiezione.txt";
 
         int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
         // Scelta diversa
@@ -34,17 +34,17 @@ public class Menu
             String password = scanner.nextLine();
 
             Scanner fileScannerU = new Scanner(new File(fileUtenti));
-            Scanner fileScannerP = new Scanner(new File(fileProizioni));
-            String linha = "";
-            String[] dados = new String[0];
+            Scanner fileScannerP = new Scanner(new File(fileProiezioni));
+            String linea = "";
+            String[] dati = new String[0];
 
             boolean autenticazione  = false;
             try (fileScannerU) {
                 while (fileScannerU.hasNextLine()) {
-                    linha = fileScannerU.nextLine();
-                    dados = linha.split(",");
+                    linea = fileScannerU.nextLine();
+                    dati = linea.split(",");
 
-                    if (dados.length == 7 && dados[2].equals(username) && dados[3].equals(password)) {
+                    if (dati.length == 7 && dati[2].equals(username) && dati[3].equals(password)) {
                         autenticazione  = true;
                         break;
                     }
@@ -58,10 +58,10 @@ public class Menu
                 //Tipo di Menu a Aprire
                 try (fileScannerU) {
                     {
-                        if (dados[2].equals(username) && dados[3].equals(password)) {
+                        if (dati[2].equals(username) && dati[3].equals(password)) {
 
                             //Tipo Menu:Clienti
-                            if (dados[6].equals("Clienti")){
+                            if (dati[6].equals("Clienti")){
                                 int sceltaClienti = 0;
                                 boolean continua = true;
                                 while(continua) {
@@ -80,8 +80,8 @@ public class Menu
 
                                                     //Tutte Proiezioni
                                                     if(sceltaMenuCerca == 1){
-                                                        String linhaProiezione = "";
-                                                        String[] dadosProiezione = new String[0];
+                                                        String lineaProiezione = "";
+                                                        String[] datiProiezione = new String[0];
                                                         String tuttiProizione = "";
                                                         try (fileScannerP) {
                                                             while (fileScannerP.hasNextLine()) {

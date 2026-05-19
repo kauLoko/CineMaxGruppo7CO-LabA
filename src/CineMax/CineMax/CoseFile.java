@@ -1,16 +1,20 @@
 package CineMax;
 
-/*import prog.io.*;
+import prog.io.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class CoseFile {
+public class CoseFile 
+{
 
 
-    public CoseFile() throws IOException {
+    public CoseFile() throws IOException 
+    {
     }
+    
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException 
+    {
         ConsoleOutputManager out = new ConsoleOutputManager();
         ConsoleInputManager in = new ConsoleInputManager();
 
@@ -18,7 +22,8 @@ public class CoseFile {
         Scanner scan = new Scanner(file);
         String fileContent = in.readLine();
 
-        while (scan.hasNextLine()) {
+        while (scan.hasNextLine()) 
+        {
             fileContent = fileContent.concat(scan.nextLine() + "\n");
         }
 
@@ -27,4 +32,3 @@ public class CoseFile {
         writer.close();
     }
 }
-*/

@@ -1,8 +1,5 @@
 package CineMax;
 
-import prog.io.ConsoleInputManager;
-import prog.io.ConsoleOutputManager;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -46,9 +43,6 @@ public class Proiezioni {
         String etaMin = scanner.nextLine();
 
 
-        ConsoleOutputManager ou = new ConsoleOutputManager();
-        ConsoleInputManager in = new ConsoleInputManager();
-
         File file = new File("Proiezione.txt");
         Scanner scan = new Scanner(file);
         String fileContent = "";
@@ -63,7 +57,7 @@ public class Proiezioni {
 
             // Salvare
             pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
-            System.out.println("Registrato con sucesso!");
+            System.out.println("Registrato con successo!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
         }
