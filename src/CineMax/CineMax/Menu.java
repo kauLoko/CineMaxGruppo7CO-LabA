@@ -1,6 +1,5 @@
 package CineMax;
 
-import prog.io.*;
 import java.io.*;
 import java.util.*;
 
@@ -11,13 +10,13 @@ public class Menu
 {
     public static void main (String[] args) throws IOException 
     {
-        ConsoleOutputManager out = new ConsoleOutputManager();
-        ConsoleInputManager in = new ConsoleInputManager();
         Scanner scanner = new Scanner(System.in);
         String fileUtenti = "InfoUtenti.txt";
         String fileProiezioni = "Proiezione.txt";
 
-        int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
+
+        System.out.print("\n1.Log In\n2.Registrazione\n3.Ospite\n");
+        int scelta = scanner.nextInt();
         // Scelta diversa
         if ((scelta != 1) && (scelta != 2) && (scelta != 3)){
             System.out.println("Scelta non valida");
@@ -66,7 +65,8 @@ public class Menu
                                 int sceltaClienti = 0;
                                 boolean continua = true;
                                 while(continua) {
-                                    sceltaClienti = in.readInt("1.Cercare proiezioni e fare Prenotazione\n2.Visualizzare le proprie prenotazioni\n3.Modificare e cancellare le proprie prenotazioni\n4.Logout\n");
+                                    System.out.print("1.Cercare proiezioni e fare Prenotazione\n2.Visualizzare le proprie prenotazioni\n3.Modificare e cancellare le proprie prenotazioni\n4.Logout\n");
+                                    sceltaClienti = scanner.nextInt();
                                     if (sceltaClienti == 1 || sceltaClienti == 2 || sceltaClienti == 3 || sceltaClienti == 4){
                                         continua = false;
 
@@ -75,7 +75,8 @@ public class Menu
                                             int sceltaMenuCerca = 0;
                                             continua = true;
                                             while(continua) {
-                                                sceltaMenuCerca = in.readInt("1.Tutti gli Proiezioni\n2.Cercare per nome\n3.Filtri\n");
+                                                System.out.print("1.Tutti gli Proiezioni\n2.Cercare per nome\n3.Filtri\n");
+                                                sceltaMenuCerca = scanner.nextInt();
                                                 if (sceltaMenuCerca == 1 || sceltaMenuCerca == 2 || sceltaMenuCerca == 3) {
                                                     continua = false;
 
@@ -86,11 +87,13 @@ public class Menu
                                                             while (fileScannerP.hasNextLine()) {
                                                                 tuttiProizione = tuttiProizione.concat(fileScannerP.nextLine() +"\n");
                                                             }
-                                                            out.println(tuttiProizione);
+                                                            System.out.print(tuttiProizione);
 
                                                             //Prenotare Film
                                                             try(fileScannerP) {
-                                                                String filmPrenotato = in.readLine("\nSceglie quale prenotare(solo il nome del film):");
+                                                                System.out.print("\nSceglie quale prenotare(solo il nome del film):");
+                                                                String filmPrenotato = scanner.nextLine();
+
                                                                 while (fileScannerP.hasNextLine()) {
                                                                     linea = fileScannerP.nextLine();
                                                                     dati = linea.split(",");
@@ -102,26 +105,18 @@ public class Menu
                                                                 }
                                                             }
                                                             if (continua){
-                                                                System.out.println("boa");
+                                                                System.out.println("buono");
                                                             }
                                                             else{
                                                                 System.out.println("paia");
                                                             }
                                                         }
 
-
-
-
-
-
-
-
-
                                                     }
                                                 }
 
                                                 else{
-                                                    out.println("Scelta non valida!\n");
+                                                    System.out.println("Scelta non valida!\n");
                                                 }
                                             }
 
@@ -144,7 +139,7 @@ public class Menu
                                         }
                                     }
                                     else{
-                                        out.println("\nScelta non valida!");
+                                        System.out.println("\nScelta non valida!");
                                     }
                                 }
                             }
@@ -154,7 +149,8 @@ public class Menu
                                 int sceltaProiezionista = 0;
                                 boolean continua = true;
                                 while(continua) {
-                                    sceltaProiezionista = in.readInt("1.Inserire un film\n2.Modificare la data di una proiezione\n3.Eliminare una proiezione\n4.Logout\n");
+                                    System.out.print("1.Inserire un film\n2.Modificare la data di una proiezione\n3.Eliminare una proiezione\n4.Logout\n");
+                                    sceltaProiezionista = scanner.nextInt();
                                     if (sceltaProiezionista == 1 || sceltaProiezionista == 2 || sceltaProiezionista == 3 || sceltaProiezionista == 4){
                                         continua = false;
 
@@ -177,7 +173,7 @@ public class Menu
 
                                     //Scelta non valida
                                     }else{
-                                        out.println("\nScelta non valida!");
+                                        System.out.println("\nScelta non valida!");
                                     }
                                 }
 
@@ -188,7 +184,8 @@ public class Menu
                                 int sceltaBalconista = 0;
                                 boolean continua = true;
                                 while(continua) {
-                                    sceltaBalconista = in.readInt("1.Visualizzare le prenotazioni nella data odierna\n2.Cercare una prenotazione\n3.Logout\n");
+                                    System.out.print("1.Visualizzare le prenotazioni nella data odierna\n2.Cercare una prenotazione\n3.Logout\n");
+                                    sceltaBalconista = scanner.nextInt();
                                     if (sceltaBalconista == 1 || sceltaBalconista == 2 || sceltaBalconista == 3){
                                         continua = false;
 
@@ -207,7 +204,7 @@ public class Menu
 
                                     //Scelta non valida
                                     }else{
-                                        out.println("\nScelta non valida!");
+                                        System.out.println("\nScelta non valida!");
                                     }
                                 }
                             }
