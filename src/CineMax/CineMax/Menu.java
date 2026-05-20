@@ -37,6 +37,7 @@ public class Menu
 
             Scanner fileScannerU = new Scanner(new File(fileUtenti));
             Scanner fileScannerP = new Scanner(new File(fileProiezioni));
+            Scanner fileScannerPD = new Scanner(new File(fileProiezioni));
             String linea = "";
             String[] dati = new String[0];
 
@@ -93,26 +94,36 @@ public class Menu
                                                             System.out.print(tuttiProizione);
 
                                                             //Prenotare Film
-                                                            try(fileScannerP) {
+
+
+
                                                                 System.out.print("\nSceglie quale prenotare(solo il nome del film):");
                                                                 String filmPrenotato = scanner.next();
 
-                                                                while (fileScannerP.hasNextLine()) {
-                                                                    linea = fileScannerP.nextLine();
-                                                                    dati = linea.split(",");
+                                                                String lineaF = "";
+                                                                String[] datiF = new String[0];
+                                                                boolean prenotaBuono = false;
 
-                                                                    if (dati.length == 7 && dati[0].equals(filmPrenotato)) {
-                                                                        continua = true;
+
+
+                                                                while (fileScannerPD.hasNextLine()) {
+                                                                    lineaF = fileScannerPD.nextLine();
+                                                                    datiF = lineaF.split(",");
+
+                                                                    if (datiF.length == 7 && datiF[0].equals(filmPrenotato)) {
+                                                                        prenotaBuono = true;
                                                                         break;
                                                                     }
                                                                 }
-                                                            }
-                                                            if (continua){
+
+                                                            if (prenotaBuono){
                                                                 System.out.println("buono");
+
                                                             }
                                                             else{
                                                                 System.out.println("paia");
                                                             }
+
                                                         }
 
                                                     }
