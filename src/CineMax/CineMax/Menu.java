@@ -105,8 +105,6 @@ public class Menu
 
                                                             //Prenotare Film
 
-
-
                                                                 System.out.print("\nSceglie quale prenotare(solo il nome del film):");
                                                                 String filmPrenotato = scanner.next();
 
@@ -149,13 +147,10 @@ public class Menu
                                                     System.out.println("Scelta non valida!\n");
                                                 }
                                             }
-
-
-                                            //farePrenotazione
-
-
                                         }
+
                                         //Visualizzare le proprie prenotazioni
+
                                         else if(sceltaClienti == 2){
                                             try(BufferedReader brP = new BufferedReader(new FileReader(filePrenotazioneUser))){
                                                 String userPrenotazione;
