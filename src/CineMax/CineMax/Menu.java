@@ -157,6 +157,14 @@ public class Menu
                                         }
                                         //Visualizzare le proprie prenotazioni
                                         else if(sceltaClienti == 2){
+                                            try(BufferedReader brP = new BufferedReader(new FileReader(filePrenotazioneUser))){
+                                                String userPrenotazione;
+                                                while((userPrenotazione = brP.readLine()) != null){
+                                                    System.out.print(userPrenotazione+ "\n");
+
+                                                }
+
+                                            }
                                             System.out.println();
 
                                         }
