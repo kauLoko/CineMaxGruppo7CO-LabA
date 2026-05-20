@@ -157,6 +157,7 @@ public class Menu
                                         }
                                         //Visualizzare le proprie prenotazioni
                                         else if(sceltaClienti == 2){
+                                            System.out.println();
 
                                         }
                                         //Modificare e cancellare le proprie prenotazioni
