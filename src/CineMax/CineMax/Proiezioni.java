@@ -41,6 +41,7 @@ public class Proiezioni {
         String durata = scanner.nextLine();
         System.out.print("Età minima pubblico: ");
         String etaMin = scanner.nextLine();
+        int sediaQuant = 200;
 
 
         File file = new File("Proiezione.txt");
@@ -56,7 +57,7 @@ public class Proiezioni {
              PrintWriter pw = new PrintWriter(bw)) {
 
             // Salvare
-            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
+            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "," + sediaQuant + "\n" + fileContent);
             System.out.println("Registrato con successo!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());

@@ -87,23 +87,31 @@ public class Menu
                                                                 tuttiProizione = tuttiProizione.concat(fileScannerP.nextLine() +"\n");
                                                             }
                                                             out.println(tuttiProizione);
-                                                        }
 
-                                                            try (fileScannerP) {
+                                                            //Prenotare Film
+                                                            try(fileScannerP) {
                                                                 String filmPrenotato = in.readLine("\nSceglie quale prenotare(solo il nome del film):");
                                                                 while (fileScannerP.hasNextLine()) {
                                                                     linea = fileScannerP.nextLine();
                                                                     dati = linea.split(",");
 
-                                                                    if (dati[0].equals(filmPrenotato)) {
+                                                                    if (dati.length == 7 && dati[0].equals(filmPrenotato)) {
                                                                         continua = true;
                                                                         break;
                                                                     }
                                                                 }
                                                             }
-                                                            if(continua){
+                                                            if (continua){
                                                                 out.println("boa");
                                                             }
+                                                            else{
+                                                                out.println("paia");
+                                                            }
+                                                        }
+
+
+
+
 
 
 
