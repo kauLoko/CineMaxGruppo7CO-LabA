@@ -58,6 +58,7 @@ public class Menu
             if (autenticazione ) {
                 System.out.println("Login bene-sucedido!\n\nBene-venuto " + username + "!!");
 
+
                 //Tipo di Menu a Aprire
                 try (fileScannerU) {
                     {
@@ -65,7 +66,16 @@ public class Menu
 
                             //Tipo Menu:Clienti
                             if (dati[6].equals("Clienti")){
+
+                                //Variables per quando vai a salvare prenotazione
                                 String userPrenotaPath = "src/CineMax/UtentiProiezione/" + username + "_prenotazione.txt";
+
+                                File filePrenotazioneUser = new File(userPrenotaPath);
+                                FileWriter fwb = new FileWriter(userPrenotaPath,true);
+                                BufferedWriter bwp = new BufferedWriter(fwb);
+                                PrintWriter pw = new PrintWriter(bwp);
+                                //
+
                                 int sceltaClienti = 0;
                                 boolean continua = true;
                                 while(continua) {
@@ -103,6 +113,7 @@ public class Menu
                                                                 String lineaF = "";
                                                                 String[] datiF = new String[0];
                                                                 boolean prenotaBuono = false;
+                                                                String infoFilme = "";
 
 
 
@@ -112,12 +123,17 @@ public class Menu
 
                                                                     if (datiF.length == 7 && datiF[0].equals(filmPrenotato)) {
                                                                         prenotaBuono = true;
+                                                                        infoFilme = lineaF;
                                                                         break;
                                                                     }
                                                                 }
 
                                                             if (prenotaBuono){
-                                                                System.out.println("buono");
+                                                                try(fwb;bwp;pw) {
+                                                                    pw.println(infoFilme);
+                                                                }
+
+
 
                                                             }
                                                             else{

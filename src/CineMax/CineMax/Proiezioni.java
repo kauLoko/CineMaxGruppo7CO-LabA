@@ -57,8 +57,8 @@ public class Proiezioni {
              PrintWriter pw = new PrintWriter(bw)) {
 
             // Salvare
-            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "," + sediaQuant + "\n" + fileContent);
-            System.out.println("Registrato con successo!");
+            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
+            System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
         }

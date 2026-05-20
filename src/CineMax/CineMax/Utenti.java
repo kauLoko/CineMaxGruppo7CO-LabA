@@ -1,5 +1,6 @@
 package CineMax;
 
+import prog.io.*;
 import java.io.*;
 import java.util.*;
 
@@ -33,11 +34,11 @@ public class Utenti {
     public static void registrareUtente(Scanner scanner) throws IOException {
 
         System.out.print("Nome: ");
-        String nome = scanner.nextLine();
+        String nome = scanner.next();
         System.out.print("Cognome: ");
-        String cognome = scanner.nextLine();
+        String cognome = scanner.next();
         System.out.print("Username: ");
-        String username = scanner.nextLine();
+        String username = scanner.next();
         //vedi se la password é un numer
         int password = 0;
 
@@ -90,6 +91,7 @@ public class Utenti {
             }
         }
 
+
         File file = new File("InfoUtenti.txt");
         Scanner scan = new Scanner(file);
         String fileContent = "";
@@ -100,10 +102,10 @@ public class Utenti {
 
         try (FileWriter fw = new FileWriter(fileUtenti);
              BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
+             PrintWriter pwOut = new PrintWriter(bw)) {
 
             // Salvare
-            System.out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + nomeRuolo + "\n" + fileContent);
+            pwOut.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + nomeRuolo + "\n" + fileContent);
             System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
