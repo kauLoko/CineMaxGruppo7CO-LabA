@@ -25,12 +25,15 @@ public class Menu
        
         if (scelta == 1) 
         {
+
             //login
-           // fareLogin(scanner);
             System.out.print("Username: ");
-            String username = scanner.nextLine();
+            String username = scanner.next();
+            String password = "";
+            if(username != null){
             System.out.print("Password: ");
-            String password = scanner.nextLine();
+            password  = scanner.next();
+            }
 
             Scanner fileScannerU = new Scanner(new File(fileUtenti));
             Scanner fileScannerP = new Scanner(new File(fileProiezioni));
@@ -92,7 +95,7 @@ public class Menu
                                                             //Prenotare Film
                                                             try(fileScannerP) {
                                                                 System.out.print("\nSceglie quale prenotare(solo il nome del film):");
-                                                                String filmPrenotato = scanner.nextLine();
+                                                                String filmPrenotato = scanner.next();
 
                                                                 while (fileScannerP.hasNextLine()) {
                                                                     linea = fileScannerP.nextLine();
