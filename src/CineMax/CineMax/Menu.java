@@ -1,6 +1,6 @@
 package CineMax;
 
-
+import prog.io.*;
 import java.io.*;
 import java.util.*;
 
@@ -62,6 +62,7 @@ public class Menu
 
                             //Tipo Menu:Clienti
                             if (dati[6].equals("Clienti")){
+                                String userPrenotaPath = "src/CineMax/UtentiProiezione/" + username + "_prenotazione.txt";
                                 int sceltaClienti = 0;
                                 boolean continua = true;
                                 while(continua) {
@@ -80,8 +81,6 @@ public class Menu
 
                                                     //Tutte Proiezioni
                                                     if(sceltaMenuCerca == 1){
-                                                        String lineaProiezione = "";
-                                                        String[] datiProiezione = new String[0];
                                                         String tuttiProizione = "";
                                                         try (fileScannerP) {
                                                             while (fileScannerP.hasNextLine()) {
@@ -89,6 +88,25 @@ public class Menu
                                                             }
                                                             out.println(tuttiProizione);
                                                         }
+
+                                                            try (fileScannerP) {
+                                                                String filmPrenotato = in.readLine("\nSceglie quale prenotare(solo il nome del film):");
+                                                                while (fileScannerP.hasNextLine()) {
+                                                                    linea = fileScannerP.nextLine();
+                                                                    dati = linea.split(",");
+
+                                                                    if (dati[0].equals(filmPrenotato)) {
+                                                                        continua = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            if(continua){
+                                                                out.println("boa");
+                                                            }
+
+
+
 
 
                                                     }
@@ -124,7 +142,7 @@ public class Menu
                             }
 
                             //Tipo Menu:Proiezionista
-                            else if (dados[6].equals("Proiezionista")){
+                            else if (dati[6].equals("Proiezionista")){
                                 int sceltaProiezionista = 0;
                                 boolean continua = true;
                                 while(continua) {
@@ -158,7 +176,7 @@ public class Menu
                             }
 
                             //Tipo Menu:Balconista
-                            else if (dados[6].equals("Balconista")){
+                            else if (dati[6].equals("Balconista")){
                                 int sceltaBalconista = 0;
                                 boolean continua = true;
                                 while(continua) {
