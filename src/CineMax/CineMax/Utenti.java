@@ -1,6 +1,5 @@
 package CineMax;
 
-import prog.io.*;
 import java.io.*;
 import java.util.*;
 
@@ -91,9 +90,6 @@ public class Utenti {
             }
         }
 
-        ConsoleOutputManager ou = new ConsoleOutputManager();
-        ConsoleInputManager in = new ConsoleInputManager();
-
         File file = new File("InfoUtenti.txt");
         Scanner scan = new Scanner(file);
         String fileContent = "";
@@ -107,7 +103,7 @@ public class Utenti {
              PrintWriter out = new PrintWriter(bw)) {
 
             // Salvare
-            out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + nomeRuolo + "\n" + fileContent);
+            System.out.println(nome + "," + cognome + "," + username + "," + password + "," + nascista + "," + domicilio + "," + nomeRuolo + "\n" + fileContent);
             System.out.println("Registrato con sucesso!");
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());

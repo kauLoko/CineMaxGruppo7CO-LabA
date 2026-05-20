@@ -20,7 +20,7 @@ public class Menu
         int scelta = in.readInt("\n1.Log In\n2.Registrazione\n3.Ospite\n");
         // Scelta diversa
         if ((scelta != 1) && (scelta != 2) && (scelta != 3)){
-            out.println("Scelta non valida");
+            System.out.println("Scelta non valida");
         }
 
        
@@ -53,7 +53,7 @@ public class Menu
 
             //Acesso autorizato
             if (autenticazione ) {
-                out.println("Login bene-sucedido!\n\nBene-venuto " + username + "!!");
+                System.out.println("Login bene-sucedido!\n\nBene-venuto " + username + "!!");
 
                 //Tipo di Menu a Aprire
                 try (fileScannerU) {
@@ -102,10 +102,10 @@ public class Menu
                                                                 }
                                                             }
                                                             if (continua){
-                                                                out.println("boa");
+                                                                System.out.println("boa");
                                                             }
                                                             else{
-                                                                out.println("paia");
+                                                                System.out.println("paia");
                                                             }
                                                         }
 
