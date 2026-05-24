@@ -1,6 +1,7 @@
 package CineMax;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Proiezioni {
@@ -30,17 +31,57 @@ public class Proiezioni {
     public static void aggiungiProiezione(Scanner scanner) throws IOException {
 
         System.out.print("Titolo: ");
-        String titolo = scanner.nextLine();
+        String titolo = scanner.next();
         System.out.print("Genere: ");
-        String genere = scanner.nextLine();
+        String genere = scanner.next();
         System.out.print("Regista: ");
-        String regista = scanner.nextLine();
-        System.out.print("Anno: ");
-        String anno = scanner.nextLine();
-        System.out.print("Durata: ");
-        String durata = scanner.nextLine();
-        System.out.print("Età minima pubblico: ");
-        String etaMin = scanner.nextLine();
+        String regista = scanner.next();
+
+        int anno = 0;
+        boolean entrataValida = false;
+
+        while (!entrataValida) {
+            try {
+                System.out.print("Anno: ");
+                anno = scanner.nextInt(); // Prova a leggere un Int
+                scanner.nextLine();
+                entrataValida = true; // Se leggi, usce dell loop
+            } catch (InputMismatchException e) {
+                // 2. Errore e non esci dell loop
+                System.out.println("Errore:Anno solo numeri.");
+                scanner.next();
+            }
+        }
+        int durata = 0;
+        boolean entrataValidaD = false;
+
+        while (!entrataValidaD) {
+            try {
+                System.out.print("Durata(Minuti): ");
+                durata = scanner.nextInt(); // Prova a leggere un Int
+                scanner.nextLine();
+                entrataValidaD = true; // Se leggi, usce dell loop
+            } catch (InputMismatchException e) {
+                // 2. Errore e non esci dell loop
+                System.out.println("Errore:Durata solo numeri.");
+                scanner.next();
+            }
+        }
+        int etaMin = 0;
+        boolean entrataValidaE = false;
+
+        while (!entrataValidaE) {
+            try {
+                System.out.print("Età minima pubblico: ");
+                etaMin = scanner.nextInt(); // Prova a leggere un Int
+                scanner.nextLine();
+                entrataValidaE = true; // Se leggi, usce dell loop
+            } catch (InputMismatchException e) {
+                // 2. Errore e non esci dell loop
+                System.out.println("Errore:Età minima solo numeri.");
+                scanner.next();
+            }
+        }
         int sediaQuant = 200;
 
 
