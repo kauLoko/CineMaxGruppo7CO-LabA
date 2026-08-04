@@ -1,5 +1,0 @@
-kau,an,kauloko,30,1,2,Clienti
-i,i,i,5,i,i,Clienti
-l,l,l,2,l,l,Balconista
-p,p,p,4,p,p,Proiezionista
-k,k,k,6,k,k,Clienti

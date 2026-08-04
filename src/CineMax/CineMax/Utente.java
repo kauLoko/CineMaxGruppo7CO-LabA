@@ -5,7 +5,8 @@ import java.io.*;
 import java.util.*;
 
 
-public class Utenti {
+public class Utente {
+
     //Campi
     private String nome;
     private String cognome;
@@ -13,12 +14,12 @@ public class Utenti {
     private int password;
     private String nascita;
     private String domicilio;
-    private int ruolo;
+    public enum ruolo {cliente, proiezionista, bigliettaio};
     private static final String fileUtenti = "InfoUtenti.txt";
 
     //Construtore
-
-    public Utenti(String nome, String cognome, String username, int password, String nascita, String domicilio, int ruolo) {
+    public Utente(String nome, String cognome, String username, int password, String nascita, String domicilio, int ruolo) 
+    {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;

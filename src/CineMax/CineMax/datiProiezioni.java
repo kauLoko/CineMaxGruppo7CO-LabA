@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Proiezioni {
+public class datiProiezioni {
 
     //Campi
     private String titolo;
@@ -13,10 +13,10 @@ public class Proiezioni {
     private int anno;
     private int durata;
     private int etaMin;
-    private static final String fileProiezioni = "Proiezione.txt";
+    private static final String fileProiezioni = "proiezioni.csv";
 
     //Construtore
-    public Proiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) {
+    public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) {
         this.titolo = titolo;
         this.genere = genere;
         this.regista = regista;
