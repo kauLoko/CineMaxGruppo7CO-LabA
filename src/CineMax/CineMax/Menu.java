@@ -3,7 +3,7 @@ package CineMax;
 import java.io.*;
 import java.util.*;
 
-import static CineMax.Proiezioni.*;
+import static CineMax.datiProiezioni.*;
 import static CineMax.Utenti.*;
 
 public class Menu
@@ -11,58 +11,114 @@ public class Menu
     public static void main (String[] args) throws IOException 
     {
         Scanner scanner = new Scanner(System.in);
-        String fileUtenti = "InfoUtenti.txt";
-        String fileProiezioni = "Proiezione.txt";
+        String fileUtenti = "datiUtenti.csv";
+        String fileProiezioni = "proiezioni.csv";
 
 
-        System.out.print("\n1.Log In\n2.Registrazione\n3.Ospite\n");
+        System.out.print("\n1.Log In\n2.Registrazione\n3.Accedi come ospite\n");
         int scelta = scanner.nextInt();
-        // Scelta diversa
-        if ((scelta != 1) && (scelta != 2) && (scelta != 3)){
-            System.out.println("Scelta non valida");
+
+
+        switch (scelta) 
+        {
+            case 1:     //LOG IN
+                System.out.print("Username: ");
+                String username = scanner.nextLine();
+
+                System.out.print("Password: ");
+                String password  = scanner.nextLine();
+
+                boolean autenticazione  = false;
+                
+                Scanner fileScannerP = new Scanner(new File(proiezioni));
+                Scanner fileScannerPD = new Scanner(new File(proiezioni));
+                
+                try (Scanner fileScannerU = new Scanner(new File(datiUtenti))) 
+                {
+                    while (fileScannerU.hasNextLine()) 
+                    {
+                        String linea = fileScannerU.nextLine();
+                        String[] dati = linea.split(",");
+
+                        if (dati.length == 7 && dati[2].equals(username) && dati[3].equals(password)) 
+                        {
+                            autenticazione  = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!autenticazione) 
+                {
+                    throw new Exception("Utente non trovato o credenziali errate.");
+                }
+                else //ACCESSO EFFETTUATO
+                {
+                    System.out.println("Login effettuato!\n\nBenvenuto" + username);    
+                }
+                
+                boolean inSessione = true;
+                
+                //MENU PRINCIPALE CLIENTE
+
+                while (inSessione) 
+                {
+                    System.out.println("\n--- MENU CLIENTE ---");
+                    System.out.println("1. Cercare proiezioni e fare Prenotazione");
+                    System.out.println("2. Visualizzare le proprie prenotazioni");
+                    System.out.println("3. Modificare e cancellare le proprie prenotazioni");
+                    System.out.println("4. Logout");
+                    System.out.print("Scelta: ");
+                
+                    int sceltaClienti = scanner.nextInt();
+
+                    switch(sceltaClienti)
+                    {
+                        case 1:
+                            gestireRicercaEPrenotazione(scanner, fileProiezioni);
+                            break;
+                        case 2: 
+                            System.out.println("Visualizza prenotazioni");
+                            break;
+                        case 3:
+                            System.out.println("Modifica/Cancella prenotazione");
+                            break;
+                        case 4:
+                            System.out.println("Logout effettuato con successo.");
+                            break;
+                            inSessione = false;     
+                        default:
+                            System.out.println("Opzione non valida.");
+                            break;
+                    }
+
+                    //CASE 1: Ricerca e Prenotazione
+                    private static void  gestireRicercaEPrenotazione(Scanner scanner, String fileProiezioni)
+                    {
+                        
+                    }
+                
+
+
+
+
+
+            case 2:     //REGISTRAZIONE
+                
+                break;
+            case 3:     //ACCESSO COME OSPITE
+                
+                break;
+            default:
+                System.out.println("Scelta non valida");
+                break;
         }
+        
 
        
         if (scelta == 1) 
         {
 
-            //login
-            System.out.print("Username: ");
-            String username = scanner.next();
-            String password = "";
-            if(username != null){
-            System.out.print("Password: ");
-            password  = scanner.next();
-            }
-
-            Scanner fileScannerU = new Scanner(new File(fileUtenti));
-            Scanner fileScannerP = new Scanner(new File(fileProiezioni));
-            Scanner fileScannerPD = new Scanner(new File(fileProiezioni));
-            String linea = "";
-            String[] dati = new String[0];
-
-            boolean autenticazione  = false;
-            try (fileScannerU) {
-                while (fileScannerU.hasNextLine()) {
-                    linea = fileScannerU.nextLine();
-                    dati = linea.split(",");
-
-                    if (dati.length == 7 && dati[2].equals(username) && dati[3].equals(password)) {
-                        autenticazione  = true;
-                        break;
-                    }
-                }
-            }
-
-            //Acesso autorizato
-            if (autenticazione ) {
-                System.out.println("Login bene-sucedido!\n\nBene-venuto " + username + "!!");
-
-
-                //Tipo di Menu a Aprire
-                try (fileScannerU) {
-                    {
-                        if (dati[2].equals(username) && dati[3].equals(password)) {
 
                             //Tipo Menu:Clienti
                             if (dati[6].equals("Clienti")){

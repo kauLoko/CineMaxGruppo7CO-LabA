@@ -1,8 +1,7 @@
 package CineMax;
 
-import prog.io.*;
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class CoseFile 
 {

@@ -1,8 +1,7 @@
 package CineMax;
 
 import java.io.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class datiProiezioni {
 

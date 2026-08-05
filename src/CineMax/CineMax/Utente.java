@@ -1,24 +1,25 @@
 package CineMax;
 
-import prog.io.*;
 import java.io.*;
 import java.util.*;
 
 
-public class Utente {
-
+public class Utente 
+{
     //Campi
     private String nome;
     private String cognome;
     private String username;
-    private int password;
+    private String password;
     private String nascita;
     private String domicilio;
-    public enum ruolo {cliente, proiezionista, bigliettaio};
+    private Ruolo ruolo;
     private static final String fileUtenti = "InfoUtenti.txt";
 
+    public enum Ruolo {cliente, proiezionista, bigliettaio};
+
     //Construtore
-    public Utente(String nome, String cognome, String username, int password, String nascita, String domicilio, int ruolo) 
+    public Utente(String nome, String cognome, String username, String password, String nascita, String domicilio, Ruolo ruolo) 
     {
         this.nome = nome;
         this.cognome = cognome;
@@ -32,7 +33,7 @@ public class Utente {
     //Metodi
 
     //RegistraClienti
-    public static void registrareUtente(Scanner scanner) throws IOException {
+    public static void registrazioneUtente(Scanner scanner) throws IOException {
 
         System.out.print("Nome: ");
         String nome = scanner.next();
@@ -40,52 +41,44 @@ public class Utente {
         String cognome = scanner.next();
         System.out.print("Username: ");
         String username = scanner.next();
-        //vedi se la password é un numer
-        int password = 0;
-
-        boolean entrataValida = false;
-
-        while (!entrataValida) {
-            try {
-                System.out.print("Password: ");
-                password = scanner.nextInt(); // Prova a leggere un Int
-                scanner.nextLine();
-                entrataValida = true; // Se leggi, usce dell loop
-            } catch (InputMismatchException e) {
-                // 2. Errore e non esci dell loop
-                System.out.println("Errore:Password solo numeri.");
-                scanner.next();
-            }
-        }
-        System.out.print("Nascista: ");
-        String nascista = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.next();
+        System.out.print("Nascita: ");
+        String nascita = scanner.nextLine();
         System.out.print("Domicilio: ");
         String domicilio = scanner.nextLine();
 
-        String nomeRuolo = "";
+        System.out.println("Ruolo: 1. Cliente, 2. Proiezionista, 3. Bigliettaio");
+        int scelta = scanner.nextInt();
+
+        Utente u = new Utente(nome, cognome, username, password, nascita, domicilio, scelta);
+
+
         entrataValida = true;
-        while(entrataValida) {
-            try {
-            System.out.print("Ruolo:(1.Clienti/2.Proiezionista/3.Balconista) SOLO IL NUMERO: ");
-            int role = scanner.nextInt();
-            if (role == 1) {
-                nomeRuolo = "Clienti";
-                entrataValida = false;
-                scanner.nextLine();
-            }
-            else if (role == 2) {
-                nomeRuolo = "Proiezionista";
-                entrataValida = false;
-                scanner.nextLine();
-            }
-            else if (role == 3) {
-                nomeRuolo = "Balconista";
-                entrataValida = false;
-                scanner.nextLine();
-            } else {
-                System.out.print("Entrata non Valida\n");
-                scanner.next();
-            }
+        while(entrataValida) 
+        {
+            try 
+            {
+                System.out.print("Ruolo:(1.Clienti/2.Proiezionista/3.Balconista) SOLO IL NUMERO: ");
+                int role = scanner.nextInt();
+                if (role == 1) {
+                    nomeRuolo = "Clienti";
+                    entrataValida = false;
+                    scanner.nextLine();
+                }
+                else if (role == 2) {
+                    nomeRuolo = "Proiezionista";
+                    entrataValida = false;
+                    scanner.nextLine();
+                }
+                else if (role == 3) {
+                    nomeRuolo = "Balconista";
+                    entrataValida = false;
+                    scanner.nextLine();
+                } else {
+                    System.out.print("Entrata non Valida\n");
+                    scanner.next();
+                }
             } catch (InputMismatchException e) {
                 System.out.print("Entrata non Valida\n");
                 scanner.next();
