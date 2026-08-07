@@ -1,4 +1,4 @@
-package CineMax;
+
 
 import java.io.*;
 import java.util.*;

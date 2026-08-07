@@ -1,10 +1,9 @@
-package CineMax;
 
 import java.io.*;
 import java.util.*;
 
-public class datiProiezioni {
-
+public class datiProiezioni 
+{
     //Campi
     private String titolo;
     private String genere;
@@ -39,7 +38,8 @@ public class datiProiezioni {
         int anno = 0;
         boolean entrataValida = false;
 
-        while (!entrataValida) {
+        while (!entrataValida)
+        {
             try {
                 System.out.print("Anno: ");
                 anno = scanner.nextInt(); // Prova a leggere un Int

@@ -1,16 +1,13 @@
-package CineMax;
 
 import java.io.*;
 import java.util.*;
-
-import static CineMax.datiProiezioni.*;
-import static CineMax.Utenti.*;
 
 public class Menu
 {
     public static void main (String[] args) throws IOException 
     {
         Scanner scanner = new Scanner(System.in);
+
         String fileUtenti = "datiUtenti.csv";
         String fileProiezioni = "proiezioni.csv";
 
@@ -19,7 +16,8 @@ public class Menu
         int scelta = scanner.nextInt();
 
 
-        switch (scelta) 
+
+        switch(scelta) 
         {
             case 1:     //LOG IN
                 System.out.print("Username: ");
