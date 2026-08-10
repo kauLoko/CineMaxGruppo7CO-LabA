@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 
@@ -14,7 +13,7 @@ public class Utente
     private String domicilio;
     private Ruolo ruolo;
 
-    private static final String fileUtenti = "datiUtenti.csv";
+    private static final String fileUtenti = "data/datiUtenti.csv";
 
     public enum Ruolo {cliente, proiezionista, bigliettaio};
 
@@ -98,6 +97,15 @@ public class Utente
         }
     }
 
+//metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
+public String getNome() {return nome;}
+public String getCognome() {return cognome;}
+public String getUsername() {return username;}
+public String getPassword() {return password;}
+public String getNascita() {return nascita;}
+public String getDomicilio() {return domicilio;}
+public Ruolo getRuolo() {return ruolo;}
+
     @Override
     public String toString() 
     {
@@ -113,30 +121,3 @@ public class Utente
             nome, cognome, username, password, nascita, domicilio, ruolo);
     }
 }
-
-       /*  File file = new File("datiUtenti.csv");
-        Scanner scan = new Scanner(file);
-        String fileContent = "";
-
-        while (scan.hasNextLine()) {
-            fileContent = fileContent.concat(scan.nextLine() +"\n");
-        }
-
-        try (FileWriter fw = new FileWriter(fileUtenti);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter pwOut = new PrintWriter(bw)) {
-
-            // Salvare
-            pwOut.println(nome + "," + cognome + "," + username + "," + password + "," + nascita + "," + domicilio + "," + ruolo + "\n" + fileContent);
-            System.out.println("Registrato con sucesso!");
-        } catch (IOException e) {
-            System.out.println("Errore in salvare file: " + e.getMessage());
-        }
-    }
-
-    public String toString(){
-        return "\nIl tuo  è Utenti:" + nome + " " + cognome +"\nUsername: "+ username + "\nPassword: " + String.valueOf(password)
-                + "\nNascita: " + nascita + "\nDomicilio: " + domicilio + "\nRole: " + ruolo;
-    }
-
-} */

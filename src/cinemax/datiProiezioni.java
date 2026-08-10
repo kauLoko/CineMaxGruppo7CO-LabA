@@ -11,7 +11,7 @@ public class datiProiezioni
     private int anno;
     private int durata;
     private int etaMin;
-    private static final String fileProiezioni = "proiezioni.csv";
+    private static final String fileProiezioni = "data/proiezioni.csv";
 
     //Construtore
     public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) {
@@ -102,5 +102,31 @@ public class datiProiezioni
         } catch (IOException e) {
             System.out.println("Errore in salvare file: " + e.getMessage());
         }
+    }
+
+
+    public static List<Proiezione> listaProiezioni() {
+        List<Proiezione> listaProiezioni = new ArrayList<>(); //Uso la lista perchè l'array ha dimensione fissa definita in fase di creazione, mentre la lista è estendibile
+        try (BufferedReader br = new BufferedReader(new FileReader(fileProiezioni))) {
+            String riga = br.readLine(); //Salta la prima riga che è di intestazione
+            while ((riga = br.readLine()) != null) {
+                String[] campi = riga.split(",");
+                String dataOrario = campi[0];
+                String titolo = campi[1];
+                String genere = campi[2];
+                String regista = campi[3];
+                int anno = Integer.parseInt(campi[4]);
+                int durata = Integer.parseInt(campi[5]);
+                int etàMinima = Integer.parseInt(campi[6]);
+                double costo = Double.parseDouble(campi[7]);
+                int postiDisponibili = Integer.parseInt(campi[8]);
+                Proiezione proiezione = new Proiezione(titolo, genere, regista, anno, durata, etàMinima, dataOrario, costo, postiDisponibili);
+                listaProiezioni.add(proiezione);
+            }
+        }   
+        catch (IOException e) {
+            System.err.println("Errore durante la lettura del file: " + e.getMessage());
+        }
+        return listaProiezioni;
     }
 }
