@@ -227,4 +227,25 @@ public class Cliente extends Utente {
         }
         System.out.println("--------------------------------"); //Per staccare quando verrà chiamato un altro metodo 
     }
+
+    public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) {
+        System.out.print("Inserisci il titolo della proiezione da visualizzare: ");
+        String titolo = scanner.nextLine().trim();
+        boolean trovato = false;
+        for (Proiezione proiezione : risultatoRicerca) {
+            if (proiezione.getTitolo().equalsIgnoreCase(titolo)) {
+                System.out.println(proiezione.toString());
+                trovato = true;
+                break;
+            }
+        }
+        if (!trovato) {
+            System.out.println("Proiezione non trovata.");
+        }
+    }
+
+    public void inserisciPrenotazione() {
+        // Implementazione del metodo per inserire una prenotazione
+    }
+
 }
