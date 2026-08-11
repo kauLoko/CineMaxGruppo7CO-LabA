@@ -21,64 +21,169 @@ public class Cliente extends Utente {
         int durata = -1;
         int etàMinima = -1; 
         double costo = -1.0;
-        //mettere try con dentro ciclo while con un booleano per forzare una risposta che sia s o n, come boolean continua = true; ed eventualmente gestire le eccezioni
 
+        String risposta = "";
 
-        System.out.print("Vuoi cercare una proiezione per titolo? (s/n): ");
-        String risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per titolo? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
+        if(risposta.equals("s")) {
             System.out.print("Titolo del film: ");
-            titolo = scanner.nextLine();
+            titolo = scanner.nextLine().trim();
         }
-        System.out.print("Vuoi cercare una proiezione per genere? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per genere? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
+        if(risposta.equals("s")) {
             System.out.print("Genere del film: ");
-            genere = scanner.nextLine();
+            genere = scanner.nextLine().trim();
         }
-        System.out.print("Vuoi cercare una proiezione per regista? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
+    
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per regista? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
+        if(risposta.equals("s")) {
             System.out.print("Regista del film: ");
-            regista = scanner.nextLine();
+            regista = scanner.nextLine().trim();
         }
-        System.out.print("Vuoi cercare una proiezione per anno? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
-            System.out.print("Anno del film: ");
-            anno = scanner.nextInt();
-            scanner.nextLine(); // debuffer
-        }   
-        System.out.print("Vuoi cercare una proiezione per data e orario? (s/n): ");
-        risposta = scanner.nextLine();
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per anno? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
+        if(risposta.equals("s")) {
+            boolean inputValido = false;
+            while(!inputValido) {
+                System.out.print("Anno del film: ");
+                try {
+                    anno = Integer.parseInt(scanner.nextLine().trim());
+                    inputValido = true;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Input non valido. Inserisci un numero intero per l'anno.");
+                }
+            }
+        }
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per data e orario? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
         if (risposta.equals("s")) {
             System.out.print("Data e orario della proiezione (formato: gg/mm/aaaa hh:mm): ");
-            dataOrario = scanner.nextLine();
+            dataOrario = scanner.nextLine().trim();
         }
-        System.out.print("Vuoi cercare una proiezione per durata? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
-            System.out.print("Durata del film (in minuti): ");
-            durata = scanner.nextInt();
-            scanner.nextLine(); // debuffer
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per durata? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
         }
-        System.out.print("Vuoi cercare una proiezione per età minima? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
-            System.out.print("Età minima per il film: ");
-            etàMinima = scanner.nextInt();
-            scanner.nextLine(); // debuffer
+        if(risposta.equals("s")) {
+            boolean inputValido = false;
+            while(!inputValido) {
+                System.out.print("Durata del film (in minuti): ");
+                try {
+                    durata = Integer.parseInt(scanner.nextLine().trim());
+                    inputValido = true;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Input non valido. Inserisci un numero intero per la durata.");
+                }
+            }
         }
-        System.out.print("Vuoi cercare una proiezione per costo del biglietto? (s/n): ");
-        risposta = scanner.nextLine();
-        if (risposta.equals("s")) {
-            System.out.print("Costo del biglietto: ");
-            costo = scanner.nextDouble();
-            scanner.nextLine(); // debuffer
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per età minima? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
         }
+        if(risposta.equals("s")) {
+            boolean inputValido = false;
+            while(!inputValido) {
+                System.out.print("Età minima per il film: ");
+                try {
+                    etàMinima = Integer.parseInt(scanner.nextLine().trim());
+                    inputValido = true;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Input non valido. Inserisci un numero intero per l'età minima.");
+                }
+            }
+        }
+
+        while (true) {
+            System.out.print("Vuoi cercare una proiezione per costo del biglietto? (s/n): ");
+            risposta = scanner.nextLine().trim().toLowerCase();
+            if (risposta.equals("s") || risposta.equals("n")) {
+                break;
+            }
+            else {
+                System.out.println("Risposta non valida. Inserisci 's' per sì o 'n' per no.");
+            }
+        }
+        if(risposta.equals("s")) {
+            boolean inputValido = false;
+            while(!inputValido) {
+                System.out.print("Costo del biglietto: ");
+                try {
+                    costo = Double.parseDouble(scanner.nextLine().trim());
+                    inputValido = true;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Input non valido. Inserisci un numero per il costo.");
+                }
+            }
+        }
+
         System.out.print("Filtri impostati. Inizio la ricerca...");
 
        //prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
+       List<Proiezione> risultatoRicerca = new ArrayList<>();
        for(Proiezione proiezione : listaProiezioni) {
             boolean corrisponde = true;
             //controllo vero e proprio. Filtro tutto per esclusione, molto più semplice logicamente e da implementare rispetto al filtrare per inclusione. Uso lazy evaluation per semplicità
@@ -107,9 +212,19 @@ public class Cliente extends Utente {
                 corrisponde = false;
             }
             if (corrisponde) {
-                // Da aggiungere alle proiezioni da restituire
+                //Da aggiungere alle proiezioni da restituire
+                risultatoRicerca.add(proiezione);
             }
-       } 
-
+        }
+        if (risultatoRicerca.isEmpty()) {
+            System.out.println("\nNessuna proiezione trovata con questi filtri.");
+        }   
+        else {
+            System.out.println("\n" + risultatoRicerca.size() + " proiezioni trovate:");
+            for (Proiezione p : risultatoRicerca) {
+                System.out.println(p.toString());              
+            }        
+        }
+        System.out.println("--------------------------------"); //Per staccare quando verrà chiamato un altro metodo 
     }
 }
