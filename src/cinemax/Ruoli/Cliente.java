@@ -1,9 +1,7 @@
-import java.io.*;
 import java.util.*;
 
 public class Cliente extends Utente {
 
-    private static final String fileProiezioni = "data/proiezioni.csv";
     //Costruttore
     public Cliente(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {

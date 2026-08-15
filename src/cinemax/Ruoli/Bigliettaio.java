@@ -11,6 +11,7 @@ public class Bigliettaio extends Utente
 
     public static void cercaPrenotazione(Scanner scanner) {
         // Implementazione del metodo per cercare una prenotazione
+        //Aprire CSV trascrivere tutto come con le proiezioni ad inizio file e poi accedere alla lista per tutti i confronti e ricerche
     }
 
     public static void visualizzaPrenotazione(Scanner scanner) {
