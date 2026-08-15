@@ -10,6 +10,8 @@ public class Cliente extends Utente {
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
 
+    //Questo metodo è lungo e potrebbe essere ottimizzato perchè ripete diverse righe più volte. Manca prima di questi la distinzione tra guest e cliente registrato
+    //Da sistemare il filtraggio per costo e data, non usa ancora il range.
     public static void cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) {
 
         //Ottengo i criteri di ricerca dall'utente; imposto valori di default per capire se non vengono impostati dall'utente
@@ -182,11 +184,11 @@ public class Cliente extends Utente {
 
         System.out.print("Filtri impostati. Inizio la ricerca...");
 
-       //prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
+       //Prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
        List<Proiezione> risultatoRicerca = new ArrayList<>();
        for(Proiezione proiezione : listaProiezioni) {
             boolean corrisponde = true;
-            //controllo vero e proprio. Filtro tutto per esclusione, molto più semplice logicamente e da implementare rispetto al filtrare per inclusione. Uso lazy evaluation per semplicità
+            //Filtro tutto per esclusione, molto più semplice logicamente e da implementare rispetto al filtrare per inclusione.
             if (titolo != null && !proiezione.getTitolo().toLowerCase().contains(titolo.toLowerCase())) {
                 corrisponde = false;
             }
@@ -212,7 +214,6 @@ public class Cliente extends Utente {
                 corrisponde = false;
             }
             if (corrisponde) {
-                //Da aggiungere alle proiezioni da restituire
                 risultatoRicerca.add(proiezione);
             }
         }
@@ -244,8 +245,15 @@ public class Cliente extends Utente {
         }
     }
 
-    public void inserisciPrenotazione() {
+    public static void visualizzaPrenotazioni(Scanner scanner) {
+        // Implementazione del metodo per visualizzare le prenotazioni
+    }
+
+    public static void creaPrenotazione() {
         // Implementazione del metodo per inserire una prenotazione
     }
 
+    public static void modificaPrenotazione(Scanner scanner) {
+        // Implementazione del metodo per modificare una prenotazione
+    }
 }
