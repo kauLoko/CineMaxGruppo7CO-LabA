@@ -120,4 +120,36 @@ public Ruolo getRuolo() {return ruolo;}
             Ruolo: %s""",
             nome, cognome, username, password, nascita, domicilio, ruolo);
     }
+
+    public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) {
+        Ruolo ruolo = utente.getRuolo();
+        switch(ruolo) {
+            case cliente:
+                List<Prenotazione> risultatoRicerca = new ArrayList<>();
+                if(utente.getNome() != null && utente.getCognome() != null) {
+                    String infoCliente = utente.getNome().trim() + " " + utente.getCognome().trim();
+                    for(Prenotazione prenotazione: listaPrenotazioni) {
+                        String nomeCognomeCliente = prenotazione.getNomeCliente().trim() + " " + prenotazione.getCognomeCliente().trim();
+                        if(nomeCognomeCliente.equalsIgnoreCase(infoCliente)) {
+                            risultatoRicerca.add(prenotazione);
+                        }
+                    }
+                    if(risultatoRicerca.isEmpty()) {
+                        System.out.println("Nessuna prenotazione trovata" );
+                    }
+                    else {
+                        System.out.println(risultatoRicerca.size() + " prenotazioni trovate:");
+                        for(Prenotazione p: risultatoRicerca) {
+                            System.out.println(p.toString()); //Da sistemare il toString, qui fornisce troppe informazioni non necessarie al cliente, il metodo è giusto per il bigliettaio
+                        }
+                    }
+                } break;
+            case bigliettaio:
+
+            case proiezionista:
+                break;
+
+        }
+    }
+
 }
