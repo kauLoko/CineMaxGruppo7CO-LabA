@@ -74,7 +74,7 @@ public class Utente
                     ruolo = Ruolo.bigliettaio;
                     break;
                 default:
-                    System.out.print("Ruolo non valido, scegliere uno di quelli già esistenti");
+                    System.out.print("Ruolo non valido, scegliere uno di quelli gia' esistenti");
                     break;
             }
         }
@@ -123,23 +123,33 @@ public Ruolo getRuolo() {return ruolo;}
 
     public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) {
         Ruolo ruolo = utente.getRuolo();
-        switch(ruolo) {
+        switch(ruolo) 
+        {
             case cliente:
                 List<Prenotazione> risultatoRicerca = new ArrayList<>();
-                if(utente.getNome() != null && utente.getCognome() != null) {
+                if(utente.getNome() != null && utente.getCognome() != null) 
+                {
                     String infoCliente = utente.getNome().trim() + " " + utente.getCognome().trim();
-                    for(Prenotazione prenotazione: listaPrenotazioni) {
+                    
+                    for(Prenotazione prenotazione: listaPrenotazioni) 
+                    {
                         String nomeCognomeCliente = prenotazione.getNomeCliente().trim() + " " + prenotazione.getCognomeCliente().trim();
-                        if(nomeCognomeCliente.equalsIgnoreCase(infoCliente)) {
+                        
+                        if(nomeCognomeCliente.equalsIgnoreCase(infoCliente)) 
+                        {
                             risultatoRicerca.add(prenotazione);
                         }
                     }
-                    if(risultatoRicerca.isEmpty()) {
+
+                    if(risultatoRicerca.isEmpty()) 
+                    {
                         System.out.println("Nessuna prenotazione trovata" );
                     }
-                    else {
+                    else 
+                    {
                         System.out.println(risultatoRicerca.size() + " prenotazioni trovate:");
-                        for(Prenotazione p: risultatoRicerca) {
+                        for(Prenotazione p: risultatoRicerca) 
+                        {
                             System.out.println(p.toString()); //Da sistemare il toString, qui fornisce troppe informazioni non necessarie al cliente, il metodo è giusto per il bigliettaio
                         }
                     }

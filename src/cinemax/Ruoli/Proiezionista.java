@@ -9,15 +9,18 @@ public class Proiezionista extends Utente
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.proiezionista);
     }
 
-    public static void aggiungiProiezione(Scanner scanner, List<Proiezione> listaProiezioni) {
+    public static void aggiungiProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
+    {
         // Implementazione del metodo per aggiungere una proiezione
     }
 
-    public static void modificaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) {
+    public static void modificaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
+    {
         // Implementazione del metodo per modificare una proiezione
     }
 
-    public static void eliminaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) {
+    public static void eliminaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
+    {
         // Implementazione del metodo per eliminare una proiezione
     }
 }
