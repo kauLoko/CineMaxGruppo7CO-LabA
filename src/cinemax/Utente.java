@@ -92,19 +92,48 @@ public class Utente
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fileUtenti, true)))) {
             pw.println(nome + "," + cognome + "," + username + "," + password + "," + nascita + "," + domicilio + "," + ruolo);
             System.out.println(">> Utente registrato e salvato con successo!");
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             System.err.println("Errore durante il salvataggio su file: " + e.getMessage());
         }
     }
 
 //metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
-public String getNome() {return nome;}
-public String getCognome() {return cognome;}
-public String getUsername() {return username;}
-public String getPassword() {return password;}
-public String getNascita() {return nascita;}
-public String getDomicilio() {return domicilio;}
-public Ruolo getRuolo() {return ruolo;}
+    public String getNome() 
+    {
+        return nome;
+    }
+
+    public String getCognome() 
+    {
+        return cognome;
+    }
+
+    public String getUsername() 
+    {
+        return username;
+    }
+
+    public String getPassword() 
+    {
+        return password;
+    }
+
+    public String getNascita() 
+    {
+        return nascita;
+    }
+    
+    public String getDomicilio() 
+    {
+        return domicilio;
+    }
+    
+    public Ruolo getRuolo() 
+    {
+        return ruolo;
+    }
 
     @Override
     public String toString() 
@@ -121,12 +150,15 @@ public Ruolo getRuolo() {return ruolo;}
             nome, cognome, username, password, nascita, domicilio, ruolo);
     }
 
-    public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) {
+    public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) 
+    {
         Ruolo ruolo = utente.getRuolo();
+
         switch(ruolo) 
         {
             case cliente:
                 List<Prenotazione> risultatoRicerca = new ArrayList<>();
+
                 if(utente.getNome() != null && utente.getCognome() != null) 
                 {
                     String infoCliente = utente.getNome().trim() + " " + utente.getCognome().trim();
@@ -154,6 +186,7 @@ public Ruolo getRuolo() {return ruolo;}
                         }
                     }
                 } break;
+
             case bigliettaio:
 
             case proiezionista:
