@@ -8,6 +8,7 @@ public class Cliente extends Utente
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
 
+
     //Questo metodo e' lungo e potrebbe essere ottimizzato perche' ripete diverse righe piu' volte. Manca prima di questi la distinzione tra guest e cliente registrato
     //Da sistemare il filtraggio per costo e data, non usa ancora il range.
     public static void cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
@@ -24,7 +25,7 @@ public class Cliente extends Utente
 
         String risposta = "";
 
-        while (true) 
+        while(true) 
         {
             System.out.print("Vuoi cercare una proiezione per titolo? (s/n): ");
             risposta = scanner.nextLine().trim().toLowerCase();

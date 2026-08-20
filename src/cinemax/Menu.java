@@ -8,8 +8,8 @@ public class Menu
     {
         Scanner scanner = new Scanner(System.in);
 
-        String fileUtenti = "datiUtenti.csv";
-        String fileProiezioni = "proiezioni.csv";
+        String fileUtenti = "data/datiUtenti.csv";
+        String fileProiezioni = "data/proiezioni.csv";
 
 
         System.out.print("\n1.Log In\n2.Registrazione\n3.Accedi come ospite\n");
@@ -28,10 +28,10 @@ public class Menu
 
                 boolean autenticazione  = false;
                 
-                Scanner fileScannerP = new Scanner(new File(proiezioni));
-                Scanner fileScannerPD = new Scanner(new File(proiezioni));
+                Scanner fileScannerP = new Scanner(new File(fileProiezioni));
+                Scanner fileScannerPD = new Scanner(new File(fileProiezioni));
                 
-                try (Scanner fileScannerU = new Scanner(new File(datiUtenti))) 
+                try (Scanner fileScannerU = new Scanner(new File(fileUtenti))) 
                 {
                     while (fileScannerU.hasNextLine()) 
                     {
@@ -83,23 +83,14 @@ public class Menu
                             break;
                         case 4:
                             System.out.println("Logout effettuato con successo.");
+                            inSessione = false;
                             break;
-                            inSessione = false;     
                         default:
                             System.out.println("Opzione non valida.");
                             break;
                     }
 
-                    //CASE 1: Ricerca e Prenotazione
-                    private static void  gestireRicercaEPrenotazione(Scanner scanner, String fileProiezioni)
-                    {
-                        
-                    }
-                
-
-
-
-
+                }
 
             case 2:     //REGISTRAZIONE
                 

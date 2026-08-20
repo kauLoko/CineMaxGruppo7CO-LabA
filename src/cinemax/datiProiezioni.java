@@ -14,7 +14,8 @@ public class datiProiezioni
     private static final String fileProiezioni = "data/proiezioni.csv";
 
     //Construtore
-    public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) {
+    public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) 
+    {
         this.titolo = titolo;
         this.genere = genere;
         this.regista = regista;
@@ -26,8 +27,8 @@ public class datiProiezioni
     //Metodi
 
     //Aggiungi Proiezione
-    public static void aggiungiProiezione(Scanner scanner) throws IOException {
-
+    public static void aggiungiProiezione(Scanner scanner) throws IOException 
+    {
         System.out.print("Titolo: ");
         String titolo = scanner.next();
         System.out.print("Genere: ");

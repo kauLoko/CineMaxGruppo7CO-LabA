@@ -180,6 +180,7 @@ public class Utente
                     else 
                     {
                         System.out.println(risultatoRicerca.size() + " prenotazioni trovate:");
+                        
                         for(Prenotazione p: risultatoRicerca) 
                         {
                             System.out.println(p.toString()); //Da sistemare il toString, qui fornisce troppe informazioni non necessarie al cliente, il metodo è giusto per il bigliettaio
@@ -188,9 +189,6 @@ public class Utente
                 } break;
 
             case bigliettaio:
-
-            case proiezionista:
-                break;
 
         }
     }
