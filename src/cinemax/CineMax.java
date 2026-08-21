@@ -1,13 +1,65 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import java.io.*;
+import java.util.*;
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
+public static void main(String[] args) 
+{
+  Scanner scanner = new Scanner(System.in);
+
+  System.out.println("=================================================");
+  System.out.println("=          BENVENUTO NEL SISTEMA CINEMAX        =");
+  System.out.println("=================================================");
+
+  System.out.println("\n--- MENU PRINCIPALE ---");
+  System.out.println("1. Login");
+  System.out.println("2. Registrati come Cliente");
+  System.out.println("3. Prosegui come Ospite (Guest)");
+  System.out.println("4. Esci");
+  System.out.print("Scelta: ");
+  
+  String scelta = scanner.nextLine().trim();
+  
+  switch (scelta) 
+  {
+    case "1":
+      //eseguiLogin();
+            
+    case "2":
+      //registraCliente();
+            
+    case "3":
+      //menuGuest();
+            
+    case "4":
+    {
+      System.out.println("Grazie per aver usato CineMax. Arrivederci!");
+      System.exit(0);
+    }
+    
+    default:
+      System.out.println("Scelta non valida!");
+  }
+
+  while (true) 
+  {
+    if (utenteCorrente == null) //se non c'è utente loggato 
+    {
+      mostraMenuPrincipale();
+    } 
+    else 
+    {
+      switch (utenteCorrente.getRuolo()) 
+      {
+        case CLIENTE:
+          mostraMenuCliente();
+                    
+        case PROIEZIONISTA: 
+          mostraMenuProiezionista();
+        
+        case BIGLIETTAIO: 
+          mostraMenuBigliettaio();
+                
+      }
+    }
   }
 }
+
