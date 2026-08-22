@@ -9,10 +9,9 @@ public class Proiezione
     private int etaMinima;
     private String dataOrario;
     private double costo;
-    private int postiDisponibili; //potremmo usarlo e aggiornarlo e poi in chiusura al programma aggiornare il csv di ogni proiezione con i posti disponibili aggiornati, così da non doverlo fare ogni volta che si prenota un biglietto
-
+    private int postiDisponibili; 
     //Costruttore
-    public Proiezione(String titolo, String genere, String regista, int anno, int durata, int etaMinima, String dataOrario, double costo, int postiDisponibili) 
+    public Proiezione(String titolo, String genere, String regista, int anno, int durata, int etaMinima, String dataOrario, double costo) 
     {
         this.titolo = titolo;
         this.genere = genere;
@@ -22,7 +21,7 @@ public class Proiezione
         this.etaMinima = etaMinima;
         this.dataOrario = dataOrario;
         this.costo = costo;
-        this.postiDisponibili = postiDisponibili;
+        this.postiDisponibili = 200;
     }
 
     //Metodi
@@ -69,6 +68,16 @@ public class Proiezione
     public int getPostiDisponibili() 
     {
         return postiDisponibili;
+    }
+
+    public void setPostiDisponibili(int postiDisponibili) 
+    {
+        this.postiDisponibili = postiDisponibili;
+    }
+
+    public void decrementaPosti(int bigliettiVenduti) 
+    {
+        this.postiDisponibili -= bigliettiVenduti;
     }
 
     @Override

@@ -183,12 +183,14 @@ public class Utente
                         
                         for(Prenotazione p: risultatoRicerca) 
                         {
-                            System.out.println(p.toString()); //Da sistemare il toString, qui fornisce troppe informazioni non necessarie al cliente, il metodo è giusto per il bigliettaio
+                            System.out.println(p.toString());
                         }
                     }
                 } break;
 
             case bigliettaio:
+
+            case proiezionista:
 
         }
     }

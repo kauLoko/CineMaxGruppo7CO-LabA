@@ -120,8 +120,7 @@ public class datiProiezioni
                 int durata = Integer.parseInt(campi[5]);
                 int etàMinima = Integer.parseInt(campi[6]);
                 double costo = Double.parseDouble(campi[7]);
-                int postiDisponibili = Integer.parseInt(campi[8]);
-                Proiezione proiezione = new Proiezione(titolo, genere, regista, anno, durata, etàMinima, dataOrario, costo, postiDisponibili);
+                Proiezione proiezione = new Proiezione(titolo, genere, regista, anno, durata, etàMinima, dataOrario, costo);
                 listaProiezioni.add(proiezione);
             }
         }   
@@ -129,5 +128,18 @@ public class datiProiezioni
             System.err.println("Errore durante la lettura del file: " + e.getMessage());
         }
         return listaProiezioni;
+    }
+    public static int calcoloPostiLiberi(Proiezione proiezione, List<Prenotazione> listaPrenotazioni) 
+    {
+        int capienzaMassima = 200;
+        int postiOccupati = 0;
+        for(Prenotazione p: listaPrenotazioni) 
+        {
+            if(p.getTitoloFilm().equalsIgnoreCase(proiezione.getTitolo()) && (p.getDataProiezione() + " " + p.getOrarioProiezione()).equals(proiezione.getDataOrario())) 
+            {
+                postiOccupati += p.getNumeroBiglietti();
+            }
+        }
+        return capienzaMassima - postiOccupati;
     }
 }

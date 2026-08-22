@@ -301,12 +301,16 @@ public class ClienteRegistrato extends Utente
         }   
         else 
         {
-            System.out.println("\n" + risultatoRicerca.size() + " proiezioni trovate:");
-
+            Set<String> titoliTrovati = new HashSet<>();
             for (Proiezione p : risultatoRicerca) 
             {
-                System.out.println(p.toString());              
+                titoliTrovati.add(p.getTitolo());              
             }        
+            System.out.println("Trovate " + risultatoRicerca.size() + " proiezioni distribuite su " + titoliTrovati.size() + " film:");
+            for(String t: titoliTrovati) 
+            {
+                System.out.println("- " + t);
+            }
         }
         System.out.println("--------------------------------"); //Per staccare quando verra' chiamato un altro metodo 
     }
@@ -323,7 +327,6 @@ public class ClienteRegistrato extends Utente
             {
                 System.out.println(proiezione.toString());
                 trovato = true;
-                break;
             }
         }
         if (!trovato) 
@@ -332,18 +335,74 @@ public class ClienteRegistrato extends Utente
         }
     }
 
-    public static void visualizzaPrenotazioni(Scanner scanner) 
+ public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
-        // Implementazione del metodo per visualizzare le prenotazioni
-    }
+        System.out.println("Inserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
+        String dataOra = scanner.nextLine().trim();
+        boolean proiezioneTrovata = false;
+        for(Proiezione p: risultatoRicerca) 
+        {
+            if(p.getDataOrario().equals(dataOra)) 
+            {
+                proiezioneTrovata = true;
+                int numeroBiglietti = 0;
+                boolean inputValido = false;
+                while(!inputValido) 
+                { 
+                    System.out.println("Quanti biglietti desidera acquistare?");
+                    try
+                    {
+                        numeroBiglietti = Integer.parseInt(scanner.nextLine().trim());
+                        if(numeroBiglietti > 0) 
+                        {
+                            inputValido = true;
+                        } 
+                        else 
+                        {
+                            System.out.println("Inserisci un numero maggiore di zero");
+                        }
+                    } 
+                    catch(NumberFormatException e)
+                    {
+                        System.out.println("Errore: devi inserire un numero intero");
+                    }
+                }
+                if(numeroBiglietti <= p.getPostiDisponibili()) 
+                {
+                    p.decrementaPosti(numeroBiglietti);
+                    //genera codice univoco
+                    //crea oggetto prenotazione e aggiungilo alla lista prenotazioni globale 
 
-    public static void creaPrenotazione() 
-    {
-        // Implementazione del metodo per inserire una prenotazione
+                }
+                else 
+                {
+                    System.out.println("Prenotazione non riuscita: posti liberi non sufficienti");
+                } break;
+            }
+        }
+        if (!proiezioneTrovata)         
+        {
+            System.out.println("Nessuna proiezione trovata a questo orario");
+        }
     }
 
     public static void modificaPrenotazione(Scanner scanner) 
     {
         // Implementazione del metodo per modificare una prenotazione
+        /*
+            1.Chiedo codice univoco della prenotazione da modificare
+            2.Controllo che la data sia successiva ad oggi
+            3.Restituisco tutte le altre proiezioni future dello stesso film e chiedo a quale spostare 
+            4.Modifico la prenotazione e sovrascrivo nel CSV 
+        */
+    }
+
+    public static void eliminaPrenotazione(Scanner scanner) 
+    {
+        /*
+            1.Chiedi quale prenotazione vuole eliminare per titolo/codice univoco
+            2.Controlla che esista fra le prenotazioni del cliente e che la data di proiezione sia precedente alla data odierna
+            3.Eliminala e modifica il file CSV
+        */
     }
 }
