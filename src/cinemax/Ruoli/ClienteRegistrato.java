@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class Cliente extends Utente 
+public class ClienteRegistrato extends Utente 
 {
     //Costruttore
-    public Cliente(String nome, String cognome, String username, String password, String nascita, String domicilio) 
+    public ClienteRegistrato(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
