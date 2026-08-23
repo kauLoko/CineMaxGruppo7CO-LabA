@@ -21,12 +21,14 @@ public static void main(String[] args)
   switch (scelta) 
   {
     case "1":
-      //eseguiLogin();
+      ClienteRegistrato.eseguiLogin(scanner);
+      break;
             
     case "2":
-      //registraCliente();
+      Utente.registrazioneUtente(scanner);
+      break;
             
-    case "3":
+   // case "3":
       //menuGuest();
             
     case "4":
@@ -38,8 +40,8 @@ public static void main(String[] args)
     default:
       System.out.println("Scelta non valida!");
   }
-
-  while (true) 
+}
+ /*  while (true) 
   {
     if (utenteCorrente == null) //se non c'è utente loggato 
     {
@@ -61,5 +63,5 @@ public static void main(String[] args)
       }
     }
   }
-}
+} */
 
