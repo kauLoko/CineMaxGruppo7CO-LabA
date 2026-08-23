@@ -8,6 +8,23 @@ public class ClienteRegistrato extends Utente
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
 
+    public static ClienteRegistrato eseguiLogin(Scanner scanner)
+    {
+        System.out.print("Username: ");
+        String username = scanner.nextLine().trim();
+        System.out.print("Password: ");
+        String password = scanner.nextLine().trim();
+        
+        if() //codice per confrontare dati csv e dati appena inseriti
+        {
+        System.out.println("\nLogin effettuato con successo! Benvenuto " + /*getNome() */);
+        } 
+        else 
+        {
+            System.out.println("Credenziali errate!");
+        }
+    }
+
 
     //Questo metodo e' lungo e potrebbe essere ottimizzato perche' ripete diverse righe piu' volte. Manca prima di questi la distinzione tra guest e cliente registrato
     //Da sistemare il filtraggio per costo e data, non usa ancora il range.
