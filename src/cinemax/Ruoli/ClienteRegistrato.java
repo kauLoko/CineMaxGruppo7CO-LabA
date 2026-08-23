@@ -407,25 +407,53 @@ public class ClienteRegistrato extends Utente
         }
     }
 
-    public static void modificaPrenotazione(Scanner scanner) 
+    public static void modificaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
     {
-        // Implementazione del metodo per modificare una prenotazione
+        Boolean entrataValida = false;
         System.out.println("Inserire il codice della prenotazione da modificare: ");
-        /*
-            1.Chiedo codice univoco della prenotazione da modificare
-            2.Controllo che la data sia successiva ad oggi
-            3.Restituisco tutte le altre proiezioni future dello stesso film e chiedo a quale spostare 
-            4.Modifico la prenotazione e sovrascrivo nel CSV 
-        */
+        String codiceUnivoco = scanner.nextLine();
+        for(Prenotazione p: listaPrenotazioni) 
+        {
+                if(codiceUnivoco.equals(p.getCodicePrenotazione())) 
+                    {
+                        entrataValida = true;
+                        //getDataOdierna
+                        System.out.println("Prenotazione trovata");
+                        String dataPrenotazione = p.getDataOraProiezione();
+                        //if(dataPrenotazione > dataOdierna)
+                        //restituisci le prenotazioni future e chiedi in quale data vuole fissarla
+                        //modifica la prenotazione modificando la lista prenotazioni, poi si salva tutto in una colta nel CSV a fine esecuzione programma
+                    }
+        }
+        if(!entrataValida) 
+        {
+            System.out.println("Il codice prenotazione inserito non è valido");
+            //potremmo mettere un blocco try, così che l'utente può riprovare a inserire il codice se vuole altrimenti esci
+        }
     }
 
-    public static void eliminaPrenotazione(Scanner scanner) 
+    public static void eliminaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
     {
-        /*
-            1.Chiedi quale prenotazione vuole eliminare per titolo/codice univoco
-            2.Controlla che esista fra le prenotazioni del cliente e che la data di proiezione sia precedente alla data odierna
-            3.Eliminala e modifica il file CSV
-        */
+        Boolean entrataValida = false;
+        System.out.println("Inserire il codice della prenotazione da eliminare: ");
+        String codiceUnivoco = scanner.nextLine();
+        for(Prenotazione p: listaPrenotazioni) 
+        {
+                if(codiceUnivoco.equals(p.getCodicePrenotazione())) 
+                    {
+                        entrataValida = true;
+                        //getDataOdierna
+                        String dataPrenotazione = p.getDataOraProiezione();
+                        //if(dataPrenotazione < dataOdierna)
+                        listaPrenotazioni.remove(p);
+                        break;
+                    }
+        }
+        if(!entrataValida) 
+        {
+            System.out.println("Il codice prenotazione inserito non è valido");
+            //anche qui potremmo mettere un blocco try, così che l'utente può riprovare a inserire il codice se vuole altrimenti esci
+        }
     }
 
     public static String generaCodiceUnivoco() 
