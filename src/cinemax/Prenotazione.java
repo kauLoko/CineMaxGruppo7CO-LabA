@@ -14,20 +14,18 @@ public class Prenotazione {
     private String nomeCliente;
     private String cognomeCliente;
     private String titoloFilm;
-    private String dataProiezione;
-    private String orarioProiezione;
+    private String dataOraProiezione;
     private Double costoUintario;
     private Double costoTotale;
     private int numeroBiglietti;
 
     //Costruttore
-    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataProiezione, String orarioProiezione, Double costoUintario, Double costoTotale, int numeroBiglietti) {
+    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraProiezione, Double costoUintario, Double costoTotale, int numeroBiglietti) {
         this.codicePrenotazione = codicePrenotazione;
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
         this.titoloFilm = titoloFilm;
-        this.dataProiezione = dataProiezione;
-        this.orarioProiezione = orarioProiezione;
+        this.dataOraProiezione = dataOraProiezione;
         this.costoUintario = costoUintario;
         this.costoTotale = costoTotale;
         this.numeroBiglietti = numeroBiglietti;
@@ -38,8 +36,7 @@ public class Prenotazione {
     public String getNomeCliente() {return nomeCliente;}
     public String getCognomeCliente() {return cognomeCliente;}
     public String getTitoloFilm() {return titoloFilm;}
-    public String getDataProiezione() {return dataProiezione;}
-    public String getOrarioProiezione() {return orarioProiezione;}
+    public String getDataOraProiezione() {return dataOraProiezione;}
     public Double getCostoUnitario() {return costoUintario;}
     public Double getCostoTotale() {return costoTotale;}
     public int getNumeroBiglietti() {return numeroBiglietti;}
@@ -53,20 +50,19 @@ public class Prenotazione {
                     continue; // Salta le righe vuote
                 }
                 String[] campi = riga.split(",");
-                if(campi.length != 9) {
-                    continue; // Salta le righe con meno di 9 campi
+                if(campi.length != 8) {
+                    continue; // Salta le righe con meno di 8 campi
                 }
                 try {
                     String codicePrenotazione = campi[0];
                     String nomeCliente = campi[1];
                     String cognomeCliente = campi[2];
                     String titoloFilm = campi[3];
-                    String dataProiezione = campi[4];
-                    String orarioProiezione = campi[5];
-                    Double costoUnitario = Double.parseDouble(campi[6]);
-                    Double costoTotale = Double.parseDouble(campi[7]);
-                    int numeroBiglietti = Integer.parseInt(campi[8]);
-                    Prenotazione prenotazione = new Prenotazione(codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataProiezione, orarioProiezione, costoUnitario, costoTotale, numeroBiglietti);
+                    String dataOraProiezione = campi[4];
+                    Double costoUnitario = Double.parseDouble(campi[5]);
+                    Double costoTotale = Double.parseDouble(campi[6]);
+                    int numeroBiglietti = Integer.parseInt(campi[7]);
+                    Prenotazione prenotazione = new Prenotazione(codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUnitario, costoTotale, numeroBiglietti);
                     listaPrenotazioni.add(prenotazione);
                 } 
                 catch (NumberFormatException e) {
@@ -90,11 +86,10 @@ public class Prenotazione {
             Nome cliente: %s
             Cognome cliente: %s
             Titolo film: %s
-            Data proiezione: %s
-            Orario proiezione: %s
+            Data e ora proiezione: %s
             Costo unitario: %.2f
             Costo totale: %.2f
             Numero biglietti: %d
-            """, codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataProiezione, orarioProiezione, costoUintario, costoTotale, numeroBiglietti);
+            """, codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUintario, costoTotale, numeroBiglietti);
     }
 }

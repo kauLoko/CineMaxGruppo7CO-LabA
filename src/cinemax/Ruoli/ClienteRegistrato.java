@@ -371,8 +371,12 @@ public class ClienteRegistrato extends Utente
                 {
                     p.decrementaPosti(numeroBiglietti);
                     //genera codice univoco
+                    String codiceUnivoco = generaCodiceUnivoco();
                     //crea oggetto prenotazione e aggiungilo alla lista prenotazioni globale 
-
+                    Prenotazione nuovaPrenotazione = new Prenotazione(codiceUnivoco, utente.getNome(), utente.getCognome(), p.getTitolo(), p.getDataOrario(), p.getCosto(), (p.getCosto() * numeroBiglietti), numeroBiglietti);
+                    listaPrenotazioni.add(nuovaPrenotazione); 
+                    System.out.println("Prenotazione avvenuta con successo!");
+                    System.out.println(nuovaPrenotazione.toString());
                 }
                 else 
                 {
@@ -389,6 +393,7 @@ public class ClienteRegistrato extends Utente
     public static void modificaPrenotazione(Scanner scanner) 
     {
         // Implementazione del metodo per modificare una prenotazione
+        System.out.println("Inserire il codice della prenotazione da modificare: ");
         /*
             1.Chiedo codice univoco della prenotazione da modificare
             2.Controllo che la data sia successiva ad oggi
@@ -405,4 +410,18 @@ public class ClienteRegistrato extends Utente
             3.Eliminala e modifica il file CSV
         */
     }
+
+    public static String generaCodiceUnivoco() 
+    {
+        String caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder codice = new StringBuilder(); //Builder perchè modificabile al contrario delle stringhe normali
+        java.util.Random random = new java.util.Random();
+        for(int i = 0; i < 8; i++) 
+        {
+            int indice = random.nextInt(caratteri.length());
+            char carattere = caratteri.charAt(indice);
+            codice.append(carattere);
+        }
+        return codice.toString();
+    } 
 }

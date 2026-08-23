@@ -133,9 +133,9 @@ public class datiProiezioni
     {
         int capienzaMassima = 200;
         int postiOccupati = 0;
-        for(Prenotazione p: listaPrenotazioni) 
+        for(Prenotazione p: listaPrenotazioni)
         {
-            if(p.getTitoloFilm().equalsIgnoreCase(proiezione.getTitolo()) && (p.getDataProiezione() + " " + p.getOrarioProiezione()).equals(proiezione.getDataOrario())) 
+            if(p.getTitoloFilm().equalsIgnoreCase(proiezione.getTitolo()) && p.getDataOraProiezione().equals(proiezione.getDataOrario())) 
             {
                 postiOccupati += p.getNumeroBiglietti();
             }
