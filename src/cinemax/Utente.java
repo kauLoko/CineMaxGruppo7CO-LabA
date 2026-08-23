@@ -30,7 +30,6 @@ public class Utente
     }
 
     //Metodi
-
     public static Utente registrazioneUtente(Scanner scanner) 
     {
         System.out.print("Nome: ");
