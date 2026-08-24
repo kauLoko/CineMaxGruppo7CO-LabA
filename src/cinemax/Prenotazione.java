@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Prenotazione {
+public class Prenotazione 
+{
 
     //Campi
-
     private static final String filePrenotazioni = "data/prenotazioni.csv";
 
     private String codicePrenotazione;
@@ -20,7 +20,8 @@ public class Prenotazione {
     private int numeroBiglietti;
 
     //Costruttore
-    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraProiezione, Double costoUintario, Double costoTotale, int numeroBiglietti) {
+    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraProiezione, Double costoUintario, Double costoTotale, int numeroBiglietti) 
+    {
         this.codicePrenotazione = codicePrenotazione;
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
@@ -32,28 +33,70 @@ public class Prenotazione {
     }
 
     //Metodi
-    public String getCodicePrenotazione() {return codicePrenotazione;}
-    public String getNomeCliente() {return nomeCliente;}
-    public String getCognomeCliente() {return cognomeCliente;}
-    public String getTitoloFilm() {return titoloFilm;}
-    public String getDataOraProiezione() {return dataOraProiezione;}
-    public Double getCostoUnitario() {return costoUintario;}
-    public Double getCostoTotale() {return costoTotale;}
-    public int getNumeroBiglietti() {return numeroBiglietti;}
+    public String getCodicePrenotazione() 
+    {
+        return codicePrenotazione;
+    }
 
-    public static List<Prenotazione> listaPrenotazioni() {
+    public String getNomeCliente() 
+    {
+        return nomeCliente;
+    }
+
+    public String getCognomeCliente() 
+    {
+        return cognomeCliente;
+    }
+
+    public String getTitoloFilm() 
+    {
+        return titoloFilm;
+    }
+
+    public String getDataOraProiezione() 
+    {
+        return dataOraProiezione;
+    }
+
+    public Double getCostoUnitario() 
+    {
+        return costoUintario;
+    }
+
+    public Double getCostoTotale() 
+    {
+        return costoTotale;
+    }
+
+    public int getNumeroBiglietti() 
+    {
+        return numeroBiglietti;
+    }
+
+    public static List<Prenotazione> listaPrenotazioni() 
+    {
         List<Prenotazione> listaPrenotazioni = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePrenotazioni))) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePrenotazioni))) 
+        {
             String riga = br.readLine();
-            while ((riga = br.readLine()) != null) {
-                if (riga.trim().isEmpty()) {
+
+            while ((riga = br.readLine()) != null) 
+            {
+                if (riga.trim().isEmpty()) 
+                {
                     continue; // Salta le righe vuote
                 }
+
                 String[] campi = riga.split(",");
-                if(campi.length != 8) {
+
+                if(campi.length != 8) 
+                {
                     continue; // Salta le righe con meno di 8 campi
                 }
-                try {
+
+                try 
+                {
                     String codicePrenotazione = campi[0];
                     String nomeCliente = campi[1];
                     String cognomeCliente = campi[2];
@@ -65,14 +108,17 @@ public class Prenotazione {
                     Prenotazione prenotazione = new Prenotazione(codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUnitario, costoTotale, numeroBiglietti);
                     listaPrenotazioni.add(prenotazione);
                 } 
-                catch (NumberFormatException e) {
+                catch (NumberFormatException e) 
+                {
                     System.err.println("Errore durante l'analisi della riga: " + riga); //Se c'è un problema nei parseDouble/Int lancia eccezione
                 }
             }
         }   
-        catch (IOException e) {
+        catch (IOException e) 
+        {
             System.err.println("Errore durante la lettura del file: " + e.getMessage());
         }
+        
         return listaPrenotazioni;
     }
 
