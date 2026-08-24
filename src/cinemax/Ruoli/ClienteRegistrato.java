@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ClienteRegistrato extends Utente 
 {
@@ -407,52 +409,86 @@ public class ClienteRegistrato extends Utente
         }
     }
 
-    public static void modificaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
+    public static void modificaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, List<Prenotazione> listaPrenotazioni) 
     {
         Boolean entrataValida = false;
-        System.out.println("Inserire il codice della prenotazione da modificare: ");
-        String codiceUnivoco = scanner.nextLine();
-        for(Prenotazione p: listaPrenotazioni) 
+        while(!entrataValida) 
         {
-                if(codiceUnivoco.equals(p.getCodicePrenotazione())) 
-                    {
-                        entrataValida = true;
-                        //getDataOdierna
-                        System.out.println("Prenotazione trovata");
-                        String dataPrenotazione = p.getDataOraProiezione();
-                        //if(dataPrenotazione > dataOdierna)
-                        //restituisci le prenotazioni future e chiedi in quale data vuole fissarla
-                        //modifica la prenotazione modificando la lista prenotazioni, poi si salva tutto in una colta nel CSV a fine esecuzione programma
-                    }
-        }
-        if(!entrataValida) 
-        {
-            System.out.println("Il codice prenotazione inserito non è valido");
-            //potremmo mettere un blocco try, così che l'utente può riprovare a inserire il codice se vuole altrimenti esci
+            System.out.println("Inserire il codice della prenotazione da modificare (o 'esci' per annullare): ");
+            String codiceUnivoco = scanner.nextLine().trim();
+            for(Prenotazione prenotazione: listaPrenotazioni) 
+            {
+                    if(codiceUnivoco.equals(prenotazione.getCodicePrenotazione())) 
+                        {
+                            entrataValida = true;
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            LocalDateTime dataOggi = LocalDateTime.now();
+                            LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraProiezione(), formatter);
+                            if(dataPrenotazione.isAfter(dataOggi)) 
+                            {
+                                System.out.println("Prenotazione trovata. Scegli la data a cui desideri spostarla tra le seguenti:");
+                                for(Proiezione proiezione: risultatoRicerca) 
+                                {
+                                    if(proiezione.getTitolo().equalsIgnoreCase(prenotazione.getTitoloFilm())) 
+                                    {
+                                        //prendo orario proiezione
+                                        //converto in datatimeobject 
+                                        //confronto e se dataProiezione > dataOggi restituisco
+                                        //faccio digitare data e orario all'utente o scegliere in qualche modo e aggiorno
+                                        //   
+                                    }
+                                }
+
+                            }    
+                            else 
+                            {
+                                System.out.println("Non puoi modificare una prenotazione passata. Riprova");
+                            }
+                        }
+            }
+            if(!entrataValida) 
+            {
+                System.out.println("Il codice prenotazione inserito non è valido");
+            }
         }
     }
 
     public static void eliminaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
-    {
+    {   
         Boolean entrataValida = false;
-        System.out.println("Inserire il codice della prenotazione da eliminare: ");
-        String codiceUnivoco = scanner.nextLine();
-        for(Prenotazione p: listaPrenotazioni) 
-        {
-                if(codiceUnivoco.equals(p.getCodicePrenotazione())) 
-                    {
-                        entrataValida = true;
-                        //getDataOdierna
-                        String dataPrenotazione = p.getDataOraProiezione();
-                        //if(dataPrenotazione < dataOdierna)
-                        listaPrenotazioni.remove(p);
-                        break;
-                    }
-        }
-        if(!entrataValida) 
-        {
-            System.out.println("Il codice prenotazione inserito non è valido");
-            //anche qui potremmo mettere un blocco try, così che l'utente può riprovare a inserire il codice se vuole altrimenti esci
+        while(!entrataValida) {
+            System.out.println("Inserire il codice della prenotazione da eliminare (o 'esci' per annullare): ");
+            String codiceUnivoco = scanner.nextLine().trim();
+
+            if(codiceUnivoco.equalsIgnoreCase("esci")) 
+                {
+                    break;
+                }
+
+            for(Prenotazione p: listaPrenotazioni) 
+            {
+                    if(codiceUnivoco.equals(p.getCodicePrenotazione())) 
+                        {
+                            entrataValida = true;
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); //MM e HH perchè in minuscolo indicherebbero minuti e formato a 12 ore con AM e PM
+                            LocalDateTime dataOggi = LocalDateTime.now();
+                            LocalDateTime dataPrenotazione = LocalDateTime.parse(p.getDataOraProiezione(), formatter);
+                            if(dataPrenotazione.isBefore(dataOggi)) 
+                            {
+                                listaPrenotazioni.remove(p);
+                                System.out.println("Prenotazione rimossa con successo");
+                            }
+                            else
+                            {
+                                System.out.println("Impossibile rimuovere la prenotazione: la proiezione deve ancora avvenire");
+                            }
+                            break;
+                        }
+            }
+            if(!entrataValida) 
+            {
+                System.out.println("Il codice prenotazione inserito non è valido. Riprova");
+            }
         }
     }
 
