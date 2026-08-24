@@ -3,26 +3,50 @@ import java.io.*;
 
 public class ClienteGuest 
 {
-    public static menuGuest() 
+    public static ClienteGuest menuGuest() 
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("\nInserisci il titolo del film e premi invio per avviare la ricerca:");
+        /*System.out.print("\nInserisci il titolo del film e premi invio per avviare la ricerca:");
         
         String titolo = scanner.nextLine().trim();
 
-        List<Proiezione> proiezioni = .cercaProiezioni(titolo, null, null, null, null, null);
-
+        List<Proiezione> proiezioni = .cercaProiezioni(titolo, null, null, null, null, null);*/
     
+        System.out.println("\n--- OPZIONI GUEST ---");
+        System.out.println("1. Cerca Proiezioni");
+        System.out.println("2. Visualizza Dettaglio Proiezione");
+        System.out.println("3. Registrazione come cliente");
+        System.out.println("4. Esci");
+        System.out.print("Scelta: ");
 
-        while (true) {
-            System.out.println("\n--- OPZIONI GUEST ---");
-            System.out.println("1. Cerca Proiezioni (Filtri Avanzati)");
-            System.out.println("2. Visualizza Dettaglio Proiezione");
-            System.out.println("0. Torna al Menu Principale");
-            System.out.print("Scelta: ");
+        String scelta = scanner.nextLine().trim();
 
-            String scelta = scanner.nextLine().trim();
-        }
-    }
+        switch (scelta) 
+        {
+            case "1":
+                datiProiezioni.listaProiezioni();
+                break;
+            
+            /*case "2":
+                visualizzaDettProiezione
+                break; */
+            
+            case "3":
+                Utente.registrazioneUtente(scanner);
+                break;
+            
+            case "4":
+            {
+                System.out.println("Grazie per aver usato CineMax. Arrivederci!");
+                System.exit(0);
+            }
+    
+            default:
+                System.out.println("Scelta non valida!");
+            }
+
+        return null;
+    }  
+    
 }
