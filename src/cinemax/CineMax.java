@@ -28,9 +28,10 @@ public static void main(String[] args)
       Utente.registrazioneUtente(scanner);
       break;
             
-   // case "3":
-      //menuGuest();
-            
+    case "3":
+      ClienteGuest.menuGuest();
+      break;
+      
     case "4":
     {
       System.out.println("Grazie per aver usato CineMax. Arrivederci!");
