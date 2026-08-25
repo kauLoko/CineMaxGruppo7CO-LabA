@@ -6,12 +6,6 @@ public class ClienteGuest
     public static ClienteGuest menuGuest() 
     {
         Scanner scanner = new Scanner(System.in);
-
-        /*System.out.print("\nInserisci il titolo del film e premi invio per avviare la ricerca:");
-        
-        String titolo = scanner.nextLine().trim();
-
-        List<Proiezione> proiezioni = .cercaProiezioni(titolo, null, null, null, null, null);*/
     
         System.out.println("\n--- OPZIONI GUEST ---");
         System.out.println("1. Cerca Proiezioni");
@@ -25,7 +19,7 @@ public class ClienteGuest
         switch (scelta) 
         {
             case "1":
-                datiProiezioni.listaProiezioni();
+                ClienteRegistrato.cercaProiezione(scanner, null);
                 break;
             
             /*case "2":
