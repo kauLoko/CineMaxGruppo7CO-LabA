@@ -10,6 +10,7 @@ public class Proiezione
     private String dataOrario;
     private double costo;
     private int postiDisponibili; 
+    
     //Costruttore
     public Proiezione(String titolo, String genere, String regista, int anno, int durata, int etaMinima, String dataOrario, double costo) 
     {
