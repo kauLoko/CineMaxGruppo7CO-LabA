@@ -14,19 +14,19 @@ public class Prenotazione
     private String nomeCliente;
     private String cognomeCliente;
     private String titoloFilm;
-    private String dataOraProiezione;
+    private String dataOraPrenotazione;
     private Double costoUintario;
     private Double costoTotale;
     private int numeroBiglietti;
 
     //Costruttore
-    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraProiezione, Double costoUintario, Double costoTotale, int numeroBiglietti) 
+    public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraPrenotazione, Double costoUintario, Double costoTotale, int numeroBiglietti) 
     {
         this.codicePrenotazione = codicePrenotazione;
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
         this.titoloFilm = titoloFilm;
-        this.dataOraProiezione = dataOraProiezione;
+        this.dataOraPrenotazione = dataOraPrenotazione;
         this.costoUintario = costoUintario;
         this.costoTotale = costoTotale;
         this.numeroBiglietti = numeroBiglietti;
@@ -53,9 +53,9 @@ public class Prenotazione
         return titoloFilm;
     }
 
-    public String getDataOraProiezione() 
+    public String getDataOraPrenotazione() 
     {
-        return dataOraProiezione;
+        return dataOraPrenotazione;
     }
 
     public Double getCostoUnitario() 
@@ -71,6 +71,11 @@ public class Prenotazione
     public int getNumeroBiglietti() 
     {
         return numeroBiglietti;
+    }
+
+    public void setDataOraPrenotazione(String nuovaData) 
+    {
+        this.dataOraPrenotazione = nuovaData;
     }
 
     public static List<Prenotazione> listaPrenotazioni() 
@@ -136,6 +141,6 @@ public class Prenotazione
             Costo unitario: %.2f
             Costo totale: %.2f
             Numero biglietti: %d
-            """, codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUintario, costoTotale, numeroBiglietti);
+            """, codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraPrenotazione, costoUintario, costoTotale, numeroBiglietti);
     }
 }

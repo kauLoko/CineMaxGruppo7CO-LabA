@@ -409,36 +409,89 @@ public class ClienteRegistrato extends Utente
         }
     }
 
-    public static void modificaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, List<Prenotazione> listaPrenotazioni) 
+    public static void modificaPrenotazione(Scanner scanner, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
         Boolean entrataValida = false;
         while(!entrataValida) 
         {
             System.out.println("Inserire il codice della prenotazione da modificare (o 'esci' per annullare): ");
             String codiceUnivoco = scanner.nextLine().trim();
+
+            if(codiceUnivoco.equalsIgnoreCase("esci")) break;
+
             for(Prenotazione prenotazione: listaPrenotazioni) 
             {
                     if(codiceUnivoco.equals(prenotazione.getCodicePrenotazione())) 
                         {
                             entrataValida = true;
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            DateTimeFormatter formatter =   DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                             LocalDateTime dataOggi = LocalDateTime.now();
-                            LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraProiezione(), formatter);
+                            LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraPrenotazione(), formatter);
                             if(dataPrenotazione.isAfter(dataOggi)) 
                             {
-                                System.out.println("Prenotazione trovata. Scegli la data a cui desideri spostarla tra le seguenti:");
-                                for(Proiezione proiezione: risultatoRicerca) 
+                                System.out.println("Prenotazione trovata");
+                                for(Proiezione proiezione: listaProiezioni) 
                                 {
-                                    if(proiezione.getTitolo().equalsIgnoreCase(prenotazione.getTitoloFilm())) 
+                                    if(proiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim())) 
                                     {
-                                        //prendo orario proiezione
-                                        //converto in datatimeobject 
-                                        //confronto e se dataProiezione > dataOggi restituisco
-                                        //faccio digitare data e orario all'utente o scegliere in qualche modo e aggiorno
-                                        //   
+                                        LocalDateTime opzioni = LocalDateTime.parse(proiezione.getDataOrario(), formatter); 
+                                        if(opzioni.isAfter(dataOggi) && !proiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
+                                        {
+                                            System.out.println("\n" + proiezione.getDataOrario());
+                                        }
                                     }
                                 }
-
+                                System.out.println("Inserire la data in cui desideri spostare la preontazione (yyyy-MM-dd HH:mm:ss): ");
+                                LocalDateTime dataNuova = null;
+                                String inputUtente = "";
+                                boolean formatoValido = false;
+                                while(!formatoValido) 
+                                    {
+                                    inputUtente = scanner.nextLine().trim();
+                                    try 
+                                    {
+                                        dataNuova = LocalDateTime.parse(inputUtente, formatter);
+                                        formatoValido = true;
+                                    }
+                                    catch (Exception e) 
+                                    {
+                                        System.out.println("Errore di formato: inserisci la data esattamente come richiesto (yyyy-MM-dd HH:mm:ss)");
+                                    }
+                                }
+                                
+                                boolean nuovaTrovata = false;
+                                int biglietti = prenotazione.getNumeroBiglietti();
+                                for(Proiezione nuovaProiezione: listaProiezioni) 
+                                {
+                                    if(nuovaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && LocalDateTime.parse(nuovaProiezione.getDataOrario(), formatter).equals(dataNuova)) 
+                                    {
+                                        nuovaTrovata = true;
+                                        if(nuovaProiezione.getPostiDisponibili() >= biglietti) 
+                                        {
+                                            nuovaProiezione.decrementaPosti(biglietti);
+                                            
+                                            for(Proiezione vecchiaProiezione: listaProiezioni) 
+                                            {
+                                                if(vecchiaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && vecchiaProiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
+                                                {
+                                                    vecchiaProiezione.setPostiDisponibili(vecchiaProiezione.getPostiDisponibili() + biglietti);
+                                                    break;
+                                                }
+                                            }
+                                            prenotazione.setDataOraPrenotazione(inputUtente); //Passo inputUtente perchè nel blocco precedente col formatter ho già controllato e imposto che sia nel formato corretto, così posso direttamente aggiornarlo 
+                                            System.out.println("Prenotazione modificata con successo");
+                                        }
+                                        else 
+                                        {
+                                            System.out.println("Errore: posti insufficienti nella nuova data");
+                                        } break;
+                                    }
+                                    
+                                }
+                                if(!nuovaTrovata) 
+                                {
+                                    System.out.println("La data inserita non valida o non corrispondente alkle opzioni");
+                                } break;
                             }    
                             else 
                             {
@@ -460,10 +513,7 @@ public class ClienteRegistrato extends Utente
             System.out.println("Inserire il codice della prenotazione da eliminare (o 'esci' per annullare): ");
             String codiceUnivoco = scanner.nextLine().trim();
 
-            if(codiceUnivoco.equalsIgnoreCase("esci")) 
-                {
-                    break;
-                }
+            if(codiceUnivoco.equalsIgnoreCase("esci")) break;
 
             for(Prenotazione p: listaPrenotazioni) 
             {
@@ -472,7 +522,7 @@ public class ClienteRegistrato extends Utente
                             entrataValida = true;
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); //MM e HH perchè in minuscolo indicherebbero minuti e formato a 12 ore con AM e PM
                             LocalDateTime dataOggi = LocalDateTime.now();
-                            LocalDateTime dataPrenotazione = LocalDateTime.parse(p.getDataOraProiezione(), formatter);
+                            LocalDateTime dataPrenotazione = LocalDateTime.parse(p.getDataOraPrenotazione(), formatter);
                             if(dataPrenotazione.isBefore(dataOggi)) 
                             {
                                 listaPrenotazioni.remove(p);

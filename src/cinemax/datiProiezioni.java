@@ -156,7 +156,7 @@ public class datiProiezioni
         int postiOccupati = 0;
         for(Prenotazione p: listaPrenotazioni)
         {
-            if(p.getTitoloFilm().equalsIgnoreCase(proiezione.getTitolo()) && p.getDataOraProiezione().equals(proiezione.getDataOrario())) 
+            if(p.getTitoloFilm().equalsIgnoreCase(proiezione.getTitolo()) && p.getDataOraPrenotazione().equals(proiezione.getDataOrario())) 
             {
                 postiOccupati += p.getNumeroBiglietti();
             }
