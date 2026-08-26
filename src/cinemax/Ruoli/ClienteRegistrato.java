@@ -279,7 +279,7 @@ public class ClienteRegistrato extends Utente
             if (titolo != null && !proiezione.getTitolo().toLowerCase().contains(titolo.toLowerCase())) 
             {
                 corrisponde = false;
-            }
+            } 
             if(genere != null && !proiezione.getGenere().toLowerCase().contains(genere.toLowerCase())) 
             {
                 corrisponde = false;
