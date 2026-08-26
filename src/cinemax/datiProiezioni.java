@@ -11,10 +11,12 @@ public class datiProiezioni
     private int anno;
     private int durata;
     private int etaMin;
-    private static final String fileProiezioni = "data/proiezioni.csv";
+    String dataOrario;
+    double costo;
+    private static final String fileProiezioni = "proiezioni.csv";
 
     //Construtore
-    public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin) 
+    public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin, String dataOrario, double costo) 
     {
         this.titolo = titolo;
         this.genere = genere;
@@ -22,6 +24,8 @@ public class datiProiezioni
         this.anno = anno;
         this.durata = durata;
         this.etaMin = etaMin;
+        this.dataOrario = dataOrario;
+        this.costo = costo;
     }
 
     //Metodi
@@ -130,7 +134,8 @@ public class datiProiezioni
 
             while ((riga = br.readLine()) != null) 
             {
-                if(riga.trim().isEmpty()) continue;
+                if(riga.trim().isEmpty()) 
+                    continue;
                 String[] campi = riga.replace("\"", "").split(",");
                 String dataOrario = campi[0].trim();
                 String titolo = campi[1].trim();
