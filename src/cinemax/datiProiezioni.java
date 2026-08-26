@@ -130,12 +130,12 @@ public class datiProiezioni
 
             while ((riga = br.readLine()) != null) 
             {
-                String[] campi = riga.split(",");
+                String[] campi = riga.replace("\"", "").split(",");
                 String dataOrario = campi[0];
                 String titolo = campi[1];
                 String genere = campi[2];
                 String regista = campi[3];
-                int anno = Integer.parseInt(campi[4]);
+                int anno = Integer.parseInt(campi[4].trim());
                 int durata = Integer.parseInt(campi[5]);
                 int etàMinima = Integer.parseInt(campi[6]);
                 double costo = Double.parseDouble(campi[7]);
