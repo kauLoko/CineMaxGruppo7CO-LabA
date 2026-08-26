@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,19 +29,16 @@ public class ClienteRegistrato extends Utente
     }
 
 
-    //Questo metodo e' lungo e potrebbe essere ottimizzato perche' ripete diverse righe piu' volte. Manca prima di questi la distinzione tra guest e cliente registrato
-    //Da sistemare il filtraggio per costo e data, non usa ancora il range.
     public static void cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
         //Ottengo i criteri di ricerca dall'utente; imposto valori di default per capire se non vengono impostati dall'utente
         String titolo = null;
         String genere = null;
         String regista = null;
-        int anno = -1;
-        String dataOrario = null;
-        int durata = -1;
-        int etaMinima = -1; 
-        double costo = -1.0;
+        LocalDateTime dataInizio = null;
+        LocalDateTime dataFine = null;
+        double costoMin = 0.0;
+        double costoMax = Double.MAX_VALUE;
 
         String risposta = "";
 
@@ -107,42 +105,7 @@ public class ClienteRegistrato extends Utente
 
         while (true) 
         {
-            System.out.print("Vuoi cercare una proiezione per anno? (s/n): ");
-            risposta = scanner.nextLine().trim().toLowerCase();
-
-            if (risposta.equals("s") || risposta.equals("n")) 
-            {
-                break;
-            }
-            else 
-            {
-                System.out.println("Risposta non valida. Inserisci 's' per si o 'n' per no.");
-            }
-        }
-
-        if(risposta.equals("s")) 
-        {
-            boolean inputValido = false;
-
-            while(!inputValido) 
-            {
-                System.out.print("Anno del film: ");
-
-                try 
-                {
-                    anno = Integer.parseInt(scanner.nextLine().trim());
-                    inputValido = true;
-                }
-                catch (NumberFormatException e) 
-                {
-                    System.out.println("Input non valido. Inserisci un numero intero per l'anno.");
-                }
-            }
-        }
-
-        while (true) 
-        {
-            System.out.print("Vuoi cercare una proiezione per data e orario? (s/n): ");
+            System.out.print("Vuoi cercare una proiezione per data? (s/n): ");
             risposta = scanner.nextLine().trim().toLowerCase();
 
             if (risposta.equals("s") || risposta.equals("n")) 
@@ -157,77 +120,19 @@ public class ClienteRegistrato extends Utente
 
         if (risposta.equals("s"))
         {
-            System.out.print("Data e orario della proiezione (formato: gg/mm/aaaa hh:mm): ");
-            dataOrario = scanner.nextLine().trim();
-        }
-
-        while (true) 
-        {
-            System.out.print("Vuoi cercare una proiezione per durata? (s/n): ");
-            risposta = scanner.nextLine().trim().toLowerCase();
-
-            if (risposta.equals("s") || risposta.equals("n")) 
+            DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            System.out.println("Puoi inserire un intervallo, altrimenti premere invio");
+            System.out.print("Data iniziale (gg/mm/aaaa)");
+            String inizio = scanner.nextLine().trim();
+            if(!inizio.isEmpty()) 
             {
-                break;
+                dataInizio = LocalDateTime.parse(inizio, formatInput);
             }
-            else 
+            System.out.println("Data finale (gg/mm/aaaa)");
+            String fine = scanner.nextLine().trim();
+            if(!fine.isEmpty()) 
             {
-                System.out.println("Risposta non valida. Inserisci 's' per si o 'n' per no.");
-            }
-        }
-
-        if(risposta.equals("s")) 
-        {
-            boolean inputValido = false;
-
-            while(!inputValido) 
-            {
-                System.out.print("Durata del film (in minuti): ");
-
-                try 
-                {
-                    durata = Integer.parseInt(scanner.nextLine().trim());
-                    inputValido = true;
-                }
-                catch (NumberFormatException e) 
-                {
-                    System.out.println("Input non valido. Inserisci un numero intero per la durata.");
-                }
-            }
-        }
-
-        while (true) 
-        {
-            System.out.print("Vuoi cercare una proiezione per eta minima? (s/n): ");
-            risposta = scanner.nextLine().trim().toLowerCase();
-
-            if (risposta.equals("s") || risposta.equals("n")) 
-            {
-                break;
-            }
-            else 
-            {
-                System.out.println("Risposta non valida. Inserisci 's' per si o 'n' per no.");
-            }
-        }
-
-        if(risposta.equals("s")) 
-        {
-            boolean inputValido = false;
-
-            while(!inputValido) 
-            {
-                System.out.print("Eta minima per il film: ");
-
-                try
-                {
-                    etaMinima = Integer.parseInt(scanner.nextLine().trim());
-                    inputValido = true;
-                }
-                catch (NumberFormatException e) 
-                {
-                    System.out.println("Input non valido. Inserisci un numero intero per l'eta' minima.");
-                }
+                dataFine = LocalDateTime.parse(fine, formatInput);
             }
         }
 
@@ -248,63 +153,93 @@ public class ClienteRegistrato extends Utente
 
         if(risposta.equals("s")) 
         {
-            boolean inputValido = false;
+            boolean inputValidoMin = false;
 
-            while(!inputValido) 
+            while(!inputValidoMin) 
             {
-                System.out.print("Costo del biglietto: ");
+                System.out.print("Inserisci il costo minimo (es. 8, oppure 0 per non impostare un prezzo minimo): ");
 
                 try
                 {
-                    costo = Double.parseDouble(scanner.nextLine().trim());
-                    inputValido = true;
+                    costoMin = Double.parseDouble(scanner.nextLine().trim());
+                    if(costoMin >= 0) 
+                    {
+                        inputValidoMin = true;
+                    }
+                    else 
+                    {
+                        System.out.println("Errore: il costo non può essere negativo");
+                    }
                 }
                 catch (NumberFormatException e) 
                 {
-                    System.out.println("Input non valido. Inserisci un numero per il costo.");
+                    System.out.println("Input non valido. Inserisci un numero valido (usa il punto per i decimali, es. '8.50').");
+                }
+            }
+
+            boolean inputValidoMax = false;
+
+            while(!inputValidoMax) 
+            {
+                System.out.print("Inserisci il costo massimo (es. 15, oppure 1000 per non impostare un prezzo massimo): ");
+                try
+                {
+                    costoMax = Double.parseDouble(scanner.nextLine().trim());
+                    if(costoMax >= costoMin) 
+                    {
+                        inputValidoMax = true;
+                    }
+                    else 
+                    {
+                        System.out.println("Errore: il costo massimo non può essere inferiore al costo minimo (" + costoMin + ").");
+                    }
+                }
+                catch (NumberFormatException e) 
+                {
+                    System.out.println("Input non valido. Inserisci un numero valido (usa il punto per i decimali, es. '15.00').");
                 }
             }
         }
 
         System.out.print("Filtri impostati. Inizio la ricerca...");
-
-       //Prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
-       List<Proiezione> risultatoRicerca = new ArrayList<>();
+        LocalDateTime dataOggi = LocalDateTime.now();
+        //Prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
+        List<Proiezione> risultatoRicerca = new ArrayList<>();
 
         for(Proiezione proiezione : listaProiezioni) 
         {
             boolean corrisponde = true;
+            // Escludo le proiezioni già avvenute, non avrebbe senso mostrarle
+            DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime orarioProiezione = LocalDateTime.parse(proiezione.getDataOrario(), formatCSV);
+            if(orarioProiezione.isBefore(dataOggi)) continue; //Salta direttamente al prossimo se già avvenuto
             //Filtro tutto per esclusione, molto più semplice logicamente e da implementare rispetto al filtrare per inclusione.
 
             if (titolo != null && !proiezione.getTitolo().toLowerCase().contains(titolo.toLowerCase())) 
             {
                 corrisponde = false;
             } 
+
             if(genere != null && !proiezione.getGenere().toLowerCase().contains(genere.toLowerCase())) 
             {
                 corrisponde = false;
             }
+
             if(regista != null && !proiezione.getRegista().toLowerCase().contains(regista.toLowerCase())) 
             {
                 corrisponde = false;
             }
-            if(anno != -1 && proiezione.getAnno() != anno) 
+            
+            if(dataInizio != null || dataFine != null)
             {
-                corrisponde = false;
-            }
-            if(dataOrario != null && !proiezione.getDataOrario().toLowerCase().contains(dataOrario.toLowerCase()))
-            {
-                corrisponde = false;
+                LocalDateTime dataProiezione = LocalDateTime.parse(proiezione.getDataOrario().substring(0, 10));
+
+                if(dataInizio != null && dataProiezione.isBefore(dataInizio)) corrisponde = false;
+
+                if(dataFine != null && dataProiezione.isAfter(dataFine)) corrisponde = false;
             }   
-            if(durata != -1 && proiezione.getDurata() != durata) 
-            {
-                corrisponde = false;
-            }
-            if(etaMinima != -1 && proiezione.getEtaMinima() != etaMinima) 
-            {
-                corrisponde = false;
-            }
-            if(costo != -1.0 && proiezione.getCosto() != costo) 
+            
+            if(proiezione.getCosto() < costoMin || proiezione.getCosto() > costoMax) 
             {
                 corrisponde = false;
             }

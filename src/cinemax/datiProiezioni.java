@@ -130,15 +130,16 @@ public class datiProiezioni
 
             while ((riga = br.readLine()) != null) 
             {
+                if(riga.trim().isEmpty()) continue;
                 String[] campi = riga.replace("\"", "").split(",");
-                String dataOrario = campi[0];
-                String titolo = campi[1];
-                String genere = campi[2];
-                String regista = campi[3];
+                String dataOrario = campi[0].trim();
+                String titolo = campi[1].trim();
+                String genere = campi[2].trim();
+                String regista = campi[3].trim();
                 int anno = Integer.parseInt(campi[4].trim());
-                int durata = Integer.parseInt(campi[5]);
-                int etàMinima = Integer.parseInt(campi[6]);
-                double costo = Double.parseDouble(campi[7]);
+                int durata = Integer.parseInt(campi[5].trim());
+                int etàMinima = Integer.parseInt(campi[6].trim());
+                double costo = Double.parseDouble(campi[7].trim());
                 Proiezione proiezione = new Proiezione(titolo, genere, regista, anno, durata, etàMinima, dataOrario, costo);
                 listaProiezioni.add(proiezione);
             }
