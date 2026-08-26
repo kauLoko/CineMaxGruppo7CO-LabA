@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bigliettaio extends Utente
 {
@@ -78,7 +81,6 @@ public class Bigliettaio extends Utente
                                     System.out.println("Prenotazione trovata: " + prenotazione);
                                     inputValido = true;
                                     trovato = true;
-                                    break;
                                 }
                             }
 
@@ -106,7 +108,6 @@ public class Bigliettaio extends Utente
                                     System.out.println("Prenotazione trovata: " + prenotazione);
                                     inputValido = true;
                                     trovato = true;
-                                    break;
                                 }
                             }
 
@@ -119,8 +120,81 @@ public class Bigliettaio extends Utente
                         break;
 
                     case "4":
-                        data = "";
-                        //Da capire come confrontare e utilizzare i range di date
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate dataInizio = null;
+                        LocalDate dataFine = null;
+                        System.out.println("Puoi inserire un intervallo, altrimenti premere invio");
+                        boolean inizioValido = false;
+                        while(!inizioValido) 
+                        {
+                            System.out.print("Data iniziale (gg/mm/aaaa)");
+                            String inizio = scanner.nextLine().trim();
+                            if(inizio.isEmpty()) 
+                            {
+                                inizioValido = true; 
+                            }
+                            else 
+                            {
+                                try 
+                                {
+                                    dataInizio = LocalDate.parse(inizio, formatter);
+                                    inizioValido = true;
+                                } 
+                                catch (Exception e) 
+                                {
+                                    System.out.println("Errore di formato: assicurati di usare esattamente gg/mm/aaaa");
+                                }
+                            }
+                        }
+                        boolean fineValida = false;
+                        while(!fineValida) 
+                        {
+                            System.out.print("Data finale (gg/mm/aaaa)");
+                            String fine = scanner.nextLine().trim();
+                            if(fine.isEmpty()) 
+                            {
+                                fineValida = true; 
+                            }
+                            else 
+                            {
+                                try 
+                                {
+                                    dataFine = LocalDate.parse(fine, formatter);
+                                    if(dataInizio != null && dataFine.isBefore(dataInizio)) 
+                                    {
+                                        System.out.println("Errore: la data finale non può essere precedente alla data iniziale");
+                                    }
+                                    else 
+                                    {
+                                        fineValida = true;
+                                    }
+                                } 
+                                catch (Exception e) 
+                                {
+                                    System.out.println("Errore di formato: assicurati di usare esattamente gg/mm/aaaa");
+                                }
+                            }
+                        }
+                        boolean dataTrovata = false;
+                        DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        for(Prenotazione p: listaPrenotazioni) 
+                        {
+                            LocalDate dataPrenotazione = LocalDateTime.parse(p.getDataOraPrenotazione(), formatCSV).toLocalDate();
+                            boolean inRange = true;
+                            if(dataInizio != null && dataPrenotazione.isBefore(dataInizio)) inRange = false;
+                            if(dataFine != null && dataPrenotazione.isAfter(dataFine)) inRange = false;
+                            if(inRange) 
+                            {
+                                System.out.println("Prenotazione trovata: " + p.toString());
+                                dataTrovata = true;
+                            }
+                        }
+                        if(!dataTrovata) 
+                        {
+                            System.out.println("Nessuna prenotazione trovata in questo periodo");
+                        }
+                    inputValido = true;
+                    break;
                 }
             }                
         } 
