@@ -202,7 +202,9 @@ public class ClienteRegistrato extends Utente
         }
 
         System.out.print("Filtri impostati. Inizio la ricerca...");
+        
         LocalDateTime dataOggi = LocalDateTime.now();
+
         //Prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
         List<Proiezione> risultatoRicerca = new ArrayList<>();
 
@@ -211,7 +213,9 @@ public class ClienteRegistrato extends Utente
             boolean corrisponde = true;
             // Escludo le proiezioni già avvenute, non avrebbe senso mostrarle
             DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
             LocalDateTime orarioProiezione = LocalDateTime.parse(proiezione.getDataOrario(), formatCSV);
+
             if(orarioProiezione.isBefore(dataOggi)) continue; //Salta direttamente al prossimo se già avvenuto
             //Filtro tutto per esclusione, molto più semplice logicamente e da implementare rispetto al filtrare per inclusione.
 
