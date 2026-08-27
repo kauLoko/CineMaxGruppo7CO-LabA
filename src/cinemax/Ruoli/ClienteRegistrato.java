@@ -1,4 +1,7 @@
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,18 +20,48 @@ public class ClienteRegistrato extends Utente
         String username = scanner.nextLine().trim();
         System.out.print("Password: ");
         String password = scanner.nextLine().trim();
+
+        return eseguiLogin(username, password);
+    }
         
-        if() //codice per confrontare dati csv e dati appena inseriti
+    public static ClienteRegistrato eseguiLogin(String username, String password) 
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileUtenti))) 
         {
-        System.out.println("\nLogin effettuato con successo! Benvenuto " + /*getNome() */);
-        } 
-        else 
+            br.readLine(); //saltare intestazione
+            String riga;
+
+            while ((riga = br.readLine()) != null) 
+            {
+                if (riga.trim().isEmpty()) continue;
+
+                String[] campi = riga.split(",", -1);
+
+                // Bastano >= 6 campi per accedere agli indici da 0 a 5 in sicurezza
+                if (campi.length >= 6 && campi[2].trim().equals(username) && campi[3].trim().equals(password)) 
+                {
+                    System.out.println("\nAccesso consentito! Benvenuto/a nel sistema.");
+                    return new ClienteRegistrato(
+                        campi[0].trim(), 
+                        campi[1].trim(), 
+                        campi[2].trim(), 
+                        campi[3].trim(), 
+                        campi[4].trim(), 
+                        campi[5].trim()
+                    );
+                }
+            }
+        }    
+        catch (IOException e) 
         {
-            System.out.println("Credenziali errate!");
+            System.err.println("Errore durante la lettura del file utenti: " + e.getMessage());
         }
+
+        System.out.println("\nCredenziali errate o utente non trovato.");
+        return null;
     }
 
-
+    
     public static void cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
         //Ottengo i criteri di ricerca dall'utente; imposto valori di default per capire se non vengono impostati dall'utente
@@ -207,6 +240,7 @@ public class ClienteRegistrato extends Utente
 
         //Prendo la listaProiezioni generata all'avvio del programma e la filtro in base ai criteri impostati dall'utente, poi stampo i risultati della ricerca.
         List<Proiezione> risultatoRicerca = new ArrayList<>();
+    
 
         for(Proiezione proiezione : listaProiezioni) 
         {
