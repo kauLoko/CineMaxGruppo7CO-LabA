@@ -62,14 +62,14 @@ public class ClienteRegistrato extends Utente
     }
 
     
-    public static void cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
+    public static List<Proiezione> cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
         //Ottengo i criteri di ricerca dall'utente; imposto valori di default per capire se non vengono impostati dall'utente
         String titolo = null;
         String genere = null;
         String regista = null;
-        LocalDateTime dataInizio = null;
-        LocalDateTime dataFine = null;
+        LocalDate dataInizio = null;
+        LocalDate dataFine = null;
         double costoMin = 0.0;
         double costoMax = Double.MAX_VALUE;
 
@@ -154,18 +154,58 @@ public class ClienteRegistrato extends Utente
         if (risposta.equals("s"))
         {
             DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            System.out.println("Puoi inserire un intervallo, altrimenti premere invio");
-            System.out.print("Data iniziale (gg/mm/aaaa)");
-            String inizio = scanner.nextLine().trim();
-            if(!inizio.isEmpty()) 
+            System.out.println("Puoi inserire un intervallo temporale, altrimenti premere invio");
+            boolean inizioValido = false;
+            while(!inizioValido) 
             {
-                dataInizio = LocalDateTime.parse(inizio, formatInput);
+                System.out.print("Data iniziale (gg/mm/aaaa)");
+                String inizio = scanner.nextLine().trim();
+                if(inizio.isEmpty()) 
+                {
+                    inizioValido = true;
+                }
+                else 
+                {
+                    try 
+                    {
+                        dataInizio = LocalDate.parse(inizio, formatInput);
+                        inizioValido = true;
+                    }
+                    catch (Exception e) 
+                    {
+                        System.out.println("Errore: usa il formato gg/mm/aaaa");
+                    }
+                }
             }
-            System.out.println("Data finale (gg/mm/aaaa)");
-            String fine = scanner.nextLine().trim();
-            if(!fine.isEmpty()) 
+
+            boolean fineValido = false;
+            while(!fineValido) 
             {
-                dataFine = LocalDateTime.parse(fine, formatInput);
+                System.out.print("Data finale (gg/mm/aaaa)");
+                String fine = scanner.nextLine().trim();
+                if(fine.isEmpty()) 
+                {
+                    fineValido = true;
+                }
+                else 
+                {
+                    try 
+                    {
+                        dataFine = LocalDate.parse(fine, formatInput);
+                        if(dataInizio != null && dataFine.isBefore(dataInizio)) 
+                        {
+                            System.out.println("Errore: la data finale non può precedere la data iniziale");
+                        }
+                        else 
+                        {
+                            fineValido = true;
+                        }
+                    }
+                    catch (Exception e) 
+                    {
+                        System.out.println("Errore: usa il formato gg/mm/aaaa");
+                    }
+                }
             }
         }
 
@@ -270,13 +310,13 @@ public class ClienteRegistrato extends Utente
             
             if(dataInizio != null || dataFine != null)
             {
-                LocalDateTime dataProiezione = LocalDateTime.parse(proiezione.getDataOrario().substring(0, 10));
+                LocalDate dataProiezione = LocalDate.parse(proiezione.getDataOrario().substring(0, 10));
 
                 if(dataInizio != null && dataProiezione.isBefore(dataInizio)) corrisponde = false;
 
                 if(dataFine != null && dataProiezione.isAfter(dataFine)) corrisponde = false;
             }   
-            
+
             if(proiezione.getCosto() < costoMin || proiezione.getCosto() > costoMax) 
             {
                 corrisponde = false;
@@ -305,6 +345,7 @@ public class ClienteRegistrato extends Utente
             }
         }
         System.out.println("--------------------------------"); //Per staccare quando verra' chiamato un altro metodo 
+        return risultatoRicerca;
     }
 
     public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 

@@ -12,9 +12,9 @@ public class Bigliettaio extends Utente
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.bigliettaio);
     }
 
-    public static void cercaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
+    public static List<Prenotazione> cercaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
     {
-        
+        List<Prenotazione> risultatoRicerca = new ArrayList<>();
         String codicePrenotazione = "";
         String nomeCognomeCliente = "";
         String titolo = "";
@@ -48,7 +48,8 @@ public class Bigliettaio extends Utente
                             {
                                 if(prenotazione.getCodicePrenotazione().trim().equals(codicePrenotazione)) 
                                 {
-                                    System.out.println("Prenotazione trovata: " + prenotazione);
+                                    System.out.println("- Codice: [" + prenotazione.getCodicePrenotazione() + "] | Cliente: " + prenotazione.getNomeCliente() + " " + prenotazione.getCognomeCliente() + " | Film: " + prenotazione.getTitoloFilm());
+                                    risultatoRicerca.add(prenotazione);
                                     inputValido = true;
                                     trovato = true;
                                     break;
@@ -78,7 +79,8 @@ public class Bigliettaio extends Utente
 
                                 if(nomeCognome.equalsIgnoreCase(nomeCognomeCliente)) 
                                 {
-                                    System.out.println("Prenotazione trovata: " + prenotazione);
+                                    System.out.println("- Codice: [" + prenotazione.getCodicePrenotazione() + "] | Cliente: " + prenotazione.getNomeCliente() + " " + prenotazione.getCognomeCliente() + " | Film: " + prenotazione.getTitoloFilm());
+                                    risultatoRicerca.add(prenotazione);
                                     inputValido = true;
                                     trovato = true;
                                 }
@@ -105,7 +107,8 @@ public class Bigliettaio extends Utente
                             {
                                 if(prenotazione.getTitoloFilm().trim().equalsIgnoreCase(titolo)) 
                                 {
-                                    System.out.println("Prenotazione trovata: " + prenotazione);
+                                    System.out.println("- Codice: [" + prenotazione.getCodicePrenotazione() + "] | Cliente: " + prenotazione.getNomeCliente() + " " + prenotazione.getCognomeCliente() + " | Film: " + prenotazione.getTitoloFilm());
+                                    risultatoRicerca.add(prenotazione);
                                     inputValido = true;
                                     trovato = true;
                                 }
@@ -177,15 +180,16 @@ public class Bigliettaio extends Utente
                         }
                         boolean dataTrovata = false;
                         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                        for(Prenotazione p: listaPrenotazioni) 
+                        for(Prenotazione prenotazione: listaPrenotazioni) 
                         {
-                            LocalDate dataPrenotazione = LocalDateTime.parse(p.getDataOraPrenotazione(), formatCSV).toLocalDate();
+                            LocalDate dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraPrenotazione(), formatCSV).toLocalDate();
                             boolean inRange = true;
                             if(dataInizio != null && dataPrenotazione.isBefore(dataInizio)) inRange = false;
                             if(dataFine != null && dataPrenotazione.isAfter(dataFine)) inRange = false;
                             if(inRange) 
                             {
-                                System.out.println("Prenotazione trovata: " + p.toString());
+                                System.out.println("- Codice: [" + prenotazione.getCodicePrenotazione() + "] | Cliente: " + prenotazione.getNomeCliente() + " " + prenotazione.getCognomeCliente() + " | Film: " + prenotazione.getTitoloFilm());
+                                risultatoRicerca.add(prenotazione);
                                 dataTrovata = true;
                             }
                         }
@@ -202,6 +206,7 @@ public class Bigliettaio extends Utente
         {
             System.out.println("Errore durante la ricerca della prenotazione: " + e.getMessage());
         }
+        return risultatoRicerca;
     }
 
 }

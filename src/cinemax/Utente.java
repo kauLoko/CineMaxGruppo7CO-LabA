@@ -188,6 +188,12 @@ public class Utente
                 } break;
 
             case bigliettaio:
+                // Viene evocato dopo aver usato il cercaPrenotazione dal bigliettaio, quindi alla fine è come il visualizzaProiezione dell'utente. Chiedi "Vuoi visualizzare una proiezione in particolare?" e metti codice e confronti
+                boolean trovata = false;
+                while(!trovata) 
+                {
+                    System.out.println("Inserisci il codice della prenotazione da visualizzare: ");
+                } 
 
             case proiezionista:
 
