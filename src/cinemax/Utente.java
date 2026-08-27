@@ -13,7 +13,7 @@ public class Utente
     private String domicilio;
     private Ruolo ruolo;
 
-    private static final String fileUtenti = "data/datiUtenti.csv";
+    public static final String fileUtenti = "data/datiUtenti.csv";
 
     public enum Ruolo {cliente, proiezionista, bigliettaio};
 

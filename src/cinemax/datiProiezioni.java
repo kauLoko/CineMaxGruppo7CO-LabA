@@ -13,7 +13,7 @@ public class datiProiezioni
     private int etaMin;
     String dataOrario;
     double costo;
-    private static final String fileProiezioni = "proiezioni.csv";
+    private static final String fileProiezioni = "data/proiezioni.csv";
 
     //Construtore
     public datiProiezioni(String titolo, String genere, String regista, int anno, int durata, int etaMin, String dataOrario, double costo) 
@@ -145,6 +145,7 @@ public class datiProiezioni
                 int durata = Integer.parseInt(campi[5].trim());
                 int etàMinima = Integer.parseInt(campi[6].trim());
                 double costo = Double.parseDouble(campi[7].trim());
+
                 Proiezione proiezione = new Proiezione(titolo, genere, regista, anno, durata, etàMinima, dataOrario, costo);
                 listaProiezioni.add(proiezione);
             }
