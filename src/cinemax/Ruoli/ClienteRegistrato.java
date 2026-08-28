@@ -14,7 +14,7 @@ public class ClienteRegistrato extends Utente
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
 
-    public static ClienteRegistrato eseguiLogin(Scanner scanner)
+    public static ClienteRegistrato eseguiLogin(Scanner scanner) //"doppio metodo", se no questo dovrei metterlo nel main
     {
         System.out.print("Username: ");
         String username = scanner.nextLine().trim();
@@ -26,6 +26,7 @@ public class ClienteRegistrato extends Utente
         
     public static ClienteRegistrato eseguiLogin(String username, String password) 
     {
+        
         try (BufferedReader br = new BufferedReader(new FileReader(fileUtenti))) 
         {
             br.readLine(); //saltare intestazione
@@ -348,6 +349,7 @@ public class ClienteRegistrato extends Utente
         return risultatoRicerca;
     }
 
+
     public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
     {
         System.out.print("Inserisci il titolo della proiezione da visualizzare: ");
@@ -367,12 +369,14 @@ public class ClienteRegistrato extends Utente
             System.out.println("Proiezione non trovata.");
         }
     }
+    
 
- public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
+    public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
         System.out.println("Inserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
         String dataOra = scanner.nextLine().trim();
         boolean proiezioneTrovata = false;
+
         for(Proiezione p: risultatoRicerca) 
         {
             if(p.getDataOrario().equals(dataOra)) 

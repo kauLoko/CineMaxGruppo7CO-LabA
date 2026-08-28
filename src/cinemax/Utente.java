@@ -77,12 +77,14 @@ public class Utente
                     break;
             }
         }
+        System.out.println("Registrazione avvenuta con successo!");
 
-        Utente nuovoUtente = new Utente(nome, cognome, username, password, nascita, domicilio, ruolo);
 
-        nuovoUtente.salvaSuFile();
+        Utente utente = new Utente(nome, cognome, username, password, nascita, domicilio, ruolo);
 
-        return nuovoUtente;
+        utente.salvaSuFile();
+
+        return utente;
     }
 
 
