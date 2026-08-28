@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +17,6 @@ public class Bigliettaio extends Utente
         String codicePrenotazione = "";
         String nomeCognomeCliente = "";
         String titolo = "";
-        String data = "";
         String risposta = "";
 
         try 
