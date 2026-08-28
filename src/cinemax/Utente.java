@@ -192,11 +192,40 @@ public class Utente
                 boolean trovata = false;
                 while(!trovata) 
                 {
-                    System.out.println("Inserisci il codice della prenotazione da visualizzare: ");
-                } 
+                    System.out.println("Inserisci il codice della prenotazione da visualizzare (o inserisci 'esci' per uscire): ");
+                    String codiceUnivoco = scanner.nextLine().trim();
+                    if(codiceUnivoco.equalsIgnoreCase("esci")) 
+                    {
+                        System.out.println("Operazione annullata");
+                        break;
+                    }
+                    if(codiceUnivoco.isEmpty()) 
+                    {
+                        System.out.println("Il codice non può essere vuoto");
+                        continue;
+                    }
+
+                    for(Prenotazione prenotazione: listaPrenotazioni) 
+                    {
+                        if(prenotazione.getCodicePrenotazione().equalsIgnoreCase(codiceUnivoco)) 
+                        {
+                            System.out.println(prenotazione);
+                            trovata = true;
+                            break;
+                        }
+                    }
+                    if(!trovata) 
+                    {
+                        System.out.println("Errore: nessuna prenotazione trovata con il codice inserito");
+                    }
+                } break;
 
             case proiezionista:
-
+                System.out.println("Accesso negato: la gestione e visualizzazione delle prenotazioni non è di competenaa del proiezionista");
+                break;
+            default:
+                System.out.println("Ruolo non riconosciuto");
+                break;
         }
     }
 
