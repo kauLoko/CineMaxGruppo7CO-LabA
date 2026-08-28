@@ -145,6 +145,7 @@ public class Proiezionista extends Utente
         // ciclo per richiesta data e orario, da capire se farne due divisi o uno unico
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dataOra = null;
         boolean dataOraValida = false;
 
@@ -189,10 +190,34 @@ public class Proiezionista extends Utente
             }
             else 
             {
-                dataOraValida = true;
+                //Controllo per la sovrapposizione con altri film, sempre per esclusione perchè è più semplice
+                boolean sovrapposizione = false;
+                LocalDateTime fineFilm = dataOra.plusMinutes(durata);
+                for(Proiezione proiezione: listaProiezioni) 
+                {
+                    //Ora di inizio della proiezione n-esima
+                    LocalDateTime inizioProiezione = LocalDateTime.parse(proiezione.getDataOrario(), formatCSV);
+                    //Calcolo ora di fine della proiezione n-esima
+                    LocalDateTime fineProiezione = inizioProiezione.plusMinutes(proiezione.getDurata());
+                    //Chiedo che l'inizio della proiezione da aggiungere sia prima della fine della proiezione n-esima e inizio della n-esima sia prima della fine della proiezione aggiunta
+                    //Uso && perchè due eventi si sovrappongono solo se entrambi iniziano prima che l'altro sia finito, ovvero avvengono in contamporanea
+                    if(dataOra.isBefore(fineProiezione) && inizioProiezione.isBefore(fineFilm)) 
+                    {
+                        sovrapposizione = true;
+                        System.out.println("Errore: rilevata una sovrapposizione");
+                        System.out.println("La sala è già occupata dal film '" + proiezione.getTitolo() + "'");
+                        System.out.println("dalle " + inizioProiezione.format(DateTimeFormatter.ofPattern("HH:mm")) + " alle " + fineProiezione.format(DateTimeFormatter.ofPattern("HH:mm")));
+                        System.out.println("Scegli un altro orario");
+                        break; //Non mi serve controllare gli altri film se è già stata rilevata una sovrapposizione
+                    }
+                }
+                if(!sovrapposizione) 
+                {
+                    //Se non ci sono sovrapposizioni allora la data viene confermata
+                    dataOraValida = true;
+                }
             }
         }
-        DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataOrarioStringa = dataOra.format(formatCSV); //Converto l'oggetto LocalDateTime in stringa perchè richiesto dal costruttore di Proiezione
         //Finito di acquisire i parametri, credo nuovo oggetto e faccio add alla lista
         Proiezione nuovaProiezione = new Proiezione(titolo, genere, regista, anno, durata, etaMin, dataOrarioStringa, costo);
@@ -523,22 +548,114 @@ public class Proiezionista extends Utente
         System.out.println("Modifiche salvate in memoria");
     }
 
-        // Implementazione del metodo per modificare una proiezione
-        /*
-            1.Chiedi titolo data e ora della proiezione da modificare
-            2.Apri arrayList del CSV con tutte le proiezioni e controlla che non ci siano prenotazioni
-            3.Chiedi quali modifiche apportare
-            4.Sovrascrivi il file e salva nel CSV 
-        */
-    }
-
     public static void eliminaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
-        // Implementazione del metodo per eliminare una proiezione
-        /*
-            1.Chiedi titolo data e ora della proiezione da eliminare
-            2.Apri arrayList del CSV con tutte le proiezioni e controlla che non ci siano prenotazioni
-            3.Elimina la proiezione e salva modifiche del CSV
-        */
+        //La selezione della proiezione da eliminare è uguale alla ricerca della proiezione da modificare del metodo precedente
+        List<Proiezione>  risultatoParziale = new ArrayList<>(); //Per salvare i risultati parziali
+        String titolo = "";
+
+        while(titolo.isEmpty() && risultatoParziale.isEmpty()) 
+        {
+            System.out.println("Inserire il titolo della proiezione da modificare (oppure 'esci' per annullare): ");
+            titolo = scanner.nextLine().trim(); 
+            if(titolo.equalsIgnoreCase("esci")) 
+            {
+                System.out.println("Operazione annullata");
+                return; //Uso return e non break perchè devo saltare anche le fasi successive, altrimenti stamperebbe '0 proiezioni trovate' a vuoto
+            }
+            if(titolo.isEmpty()) 
+            {
+                System.out.println("Errore: il titolo della proiezione non può essere vuoto");
+                continue; //Uso il continue perchè se è vuoto non ha senso scansionare tutta la lista, riparto direttamente dall'inizio del metodo
+            }
+            for(Proiezione proiezione: listaProiezioni) 
+            {
+                if(titolo.equalsIgnoreCase(proiezione.getTitolo())) 
+                {
+                    risultatoParziale.add(proiezione);
+                }
+            }
+            if(risultatoParziale.isEmpty()) 
+            {
+                System.out.println("Nessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
+                titolo = ""; //Reset del titolo per poter tornare ad inizio metodo senza input residui
+            }
+        }
+
+        System.out.println(risultatoParziale.size() + " proiezioni trovate per '" + titolo + "'");
+        for(Proiezione proiezione: risultatoParziale)
+        {
+            System.out.println("- Data e ora: " + proiezione.getDataOrario());
+        }
+        //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Proiezione proiezioneDaEliminare = null;
+        boolean selezioneValida = false;
+
+        while(!selezioneValida) 
+        {
+            System.out.println("-- Seleziona la proiezione esatta --");
+            LocalDate dataScelta = null;
+            LocalTime oraScelta = null;
+
+            //Prendo la data
+            boolean dataValida = false;
+            while(!dataValida) 
+            {
+                System.out.println("Seleziona la data esatta (gg/mm/aaaa): ");
+                try 
+                {
+                    dataScelta = LocalDate.parse(scanner.nextLine().trim(), dataFormat);
+                    dataValida = true;
+                }    
+                catch (Exception e) 
+                {
+                    System.out.println("Errore di formato: usa esattamente gg/mm/aaaa (es. 12/10/2026)");
+                }
+            }
+
+            //Prendo l'ora 
+            boolean oraValida = false;
+            while(!oraValida) 
+            {
+                System.out.println("Seleziona l'ora esatta (HH:mm): ");
+                try 
+                {
+                    oraScelta= LocalTime.parse(scanner.nextLine().trim(), oraFormat);
+                    oraValida = true;
+                }    
+                catch (Exception e) 
+                {
+                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 21:30)");
+                }
+            }
+
+            //Unisco data e ora per poi confrontare con i risultati parziali e trovare la proiezione esatta
+            LocalDateTime dataOraScelta = LocalDateTime.of(dataScelta, oraScelta);
+            String dataOraStringa = dataOraScelta.format(formatCSV);
+            for(Proiezione proiezione: risultatoParziale)
+            {
+                if(proiezione.getDataOrario().equals(dataOraStringa)) 
+                {
+                    proiezioneDaEliminare = proiezione;
+                    selezioneValida = true;
+                    break;
+                }
+            }
+            if(!selezioneValida) 
+            {
+                System.out.println("Nessuna proiezione corrisponde a questa data e ora");
+            }
+        }
+
+        //Controllo se tutti i posti sono liberi per capire se ci sono prenotazioni per questa proiezione
+        if(proiezioneDaEliminare.getPostiDisponibili() < 200) 
+        {
+            System.out.println("Errore: impossibile modificare questa proiezione. Dei biglietti sono già stati venduti");
+            return; //esci subito dal metodo
+        }
+        listaProiezioni.remove(proiezioneDaEliminare);
     }
 }
