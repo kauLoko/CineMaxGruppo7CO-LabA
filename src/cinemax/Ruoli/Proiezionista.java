@@ -221,10 +221,308 @@ public class Proiezionista extends Utente
             System.out.println("Errore in salvare file: " + e.getMessage());
         }
         */
-    }
 
     public static void modificaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
+        List<Proiezione>  risultatoParziale = new ArrayList<>(); //Per salvare i risultati parziali
+        String titolo = "";
+
+        while(titolo.isEmpty() && risultatoParziale.isEmpty()) 
+        {
+            System.out.println("Inserire il titolo della proiezione da modificare (oppure 'esci' per annullare): ");
+            titolo = scanner.nextLine().trim(); 
+            if(titolo.equalsIgnoreCase("esci")) 
+            {
+                System.out.println("Operazione annullata");
+                return; //Uso return e non break perchè devo saltare anche le fasi successive, altrimenti stamperebbe '0 proiezioni trovate' a vuoto
+            }
+            if(titolo.isEmpty()) 
+            {
+                System.out.println("Errore: il titolo della proiezione non può essere vuoto");
+                continue; //Uso il continue perchè se è vuoto non ha senso scansionare tutta la lista, riparto direttamente dall'inizio del metodo
+            }
+            for(Proiezione proiezione: listaProiezioni) 
+            {
+                if(titolo.equalsIgnoreCase(proiezione.getTitolo())) 
+                {
+                    risultatoParziale.add(proiezione);
+                }
+            }
+            if(risultatoParziale.isEmpty()) 
+            {
+                System.out.println("Nessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
+                titolo = ""; //Reset del titolo per poter tornare ad inizio metodo senza input residui
+            }
+        }
+
+        System.out.println(risultatoParziale.size() + " proiezioni trovate per '" + titolo + "'");
+        for(Proiezione proiezione: risultatoParziale)
+        {
+            System.out.println("- Data e ora: " + proiezione.getDataOrario());
+        }
+        //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Proiezione proiezioneModificata = null;
+        boolean selezioneValida = false;
+
+        while(!selezioneValida) 
+        {
+            System.out.println("-- Seleziona la proiezione esatta --");
+            LocalDate dataScelta = null;
+            LocalTime oraScelta = null;
+
+            //Prendo la data
+            boolean dataValida = false;
+            while(!dataValida) 
+            {
+                System.out.println("Seleziona la data esatta (gg/mm/aaaa): ");
+                try 
+                {
+                    dataScelta = LocalDate.parse(scanner.nextLine().trim(), dataFormat);
+                    dataValida = true;
+                }    
+                catch (Exception e) 
+                {
+                    System.out.println("Errore di formato: usa esattamente gg/mm/aaaa (es. 12/10/2026)");
+                }
+            }
+
+            //Prendo l'ora 
+            boolean oraValida = false;
+            while(!oraValida) 
+            {
+                System.out.println("Seleziona l'ora esatta (HH:mm): ");
+                try 
+                {
+                    oraScelta= LocalTime.parse(scanner.nextLine().trim(), oraFormat);
+                    oraValida = true;
+                }    
+                catch (Exception e) 
+                {
+                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 21:30)");
+                }
+            }
+
+            //Unisco data e ora per poi confrontare con i risultati parziali e trovare la proiezione esatta
+            LocalDateTime dataOraScelta = LocalDateTime.of(dataScelta, oraScelta);
+            String dataOraStringa = dataOraScelta.format(formatCSV);
+            for(Proiezione proiezione: risultatoParziale)
+            {
+                if(proiezione.getDataOrario().equals(dataOraStringa)) 
+                {
+                    proiezioneModificata = proiezione;
+                    selezioneValida = true;
+                    break;
+                }
+            }
+            if(!selezioneValida) 
+            {
+                System.out.println("Nessuna proiezione corrisponde a questa data e ora");
+            }
+        }
+
+        //Controllo se tutti i posti sono liberi per capire se ci sono prenotazioni per questa proiezione
+        if(proiezioneModificata.getPostiDisponibili() < 200) 
+        {
+            System.out.println("Errore: impossibile modificare questa proiezione. Dei biglietti sono già stati venduti");
+            return; //esci subito dal metodo
+        }
+
+        //Modifica della proiezione
+        boolean modificando = true;
+        while(modificando) 
+        {
+            //Richiesta parametro da modificare
+            System.out.println("Quale parametro vuoi modificare?");
+            System.out.println("1. Titolo");
+            System.out.println("2. Genere");
+            System.out.println("3. Regista");
+            System.out.println("4. Anno");
+            System.out.println("5. Durata");
+            System.out.println("6. Età minima");
+            System.out.println("7. Data e orario");
+            System.out.println("8. Costo del biglietto");
+            System.out.println("0. Salva modifiche");
+            System.out.println("Scelta: ");
+
+            //Gestione casi
+            String scelta = scanner.nextLine().trim();
+            switch (scelta) 
+            {
+                case "1":
+                    System.out.println("Inserisci il nuovo titolo della proiezione");
+                    String titoloNuovo = scanner.nextLine().trim();
+                    if(!titoloNuovo.isEmpty()) 
+                    {
+                        proiezioneModificata.setTitolo(titoloNuovo);
+                        System.out.println("Titolo aggiornato");
+                    }
+                    break;
+                case "2":
+                    System.out.println("Inserisci il nuovo genere della proiezione");
+                    String genereNuovo = scanner.nextLine().trim();
+                    if(!genereNuovo.isEmpty()) 
+                    {
+                        proiezioneModificata.setGenere(genereNuovo);
+                        System.out.println("Genere aggiornato");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Inserisci il nuovo regista: ");
+                    String registaNuovo = scanner.nextLine().trim();
+                    if(!registaNuovo.isEmpty()) 
+                    {
+                        proiezioneModificata.setRegista(registaNuovo);
+                        System.out.println("Regista aggiornato");
+                    }
+                    break;
+                case "4":
+                    System.out.println("Inserisci il nuovo anno di rilascio: ");
+                    try 
+                    {
+                        int annoNuovo = Integer.parseInt(scanner.nextLine().trim());
+                        if(annoNuovo > 1895) 
+                        {
+                            proiezioneModificata.setAnno(annoNuovo);
+                            System.out.println("Anno aggiornato");
+                        }
+                        else 
+                        {
+                            System.out.println("Errore: il valore inserito deve essere maggiore di 1895");
+                        }
+                    }
+                    catch (NumberFormatException e) 
+                    {
+                        System.out.println("Errore: inserisci un numero valido");
+                    }
+                    break;
+                case "5":
+                    System.out.println("Inserisci la nuova durata della proiezione: ");
+                    try 
+                    {
+                        int durataNuova= Integer.parseInt(scanner.nextLine().trim());
+                        if(durataNuova > 0) 
+                        {
+                            proiezioneModificata.setDurata(durataNuova);
+                            System.out.println("Durata aggiornata");
+                        }
+                        else 
+                        {
+                            System.out.println("Errore: il valore inserito deve essere positivo");
+                        }
+                    }
+                    catch (NumberFormatException e) 
+                    {
+                        System.out.println("Errore: inserisci un numero valido");
+                    }
+                    break;
+                case "6":
+                    System.out.println("Inserisci la nuova età minima per la visione");
+                    try 
+                    {
+                        int etaMinNuova= Integer.parseInt(scanner.nextLine().trim());
+                        if(etaMinNuova >= 0) 
+                        {
+                            proiezioneModificata.setEtaMin(etaMinNuova);
+                            System.out.println("Età minima aggiornata");
+                        }
+                        else 
+                        {
+                            System.out.println("Errore: il valore inserito deve essere positivo");
+                        }
+                    }
+                    catch (NumberFormatException e) 
+                    {
+                        System.out.println("Errore: inserisci un numero valido");
+                    }
+                    break;
+                case "7":
+                    //Riutilizzo il blocco del metodo aggiungiProiezione, la logica di base è la stessa
+                    boolean dataOraValida = false;
+                    LocalDateTime nuovaDataOra = null;
+                    while(!dataOraValida) 
+                    {
+                        LocalDate data = null;
+                        LocalTime ora = null;
+
+                        //Chiedo data
+                        boolean dataValida = false;
+                        while(!dataValida) 
+                        {
+                            System.out.println("Inserisci la data della proiezione (gg/mm/aaaa)");
+                            try 
+                            {
+                                data = LocalDate.parse(scanner.nextLine().trim(), dataFormat);
+                                dataValida = true;
+                            }
+                            catch (Exception e) 
+                            {
+                                System.out.println("Errore di formato: usare esattamenente gg/mm/aaaa (es. 12/10/2026)");
+                            }
+                        }
+                        //Chiedo ora
+                        boolean oraValida = false;
+                        while(!oraValida) 
+                        {
+                            System.out.println("Inserisci l'ora della proiezione (HH:mm)");
+                            try 
+                            {
+                                ora = LocalTime.parse(scanner.nextLine().trim(), oraFormat);
+                                oraValida = true;
+                            }
+                            catch (Exception e) 
+                            {
+                                System.out.println("Errore di formato: usare esattamente HH:mm (es. 21:30)");
+                            }
+                        }
+                        //Unisco
+                        nuovaDataOra = LocalDateTime.of(data, ora);
+                        if(nuovaDataOra.isBefore(LocalDateTime.now())) 
+                        {
+                            System.out.println("Errore: impossibile riprogrammare una proiezione nel passato. Scegliere una data futura");
+                        }
+                        else 
+                        {
+                            dataOraValida = true;
+                        }
+                    }
+                    proiezioneModificata.setDataOra(nuovaDataOra.format(formatCSV));
+                    System.out.println("Data e orario aggiornati");
+                    break;
+                case "8":
+                    System.out.println("Inserisci il nuovo prezzo di un biglietto per la proiezione");
+                    try 
+                    {
+                        double costoNuovo= Double.parseDouble(scanner.nextLine().trim());
+                        if(costoNuovo > 0) 
+                        {
+                            proiezioneModificata.setCosto(costoNuovo);
+                            System.out.println("Prezzo aggiornato");
+                        }
+                        else 
+                        {
+                            System.out.println("Errore: il valore inserito deve essere positivo");
+                        }
+                    }
+                    catch (NumberFormatException e) 
+                    {
+                        System.out.println("Errore: inserisci un numero valido (per i decimali usa il punto, es. '8.50')");
+                    }
+                    break;
+                case "0":
+                    System.out.println("Uscita dal menù di modifica");
+                    modificando = false;
+                    break;           
+                default:
+                    System.out.println("Scelta non valida: inserisci un numero da 0 a 8");
+                    break;
+            }
+        }
+        System.out.println("Modifiche salvate in memoria");
+    }
+
         // Implementazione del metodo per modificare una proiezione
         /*
             1.Chiedi titolo data e ora della proiezione da modificare

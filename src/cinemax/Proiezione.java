@@ -25,7 +25,7 @@ public class Proiezione
         this.postiDisponibili = 200;
     }
 
-    //Metodi
+    //Metodi getter
     public String getTitolo() 
     {
         return titolo;
@@ -69,6 +69,47 @@ public class Proiezione
     public int getPostiDisponibili() 
     {
         return postiDisponibili;
+    }
+
+    //Metodi setter
+    public void setTitolo(String titoloNuovo) 
+    {
+        this.titolo = titoloNuovo;
+    }
+
+    public void setGenere(String genereNuovo) 
+    {
+        this.genere = genereNuovo;
+    }
+
+    public void setRegista(String registaNuovo) 
+    {
+        this.regista = registaNuovo;
+    }
+
+    public void setAnno(int annoNuovo)
+    {
+        this.anno = annoNuovo;
+    }
+
+    public void setDurata(int durataNuova)
+    {
+        this.durata = durataNuova;
+    }
+
+    public void setEtaMin(int etaMinNuova) 
+    {
+        this.etaMinima = etaMinNuova;
+    }
+
+    public void setDataOra(String dataOraNuova)
+    {
+        this.dataOrario = dataOraNuova;
+    }
+
+    public void setCosto(double costoNuovo)
+    {
+        this.costo = costoNuovo;
     }
 
     public void setPostiDisponibili(int postiDisponibili) 
