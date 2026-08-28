@@ -21,7 +21,43 @@ public static void main(String[] args)
   switch (scelta) 
   {
     case "1":
-      ClienteRegistrato.eseguiLogin(scanner);
+      ClienteRegistrato utenteLoggato = ClienteRegistrato.eseguiLogin(scanner);
+      
+      if (utenteLoggato != null) 
+      {
+        int sceltaSottomenu = 0;
+
+        do 
+        {
+          System.out.println("\n--- MENU CLIENTE (" + utenteLoggato.getUsername() + ") ---");
+          System.out.println("1. Inserisci una prenotazione");
+          System.out.println("2. Visualizza le tue prenotazioni");
+          System.out.println("3. Modifica o cancella le tue prenotazioni");
+          System.out.println("0. Logout (Torna al menu principale)");
+          System.out.print("Seleziona: ");
+          
+          sceltaSottomenu = Integer.parseInt(scanner.nextLine());
+
+          switch (sceltaSottomenu) 
+          {
+            case 1:
+              ClienteRegistrato.creaPrenotazione(scanner, null, utenteLoggato, null);
+              break;
+                        
+            case 2:
+              System.out.println("B");
+              break;
+            
+            case 0:
+              System.out.println("C");
+              break;
+            
+            default:
+              System.out.println("Opzione non valida.");
+          }
+        } 
+        while (sceltaSottomenu != 0); // Esce dal sotto-menu quando sceglie 0
+      }
       break;
             
     case "2":
@@ -41,6 +77,8 @@ public static void main(String[] args)
     default:
       System.out.println("Scelta non valida!");
   }
+
+  
 }
  /*  while (true) 
   {
