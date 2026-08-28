@@ -25,6 +25,7 @@ public class Bigliettaio extends Utente
             
             while(!inputValido) 
             {
+                //Ottengo i criteri di ricerca del bigliettaio
                 System.out.println("\nInserisci il criterio di ricerca: ");
                 System.out.println("1. Codice prenotazione\n2. Nome e cognome cliente\n3. Titolo film\n4. Data proiezione");
 
