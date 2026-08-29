@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class Utente 
@@ -30,63 +32,34 @@ public class Utente
     }
 
     //Metodi
-    public static Utente registrazioneUtente(Scanner scanner) 
+
+    public static String cifrapassword(String passwordChiara) 
     {
-        System.out.print("Nome: ");
-        String nome = scanner.next();
+        try 
+        {
+            //Prende la password inserita, la converte e restituisce una stringa di lunghezza fissa
+            //La convert in byte ottenendo una stringa di numeri per farla comprendere al computer
+            //Converto in stringa con stringbuilder per poterla salvare con caratteri leggibili e comprensibili nel CSV
 
-        System.out.print("Cognome: ");
-        String cognome = scanner.next();
-
-        System.out.print("Username: ");
-        String username = scanner.next();
-
-        System.out.print("Password: ");
-        String password = scanner.next();
-
-        scanner.nextLine();
-
-        System.out.print("Data di nascita: ");
-        String nascita = scanner.nextLine();
-
-        System.out.print("Domicilio: ");
-        String domicilio = scanner.nextLine();
-
-        
-        Ruolo ruolo = null;
-
-        while(ruolo == null)
-        {   
-            System.out.println("\nSeleziona ruolo:");
-            System.out.println("1. Cliente\n2. Proiezionista\n3. Bigliettaio");
-            int scelta = scanner.nextInt();
-
-            switch(scelta) 
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(passwordChiara.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for(byte b: hash) 
             {
-                case 1:
-                    ruolo = Ruolo.cliente;
-                    break;
-                case 2:
-                    ruolo = Ruolo.proiezionista;
-                    break;
-                case 3:
-                    ruolo = Ruolo.bigliettaio;
-                    break;
-                default:
-                    System.out.print("Ruolo non valido, scegliere uno di quelli gia' esistenti");
-                    break;
+                String hex = Integer.toHexString(0xff & b); // 0xff & b è l'AND bit a bit, serve per togliere eventuali segni negativi dei byte
+                if(hex.length() == 1) 
+                {
+                    hexString.append('0'); //Se viene prodotto un solo carattere viene aggiunto '0' prima per formattazione
+                }
+                hexString.append(hex);
             }
+            return hexString.toString();
         }
-        System.out.println("Registrazione avvenuta con successo!");
-
-
-        Utente utente = new Utente(nome, cognome, username, password, nascita, domicilio, ruolo);
-
-        utente.salvaSuFile();
-
-        return utente;
+        catch(NoSuchAlgorithmException e) 
+        {
+            throw new RuntimeException("Errore: algoritmo di cifratura non trovato", e);
+        }
     }
-
 
     public void salvaSuFile()
     {
@@ -98,6 +71,48 @@ public class Utente
         {
             System.err.println("Errore durante il salvataggio su file: " + e.getMessage());
         }
+    }
+
+        
+    public static Utente eseguiLogin(String username, String passwordChiara) 
+    {
+        String passwordCifrata = cifrapassword(passwordChiara);
+        try (BufferedReader br = new BufferedReader(new FileReader(fileUtenti))) 
+        {
+            br.readLine(); //saltare intestazione
+            String riga;
+
+            while ((riga = br.readLine()) != null) 
+            {
+                if (riga.trim().isEmpty()) continue;
+
+                String[] campi = riga.split(",", -1); //-1 è il limit, serve per dire di continuare a fare split più volte possibile
+
+                // Bastano >= 7 campi per accedere agli indici da 0 a 6 in sicurezza
+                if (campi.length >= 7 && campi[2].trim().equals(username) && campi[3].trim().equals(passwordCifrata)) 
+                {
+                    System.out.println("\nAccesso consentito! Benvenuto/a nel sistema.");
+                    // Recuperoo il ruolo dell'utente dal CSV per gestire dopo i menù e permessi
+                    Ruolo ruoloUtente = Ruolo.valueOf(campi[6].trim().toLowerCase());
+                    return new Utente(
+                        campi[0].trim(), 
+                        campi[1].trim(), 
+                        campi[2].trim(), 
+                        campi[3].trim(), 
+                        campi[4].trim(), 
+                        campi[5].trim(),
+                        ruoloUtente
+                    );
+                }
+            }
+        }    
+        catch (IOException e) 
+        {
+            System.err.println("Errore durante la lettura del file utenti: " + e.getMessage());
+        }
+
+        System.out.println("\nCredenziali errate o utente non trovato.");
+        return null;
     }
 
 //metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)

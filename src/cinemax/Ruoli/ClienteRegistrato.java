@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,54 +11,6 @@ public class ClienteRegistrato extends Utente
     public ClienteRegistrato(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
-    }
-
-    public static ClienteRegistrato eseguiLogin(Scanner scanner) //"doppio metodo", se no questo dovrei metterlo nel main
-    {
-        System.out.print("Username: ");
-        String username = scanner.nextLine().trim();
-        System.out.print("Password: ");
-        String password = scanner.nextLine().trim();
-
-        return eseguiLogin(username, password);
-    }
-        
-    public static ClienteRegistrato eseguiLogin(String username, String password) 
-    {
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(fileUtenti))) 
-        {
-            br.readLine(); //saltare intestazione
-            String riga;
-
-            while ((riga = br.readLine()) != null) 
-            {
-                if (riga.trim().isEmpty()) continue;
-
-                String[] campi = riga.split(",", -1);
-
-                // Bastano >= 6 campi per accedere agli indici da 0 a 5 in sicurezza
-                if (campi.length >= 6 && campi[2].trim().equals(username) && campi[3].trim().equals(password)) 
-                {
-                    System.out.println("\nAccesso consentito! Benvenuto/a nel sistema.");
-                    return new ClienteRegistrato(
-                        campi[0].trim(), 
-                        campi[1].trim(), 
-                        campi[2].trim(), 
-                        campi[3].trim(), 
-                        campi[4].trim(), 
-                        campi[5].trim()
-                    );
-                }
-            }
-        }    
-        catch (IOException e) 
-        {
-            System.err.println("Errore durante la lettura del file utenti: " + e.getMessage());
-        }
-
-        System.out.println("\nCredenziali errate o utente non trovato.");
-        return null;
     }
 
     public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
