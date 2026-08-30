@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +127,17 @@ public class Prenotazione
         }
         
         return listaPrenotazioni;
+    }
+    public static void salvaModifichePrenotazioni(List<Prenotazione> lista) 
+    {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filePrenotazioni, false))) { // false = sovrascrivi
+        pw.println("codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUintario, costoTotale, numeroBiglietti"); // Intestazione
+        for (Prenotazione p : lista) {
+            pw.println(p.getCodicePrenotazione() + ", " + p.getNomeCliente() + ", " + p.getCognomeCliente() + ", " + p.getTitoloFilm() + ", " + p.getDataOraPrenotazione() + ", " + p.getCostoUnitario() + ", " + p.getCostoTotale() + ", " + p.getNumeroBiglietti());
+        }
+        } catch (IOException e) {
+            System.err.println("Errore salvataggio: " + e.getMessage());
+        }
     }
 
     @Override

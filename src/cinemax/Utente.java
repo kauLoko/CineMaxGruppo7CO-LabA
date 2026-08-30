@@ -84,6 +84,38 @@ public class Utente
         return null;
     }
 
+
+    public static void registrazioneUtente(Scanner scanner) 
+    {
+        System.out.println("-- REGISTRAZIONE CLIENTE --");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine().trim();
+
+        System.out.print("Cognome: ");
+        String cognome = scanner.nextLine().trim();
+
+        System.out.print("Username: ");
+        String username = scanner.nextLine().trim();
+
+        System.out.print("Password: ");
+        String passwordChiara = scanner.nextLine().trim();
+
+        System.out.print("Data di nascita (gg/mm/aaaa): ");
+        String nascita = scanner.nextLine().trim();
+
+        System.out.print("Domicilio: ");
+        String domicilio = scanner.nextLine().trim();
+        // Cifro la password
+        String passwordCifrata = PasswordUtils.cifrapassword(passwordChiara);
+        //Fisso il ruolo a cliente
+        Utente.Ruolo ruolo = Utente.Ruolo.cliente;
+        //Creo l'oggetto vero e proprio e lo salvo nel CSV
+        Utente nuovoUtente = new Utente(nome, cognome, username, passwordCifrata, nascita, domicilio, ruolo);
+        nuovoUtente.salvaSuFile(); 
+
+        System.out.println("Registrazione avvenuta con successo!");
+    }
+
 //metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
     public String getNome() 
     {
