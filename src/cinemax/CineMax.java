@@ -3,6 +3,8 @@ import java.util.*;
 
 public static void main(String[] args) 
 {
+  List<Prenotazione> listaPrenotazioni = Prenotazione.listaPrenotazioni();
+  List<Proiezione> listaProiezioni = datiProiezioni.listaProiezioni();
   Scanner scanner = new Scanner(System.in);
 
   System.out.println("=================================================");
@@ -41,7 +43,7 @@ public static void main(String[] args)
           switch (sceltaSottomenu) 
           {
             case 1:
-              ClienteRegistrato.creaPrenotazione(scanner, null, utenteLoggato, null);
+              ClienteRegistrato.creaPrenotazione(scanner, null , utenteLoggato, listaPrenotazioni);
               break;
                         
             case 2:
