@@ -49,8 +49,10 @@ public class ClienteRegistrato extends Utente
                 if(numeroBiglietti <= p.getPostiDisponibili()) 
                 {
                     p.decrementaPosti(numeroBiglietti);
+
                     //genera codice univoco
                     String codiceUnivoco = generaCodiceUnivoco();
+                    
                     //crea oggetto prenotazione e aggiungilo alla lista prenotazioni globale 
                     Prenotazione nuovaPrenotazione = new Prenotazione(codiceUnivoco, utente.getNome(), utente.getCognome(), p.getTitolo(), p.getDataOrario(), p.getCosto(), (p.getCosto() * numeroBiglietti), numeroBiglietti);
                     listaPrenotazioni.add(nuovaPrenotazione); 
