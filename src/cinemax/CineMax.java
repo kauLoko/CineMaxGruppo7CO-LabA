@@ -21,7 +21,7 @@ public static void main(String[] args)
   switch (scelta) 
   {
     case "1":
-      ClienteRegistrato utenteLoggato = ClienteRegistrato.eseguiLogin(scanner);
+      Utente utenteLoggato = Menu.eseguiMenuLogin(scanner);
       
       if (utenteLoggato != null) 
       {
@@ -45,7 +45,7 @@ public static void main(String[] args)
               break;
                         
             case 2:
-              System.out.println("B");
+              Utente.visualizzaPrenotazione(scanner, utenteLoggato, null);
               break;
             
             case 0:
@@ -61,7 +61,7 @@ public static void main(String[] args)
       break;
             
     case "2":
-      Utente.registrazioneUtente(scanner);
+      Menu.registrazioneUtente(scanner);
       break;
             
     case "3":
