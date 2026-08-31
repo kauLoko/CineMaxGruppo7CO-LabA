@@ -3,7 +3,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtils {
-    public static String cifrapassword(String passwordChiara) 
+    public static String cifraPassword(String passwordChiara) 
     {
         try 
         {

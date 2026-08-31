@@ -1,3 +1,4 @@
+// package cinemax;
 import java.io.*;
 import java.util.*;
 
@@ -29,6 +30,42 @@ public class Utente
         this.ruolo = ruolo;
     }
 
+    //metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
+    public String getNome() 
+    {
+        return nome;
+    }
+
+    public String getCognome() 
+    {
+        return cognome;
+    }
+
+    public String getUsername() 
+    {
+        return username;
+    }
+
+    public String getPassword() 
+    {
+        return password;
+    }
+
+    public String getNascita() 
+    {
+        return nascita;
+    }
+    
+    public String getDomicilio() 
+    {
+        return domicilio;
+    }
+    
+    public Ruolo getRuolo() 
+    {
+        return ruolo;
+    }
+
     //Metodi
     public void salvaSuFile()
     {
@@ -45,7 +82,7 @@ public class Utente
         
     public static Utente eseguiLogin(String username, String passwordChiara) 
     {
-        String passwordCifrata = PasswordUtils.cifrapassword(passwordChiara);
+        String passwordCifrata = PasswordUtils.cifraPassword(passwordChiara);
         try (BufferedReader br = new BufferedReader(new FileReader(fileUtenti))) 
         {
             br.readLine(); //saltare intestazione
@@ -84,72 +121,16 @@ public class Utente
         return null;
     }
 
-
-    public static void registrazioneUtente(Scanner scanner) 
+    public static boolean registraNuovoCliente(String nome, String cognome, String username, String passwordChiara, String nascita, String domicilio) 
     {
-        System.out.println("-- REGISTRAZIONE CLIENTE --");
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine().trim();
-
-        System.out.print("Cognome: ");
-        String cognome = scanner.nextLine().trim();
-
-        System.out.print("Username: ");
-        String username = scanner.nextLine().trim();
-
-        System.out.print("Password: ");
-        String passwordChiara = scanner.nextLine().trim();
-
-        System.out.print("Data di nascita (gg/mm/aaaa): ");
-        String nascita = scanner.nextLine().trim();
-
-        System.out.print("Domicilio: ");
-        String domicilio = scanner.nextLine().trim();
-        // Cifro la password
-        String passwordCifrata = PasswordUtils.cifrapassword(passwordChiara);
-        //Fisso il ruolo a cliente
-        Utente.Ruolo ruolo = Utente.Ruolo.cliente;
-        //Creo l'oggetto vero e proprio e lo salvo nel CSV
+        //Cifro la password
+        String passwordCifrata = PasswordUtils.cifraPassword(passwordChiara);    
+        //Do un ruolo
+        Ruolo ruolo = Ruolo.cliente;
+        //Creo l'utente vero e proprio e lo salvo nel CSV
         Utente nuovoUtente = new Utente(nome, cognome, username, passwordCifrata, nascita, domicilio, ruolo);
-        nuovoUtente.salvaSuFile(); 
-
-        System.out.println("Registrazione avvenuta con successo!");
-    }
-
-//metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
-    public String getNome() 
-    {
-        return nome;
-    }
-
-    public String getCognome() 
-    {
-        return cognome;
-    }
-
-    public String getUsername() 
-    {
-        return username;
-    }
-
-    public String getPassword() 
-    {
-        return password;
-    }
-
-    public String getNascita() 
-    {
-        return nascita;
-    }
-    
-    public String getDomicilio() 
-    {
-        return domicilio;
-    }
-    
-    public Ruolo getRuolo() 
-    {
-        return ruolo;
+        nuovoUtente.salvaSuFile();
+        return true; 
     }
 
     @Override

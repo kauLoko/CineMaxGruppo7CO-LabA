@@ -20,7 +20,7 @@ public class ClienteGuest
         switch (scelta) 
         {
             case "1":
-                ClienteRegistrato.cercaProiezione(scanner, null);
+                datiProiezioni.cercaProiezione(scanner, null);
                 break;
             
             /*case "2":

@@ -1,3 +1,4 @@
+// package cinemax.Ruoli;
 import java.util.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
@@ -124,7 +125,7 @@ public class Proiezionista extends Utente
             System.out.println("Inserisci il prezzo di un biglietto (per i decimali usare il punto, es. 8.50): ");
             try 
             {
-                costo = Double.parseDouble(scanner.nextLine().trim());
+                costo = Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
                 if(costo > 0) //Il costo deve essere positivo
                 {
                     costoValido= true;
@@ -223,28 +224,6 @@ public class Proiezionista extends Utente
         listaProiezioni.add(nuovaProiezione);
         System.out.println("Proiezione aggiunta con successo");
     }
-
-        /* TENIAMOLA PER RECUPERARE POI NEL METODO sovrascritturaCSV() ALLA CHIUSURA DEL PROGRAMMA
-        File file = new File("Proiezione.txt");
-        Scanner scan = new Scanner(file);
-        String fileContent = "";
-
-        while (scan.hasNextLine()) 
-        {
-            fileContent = fileContent.concat(scan.nextLine() +"\n");
-        }
-
-        try (FileWriter fw = new FileWriter(fileProiezioni); BufferedWriter bw = new BufferedWriter(fw); PrintWriter pw = new PrintWriter(bw)) 
-        {
-            // Salvare
-            pw.println(titolo + "," + genere + "," + regista + "," + anno + "," + durata + "," + etaMin + "\n" + fileContent);
-            System.out.println("Registrato con sucesso!");
-        } 
-        catch (IOException e) 
-        {
-            System.out.println("Errore in salvare file: " + e.getMessage());
-        }
-        */
 
     public static void modificaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
@@ -519,7 +498,7 @@ public class Proiezionista extends Utente
                     System.out.println("Inserisci il nuovo prezzo di un biglietto per la proiezione");
                     try 
                     {
-                        double costoNuovo= Double.parseDouble(scanner.nextLine().trim());
+                        double costoNuovo= Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
                         if(costoNuovo > 0) 
                         {
                             proiezioneModificata.setCosto(costoNuovo);

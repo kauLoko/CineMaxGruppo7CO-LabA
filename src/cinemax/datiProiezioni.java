@@ -1,4 +1,4 @@
-
+// package cinemax;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -229,7 +229,7 @@ public class datiProiezioni
 
                 try
                 {
-                    costoMin = Double.parseDouble(scanner.nextLine().trim());
+                    costoMin = Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
                     if(costoMin >= 0) 
                     {
                         inputValidoMin = true;
@@ -252,7 +252,7 @@ public class datiProiezioni
                 System.out.print("Inserisci il costo massimo (es. 15, oppure 1000 per non impostare un prezzo massimo): ");
                 try
                 {
-                    costoMax = Double.parseDouble(scanner.nextLine().trim());
+                    costoMax = Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
                     if(costoMax >= costoMin) 
                     {
                         inputValidoMax = true;

@@ -1,3 +1,5 @@
+// package cinemax;
+
 public class Proiezione 
 {
     //Campi
