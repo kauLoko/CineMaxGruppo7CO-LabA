@@ -10,26 +10,26 @@ Laboratorio Interdisciplinare A - A.A. 2025/2026
 MEMBRI DEL TEAM
 ------------------------------------------------------------------------
 
-1. Cognome: [Molteni]
-   Nome: [Davide]
-   Matricola: [765300]
-   Sede: [Como]
+1. Cognome: Molteni
+   Nome: Davide
+   Matricola: 765300
+   Sede: Como
 
-2. Cognome: [Toppi]
-   Nome: [Davide]
-   Matricola: [765309]
-   Sede: [Como]
+2. Cognome: Toppi
+   Nome: Davide
+   Matricola: 765309
+   Sede: Como
 
-3. Cognome: [Lanza]
-   Nome: [Mattia Antonio]
-   Matricola: [766287]
-   Sede: [Como]
+3. Cognome: Lanza
+   Nome: Mattia Antonio
+   Matricola: 766287
+   Sede: Como
 
-4. Cognome: [Salmazo Bocatto]
-   Nome: [Kauan]
-   Matricola: [767919]
-   Sede: [Como]
+4. Cognome: Salmazo Bocatto
+   Nome: Kauan
+   Matricola: 767919
+   Sede: Como
 ------------------------------------------------------------------------
 PROJECT MANAGER DI RIFERIMENTO
 ------------------------------------------------------------------------
-[Mattia Antonio Lanza 766287]
+Mattia Antonio Lanza
