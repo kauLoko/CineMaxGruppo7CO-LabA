@@ -39,7 +39,7 @@ public class CineMax {
           }
           break;
         case "2":
-          //Registrazione
+          Menu.menuRegistrazioneUtente(scanner);
           break;
         case "3":
           //Prosegui come ospite

@@ -121,6 +121,16 @@ public class Utente
         return null;
     }
 
+    /**
+     * Metodo che gestisce la logica della registrazione di un nuovo cliente cifrando la password, creando l'oggetto Utente e aggiornando il file csv
+     * @param nome Il nome dell'utente
+     * @param cognome Il cognome dell'utente
+     * @param username Lo username scelto dall'utente
+     * @param passwordChiara La password inserita dall'utente prima di essere cifrata
+     * @param nascita La data di nascita inserita dall'utente
+     * @param domicilio Il domicilio inserito dall'utente
+     * @return true se la registrazione è avvenuta con successo
+     */
     public static boolean registraNuovoCliente(String nome, String cognome, String username, String passwordChiara, String nascita, String domicilio) 
     {
         //Cifro la password

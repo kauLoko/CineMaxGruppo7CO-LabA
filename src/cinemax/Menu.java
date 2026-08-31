@@ -1,5 +1,7 @@
 // package cinemax;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Menu
@@ -59,9 +61,22 @@ public class Menu
             scelta = scanner.nextLine().trim();
             switch (scelta) {
                 case "1":
-                    datiProiezioni.cercaProiezione(scanner, listaProiezioni);
-                    datiProiezioni.visualizzaProiezione(scanner, listaProiezioni);
-                    ClienteRegistrato.creaPrenotazione(scanner, listaProiezioni, utente, listaPrenotazioni);
+                    List<Proiezione> risultati = datiProiezioni.cercaProiezione(scanner, listaProiezioni);
+                    if(risultati != null && !risultati.isEmpty()) 
+                    {
+                        System.out.println("Vuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
+                        String risposta = scanner.nextLine().trim().toLowerCase();
+                        if (risposta.equals("s")) 
+                        {
+                            datiProiezioni.visualizzaProiezione(scanner, risultati);
+                        }
+                        System.out.println("Vuoi effettuare una prenotazione per una di queste proiezioni? (s/n)");
+                        String rispostaPrenotazione = scanner.nextLine().trim().toLowerCase();
+                        if (rispostaPrenotazione.equals("s")) 
+                        {
+                            ClienteRegistrato.creaPrenotazione(scanner, risultati, utente, listaPrenotazioni);
+                        }
+                    }
                     break;
                 case "2":
                     Utente.visualizzaPrenotazione(scanner, utente, listaPrenotazioni);
@@ -156,30 +171,129 @@ public class Menu
         } 
         while(!scelta.equals("0"));
     }
+
     /**
-     * Mostra il menù per effettuare la registrazione di un nuovo utente
+     * Mostra il menù dell'utente guest non registrato offrendo la possibilità di registrarsi o visualizzare una proiezione
+     * @param scanner Scanner per ottenere l'input dell'utente
+     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     */
+    public static void menuGuest(Scanner scanner, List<Proiezione> listaProiezioni) 
+    {
+        String scelta;
+        do {
+            System.out.println("\n--- OPZIONI GUEST ---");
+            System.out.println("1. Cerca Proiezioni");
+            System.out.println("2. Registrati come cliente");
+            System.out.println("0. Torna al menu principale");
+            System.out.print("Seleziona: ");
+            scelta = scanner.nextLine().trim();
+            switch (scelta) 
+            {
+                case "1":
+                    List<Proiezione> risultati = datiProiezioni.cercaProiezione(scanner, listaProiezioni);
+                    if(risultati != null && !risultati.isEmpty()) 
+                    {
+                        System.out.println("Vuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
+                        String risposta = scanner.nextLine().trim().toLowerCase();
+                        if (risposta.equals("s")) 
+                        {
+                            datiProiezioni.visualizzaProiezione(scanner, risultati);
+                        }
+                    }
+                    break;
+                case "2":
+                    Menu.menuRegistrazioneUtente(scanner);
+                    break;
+                
+                case "0":
+                    System.out.println("Grazie per aver usato CineMax. Arrivederci!");
+                    break;
+                default:
+                    System.out.println("Opzione non valida: inserire un numero tra 0 e 2");
+            }
+        }
+        while(!scelta.equals("0"));
+    }  
+
+    /**
+     * Mostra il menù per effettuare la registrazione di un nuovo utente e raccoglie i dati 
      * @param scanner Scanner per ottenere l'input dell'utente
      */
     public static void menuRegistrazioneUtente(Scanner scanner) 
     {
         System.out.println("-- REGISTRAZIONE CLIENTE --");
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine().trim();
+        String nome = "";
+        while (nome.isEmpty()) 
+        {
+            System.out.print("Nome: ");
+            nome = scanner.nextLine().trim();
+            if (nome.isEmpty())
+            {
+                 System.out.println("Errore: il nome non può essere vuoto.");
+            }    
+        }
 
-        System.out.print("Cognome: ");
-        String cognome = scanner.nextLine().trim();
+        String cognome = "";
+        while (cognome.isEmpty()) 
+        {
+            System.out.print("Cognome: ");
+            cognome = scanner.nextLine().trim();
+            if (cognome.isEmpty()) 
+            {
+                System.out.println("Errore: il cognome non può essere vuoto.");
+            } 
+        }
 
-        System.out.print("Username: ");
-        String username = scanner.nextLine().trim();
+        String username = "";
+        while (username.isEmpty()) 
+        {
+            System.out.print("Username: ");
+            username = scanner.nextLine().trim();
+            if (username.isEmpty()) 
+            {
+                System.out.println("Errore: lo username non può essere vuoto.");
+            } 
+        }
 
-        System.out.print("Password: ");
-        String passwordChiara = scanner.nextLine().trim();
+        String passwordChiara = "";
+        while (passwordChiara.isEmpty()) 
+        {
+            System.out.print("Password: ");
+            passwordChiara = scanner.nextLine().trim();
+            if (passwordChiara.isEmpty()) 
+            {
+                System.out.println("Errore: la password non può essere vuoto.");
+            } 
+        }
 
-        System.out.print("Data di nascita (gg/mm/aaaa): ");
-        String nascita = scanner.nextLine().trim();
+        String nascita = "";
+        boolean dataValida = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        while (!dataValida) {
+            System.out.print("Data di nascita (gg/mm/aaaa): ");
+            nascita = scanner.nextLine().trim();
+            if (nascita.isEmpty()) {
+                System.out.println("Errore: la data di nascita non può essere vuota.");
+            } else {
+                try {
+                    LocalDate.parse(nascita, formatter);
+                    dataValida = true; 
+                } catch (Exception e) {
+                    System.out.println("Errore di formato: usa esattamente gg/mm/aaaa (es. 15/05/2002).");
+                }
+            }
+        }
 
-        System.out.print("Domicilio: ");
-        String domicilio = scanner.nextLine().trim();
+        String domicilio = "";
+        while (domicilio.isEmpty()) 
+        {
+            System.out.print("Domicilio: ");
+            domicilio = scanner.nextLine().trim();
+            if (domicilio.isEmpty()) 
+            {
+                System.out.println("Errore: il domicilio non può essere vuoto.");
+            } 
+        }
 
         boolean successo = Utente.registraNuovoCliente(nome, cognome, username, passwordChiara, nascita, domicilio);
         if(successo) 
