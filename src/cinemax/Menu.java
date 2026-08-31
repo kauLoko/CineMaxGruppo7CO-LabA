@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Classe che rappresenta i menù dei diversi ruoli assegnabili all'utente e utilizzati per gestire input e output
+ *  */
+
 public class Menu
 {
 

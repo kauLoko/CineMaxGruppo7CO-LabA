@@ -1,6 +1,8 @@
 // package cinemax;
 import java.util.*;
-
+/**
+ * Classe contenente il metodo main
+ */
 public class CineMax {
   public static void main(String[] args) 
   {
@@ -42,10 +44,10 @@ public class CineMax {
           Menu.menuRegistrazioneUtente(scanner);
           break;
         case "3":
-          //Prosegui come ospite
+          Menu.menuGuest(scanner, listaProiezioni);
           break;
         case "4":
-          //Esci
+          System.out.println("Grazie per aver usato CineMax, arrivederci!");
           break;
         default:
           System.out.println("Scelta non valida!");

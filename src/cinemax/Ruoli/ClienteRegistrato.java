@@ -4,14 +4,32 @@ import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * La classe rappresenta il cliente registrato e gestisce la creazione, modifica ed eliminazione delle sue prenotazioni 
+ */
 public class ClienteRegistrato extends Utente 
 {
-    //Costruttore
+    /**
+     * Costruttore dell'oggetto ClienteRegistrato
+     * @param nome Nome inserito in fase di registrazione
+     * @param cognome Cognome inserito in fase di registrazione
+     * @param username Username scelto dall'utente in fase di registrazione
+     * @param password Password cifrata
+     * @param nascita Data di nascita inserita in fase di registrazione
+     * @param domicilio Domicilio inserito in fase di registrazione
+     */
     public ClienteRegistrato(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
         super(nome, cognome, username, password, nascita, domicilio, Ruolo.cliente);
     }
 
+    /**
+     * Crea un nuovo oggetto Prenotazione che viene aggiunto all'ArrayList contenente tutte le prenotazioni
+     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
+     * @param risultatoRicerca ArrayList in cui sono stati precedentemente salvati i risultati del metodo cercaProiezione()
+     * @param utente Utente che effettua la prenotazione
+     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     */
     public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
         System.out.println("Inserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
@@ -50,7 +68,7 @@ public class ClienteRegistrato extends Utente
                     p.decrementaPosti(numeroBiglietti);
 
                     //genera codice univoco
-                    String codiceUnivoco = generaCodiceUnivoco();
+                    String codiceUnivoco = Prenotazione.generaCodiceUnivoco();
                     
                     //crea oggetto prenotazione e aggiungilo alla lista prenotazioni globale 
                     Prenotazione nuovaPrenotazione = new Prenotazione(codiceUnivoco, utente.getNome(), utente.getCognome(), p.getTitolo(), p.getDataOrario(), p.getCosto(), (p.getCosto() * numeroBiglietti), numeroBiglietti);
@@ -70,6 +88,12 @@ public class ClienteRegistrato extends Utente
         }
     }
 
+    /**
+     * Modifica la data della prenotazione spostandola in una diversa data futura
+     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
+     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     */
     public static void modificaPrenotazione(Scanner scanner, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
         Boolean entrataValida = false;
@@ -167,6 +191,11 @@ public class ClienteRegistrato extends Utente
         }
     }
 
+    /**
+     * Permette la cancellazione di una prenotazione per una proiezione già avvenuta
+     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
+     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     */
     public static void eliminaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
     {   
         Boolean entrataValida = false;
@@ -202,18 +231,4 @@ public class ClienteRegistrato extends Utente
             }
         }
     }
-
-    public static String generaCodiceUnivoco() 
-    {
-        String caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder codice = new StringBuilder(); //Builder perchè modificabile al contrario delle stringhe normali
-        java.util.Random random = new java.util.Random();
-        for(int i = 0; i < 8; i++) 
-        {
-            int indice = random.nextInt(caratteri.length());
-            char carattere = caratteri.charAt(indice);
-            codice.append(carattere);
-        }
-        return codice.toString();
-    } 
 }

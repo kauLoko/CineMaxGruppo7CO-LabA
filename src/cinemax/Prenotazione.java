@@ -140,6 +140,20 @@ public class Prenotazione
             System.err.println("Errore salvataggio: " + e.getMessage());
         }
     }
+    
+    public static String generaCodiceUnivoco() 
+    {
+        String caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder codice = new StringBuilder(); //Builder perchè modificabile al contrario delle stringhe normali
+        java.util.Random random = new java.util.Random();
+        for(int i = 0; i < 8; i++) 
+        {
+            int indice = random.nextInt(caratteri.length());
+            char carattere = caratteri.charAt(indice);
+            codice.append(carattere);
+        }
+        return codice.toString();
+    } 
 
     @Override
     public String toString() 
