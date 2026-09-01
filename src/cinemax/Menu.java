@@ -341,7 +341,7 @@ public class Menu
         boolean successo = Utente.registraNuovoCliente(nome, cognome, username, passwordChiara, nascita, domicilio);
         if(successo) 
         {
-            System.out.println("Nuovo utente registrato con sucesso! Ora puoi effettuare il login dal menù principale");
+            System.out.println("\nNuovo utente registrato con sucesso! Ora puoi effettuare il login dal menù principale");
         }
         else 
         {

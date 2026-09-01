@@ -1,5 +1,4 @@
 package cinemax;
-import cinemax.Ruoli.*;
 import java.util.*;
 /**
  * Classe contenente il metodo main
