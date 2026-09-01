@@ -7,12 +7,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La classe Prenotazione rappresenta una prenotazione per un film in un cinema. 
+ * Contiene informazioni sul cliente, il film, la data e l'ora della proiezione, il costo unitario e totale, e il numero di biglietti prenotati. 
+ * La classe fornisce metodi per leggere e salvare le prenotazioni da un file CSV, generare codici univoci per le prenotazioni e visualizzare le informazioni della prenotazione.
+ */
 public class Prenotazione 
 {
-
     //Campi
     private static final String filePrenotazioni = "data/prenotazioni.csv";
-
     private String codicePrenotazione;
     private String nomeCliente;
     private String cognomeCliente;
@@ -22,7 +25,17 @@ public class Prenotazione
     private Double costoTotale;
     private int numeroBiglietti;
 
-    //Costruttore
+    /**
+     * Costruttore della classe Prenotazione.
+     * @param codicePrenotazione Il codice univoco della prenotazione.
+     * @param nomeCliente Il nome del cliente.
+     * @param cognomeCliente Il cognome del cliente.
+     * @param titoloFilm Il titolo del film prenotato.
+     * @param dataOraPrenotazione La data e l'ora della prenotazione.
+     * @param costoUintario Il costo unitario di un biglietto.
+     * @param costoTotale Il costo totale della prenotazione.
+     * @param numeroBiglietti Il numero di biglietti prenotati.
+     */
     public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraPrenotazione, Double costoUintario, Double costoTotale, int numeroBiglietti) 
     {
         this.codicePrenotazione = codicePrenotazione;
@@ -35,7 +48,7 @@ public class Prenotazione
         this.numeroBiglietti = numeroBiglietti;
     }
 
-    //Metodi
+    //Metodi getter
     public String getCodicePrenotazione() 
     {
         return codicePrenotazione;
@@ -76,11 +89,16 @@ public class Prenotazione
         return numeroBiglietti;
     }
 
+    //Metodi setter
     public void setDataOraPrenotazione(String nuovaData) 
     {
         this.dataOraPrenotazione = nuovaData;
     }
 
+    /**
+     * Legge il file CSV delle prenotazioni e restituisce una lista di oggetti Prenotazione.
+     * @return Una lista di oggetti Prenotazione letti dal file CSV.
+     */
     public static List<Prenotazione> listaPrenotazioni() 
     {
         List<Prenotazione> listaPrenotazioni = new ArrayList<>();
@@ -129,6 +147,11 @@ public class Prenotazione
         
         return listaPrenotazioni;
     }
+
+    /**
+     * Salva le modifiche apportate alla lista delle prenotazioni nel file CSV.
+     * @param lista La lista delle prenotazioni da salvare.
+     */
     public static void salvaModifichePrenotazioni(List<Prenotazione> lista) 
     {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePrenotazioni, false))) { // false = sovrascrivi
@@ -141,6 +164,10 @@ public class Prenotazione
         }
     }
     
+    /**
+     * Genera un codice univoco per la prenotazione composto da 8 caratteri alfanumerici casuali.
+     * @return Il codice univoco generato.
+     */
     public static String generaCodiceUnivoco() 
     {
         String caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

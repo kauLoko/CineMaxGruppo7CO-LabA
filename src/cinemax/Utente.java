@@ -2,7 +2,11 @@
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * La classe Utente rappresenta un utente del sistema con i relativi dettagli.
+ * Contiene informazioni personali, credenziali di accesso e ruolo dell'utente.
+ * Fornisce metodi per la registrazione, il login e la visualizzazione delle prenotazioni.
+ */
 public class Utente 
 {
     //Campi
@@ -13,12 +17,19 @@ public class Utente
     private String nascita;
     private String domicilio;
     private Ruolo ruolo;
-
     public static final String fileUtenti = "data/datiUtenti.csv";
-
     public enum Ruolo {cliente, proiezionista, bigliettaio};
 
-    //Construtore
+    /**
+     * Costruttore della classe Utente.
+     * @param nome Il nome dell'utente.
+     * @param cognome Il cognome dell'utente.
+     * @param username Lo username scelto dall'utente.
+     * @param password La password cifrata dell'utente.
+     * @param nascita La data di nascita dell'utente.
+     * @param domicilio Il domicilio dell'utente.
+     * @param ruolo Il ruolo dell'utente nel sistema (cliente, proiezionista, bigliettaio).
+     */
     public Utente(String nome, String cognome, String username, String password, String nascita, String domicilio, Ruolo ruolo) 
     {
         this.nome = nome;
@@ -30,7 +41,7 @@ public class Utente
         this.ruolo = ruolo;
     }
 
-    //metodi getter per fare accedere/confrontare negli altri file (es. per sicurezza e login)
+    //Metodi getter
     public String getNome() 
     {
         return nome;
@@ -66,7 +77,11 @@ public class Utente
         return ruolo;
     }
 
-    //Metodi
+    /**
+     * Salva le informazioni dell'utente nel file CSV specificato.
+     * Apre il file in modalità append e scrive i dettagli dell'utente in una nuova riga.
+     * Gestisce eventuali eccezioni durante l'operazione di scrittura su file.
+     */
     public void salvaSuFile()
     {
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fileUtenti, true)))) {
@@ -79,7 +94,13 @@ public class Utente
         }
     }
 
-        
+    /**
+     * Esegue il login dell'utente confrontando le credenziali inserite con quelle presenti nel file CSV.
+     * Cifra la password inserita e verifica se esiste un utente con lo stesso username e password cifrata.
+     * @param username Lo username inserito dall'utente.
+     * @param passwordChiara La password in chiaro inserita dall'utente.
+     * @return Un oggetto Utente se il login ha successo, altrimenti null.
+     */
     public static Utente eseguiLogin(String username, String passwordChiara) 
     {
         String passwordCifrata = PasswordUtils.cifraPassword(passwordChiara);
@@ -143,21 +164,14 @@ public class Utente
         return true; 
     }
 
-    @Override
-    public String toString() 
-    {
-        return String.format("""
-            
-            --- SCHEDA UTENTE ---
-            Nome: %s %s
-            Username: %s
-            Password: %s
-            Nascita: %s
-            Domicilio: %s
-            Ruolo: %s""",
-            nome, cognome, username, password, nascita, domicilio, ruolo);
-    }
-
+    /**
+     * Visualizza le prenotazioni dell'utente in base al suo ruolo.
+     * I clienti possono visualizzare le proprie prenotazioni, mentre i bigliettai possono cercare e visualizzare prenotazioni specifiche.
+     * I proiezionisti non hanno accesso alla gestione delle prenotazioni.
+     * @param scanner Lo scanner per leggere l'input dell'utente.
+     * @param utente L'oggetto Utente che rappresenta l'utente attualmente loggato.
+     * @param listaPrenotazioni La lista delle prenotazioni disponibili nel sistema.
+     */
     public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
         Ruolo ruolo = utente.getRuolo();
@@ -237,5 +251,20 @@ public class Utente
                 break;
         }
     }
+
+    @Override
+    public String toString() 
+    {
+        return String.format("""
+            
+            --- SCHEDA UTENTE ---
+            Nome: %s %s
+            Username: %s
+            Password: %s
+            Nascita: %s
+            Domicilio: %s
+            Ruolo: %s""",
+            nome, cognome, username, password, nascita, domicilio, ruolo);
+    }    
 
 }

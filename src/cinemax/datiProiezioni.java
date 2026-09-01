@@ -5,12 +5,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * La classe rappresenta un insieme di metodi statici per gestire le proiezioni cinematografiche
+ */
 public class datiProiezioni 
 {
     private static final String fileProiezioni = "data/proiezioni.csv";
 
     //Metodi
-
+    /**
+     * Legge il file CSV delle proiezioni e restituisce una lista di oggetti Proiezione.
+     * @return Una lista di oggetti Proiezione letti dal file CSV.
+     */
     public static List<Proiezione> listaProiezioni() 
     {
         List<Proiezione> listaProiezioni = new ArrayList<>(); //Uso la lista perchè l'array ha dimensione fissa definita in fase di creazione, mentre la lista è estendibile
@@ -44,6 +50,12 @@ public class datiProiezioni
         return listaProiezioni;
     }
     
+    /**
+     * Calcola il numero di posti liberi per una determinata proiezione.
+     * @param proiezione La proiezione per cui calcolare i posti liberi.
+     * @param listaPrenotazioni La lista delle prenotazioni.
+     * @return Il numero di posti liberi.
+     */
     public static int calcoloPostiLiberi(Proiezione proiezione, List<Prenotazione> listaPrenotazioni) 
     {
         int capienzaMassima = 200;
@@ -57,6 +69,12 @@ public class datiProiezioni
         }
         return capienzaMassima - postiOccupati;
     }
+    /**
+     * Cerca una proiezione in base ai criteri specificati dall'utente.
+     * @param scanner Lo scanner per leggere l'input dell'utente.
+     * @param listaProiezioni La lista delle proiezioni disponibili.
+     * @return Una lista di proiezioni che corrispondono ai criteri di ricerca.
+     */
     public static List<Proiezione> cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
         //Ottengo i criteri di ricerca dall'utente; imposto valori di default per capire se non vengono impostati dall'utente
@@ -343,7 +361,11 @@ public class datiProiezioni
         return risultatoRicerca;
     }
 
-
+    /**
+     * Visualizza i dettagli di una proiezione specifica in base al titolo inserito dall'utente.
+     * @param scanner Lo scanner per leggere l'input dell'utente.
+     * @param risultatoRicerca La lista delle proiezioni trovate.
+     */
     public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
     {
         System.out.print("Inserisci il titolo della proiezione da visualizzare: ");

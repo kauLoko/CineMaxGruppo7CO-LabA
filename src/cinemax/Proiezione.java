@@ -1,5 +1,8 @@
 // package cinemax;
 
+/**
+ * La classe rappresenta una proiezione cinematografica con i relativi dettagli.
+ */
 public class Proiezione 
 {
     //Campi
@@ -13,7 +16,17 @@ public class Proiezione
     private double costo;
     private int postiDisponibili; 
     
-    //Costruttore
+    /**
+     * Costruttore della classe Proiezione.
+     * @param titolo Il titolo del film.
+     * @param genere Il genere del film.
+     * @param regista Il regista del film.
+     * @param anno L'anno di uscita del film.
+     * @param durata La durata del film in minuti.
+     * @param etaMinima L'età minima consigliata per la visione del film.
+     * @param dataOrario La data e l'orario della proiezione.
+     * @param costo Il costo del biglietto per la proiezione.
+     */
     public Proiezione(String titolo, String genere, String regista, int anno, int durata, int etaMinima, String dataOrario, double costo) 
     {
         this.titolo = titolo;
@@ -119,6 +132,10 @@ public class Proiezione
         this.postiDisponibili = postiDisponibili;
     }
 
+    /**
+     * Decrementa il numero di posti disponibili per la proiezione in base al numero di biglietti venduti.
+     * @param bigliettiVenduti Il numero di biglietti venduti.
+     */
     public void decrementaPosti(int bigliettiVenduti) 
     {
         this.postiDisponibili -= bigliettiVenduti;
