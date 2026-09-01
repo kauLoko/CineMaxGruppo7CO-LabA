@@ -389,4 +389,20 @@ public class datiProiezioni
             System.out.println("Proiezione non trovata.");
         }
     }
+
+    /**
+     * Salva le modifiche apportate alla lista delle proiezioni nel file CSV.
+     * @param lista La lista delle proiezioni da salvare.
+     */
+    public static void salvaModificheProiezioni(List<Proiezione> lista) {
+    try (PrintWriter pw = new PrintWriter(new FileWriter(fileProiezioni, false))) {
+        pw.println("data_ora_proiezione,titolo_film,genere,regista,anno,durata_minuti,eta_minima,prezzo_biglietto");
+        for (Proiezione p : lista) {
+            // Rimettiamo le virgolette per proteggere le virgole nei titoli
+            pw.println(p.getDataOrario() + ",\"" + p.getTitolo() + "\",\"" + p.getGenere() + "\",\"" + p.getRegista() + "\"," + p.getAnno() + "," + p.getDurata() + "," + p.getEtaMinima() + "," + p.getCosto());
+        }
+    } catch (IOException e) {
+        System.err.println("Errore salvataggio proiezioni: " + e.getMessage());
+    }
+}
 }

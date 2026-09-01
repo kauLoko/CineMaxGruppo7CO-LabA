@@ -53,6 +53,8 @@ public class CineMax {
           break;
         case "4":
           System.out.println("Grazie per aver usato CineMax, arrivederci!");
+          datiProiezioni.salvaModificheProiezioni(listaProiezioni);
+          Prenotazione.salvaModifichePrenotazioni(listaPrenotazioni);
           break;
         default:
           System.out.println("Scelta non valida!");
