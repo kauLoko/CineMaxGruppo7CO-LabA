@@ -147,7 +147,7 @@ public class Bigliettaio extends Utente
                         break;
 
                     case "4":
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
                         LocalDate dataInizio = null;
                         LocalDate dataFine = null;
                         System.out.println("Puoi inserire un intervallo, altrimenti premere invio");

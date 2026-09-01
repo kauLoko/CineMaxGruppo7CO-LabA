@@ -158,7 +158,7 @@ public class Proiezione
             Durata: %d minuti
             Età Minima: %d anni
             Data e Ora: %s
-            Costo: %.2f €
+            Costo: %.2f EUR
             Posti Disponibili: %d""",
             titolo, genere, regista, anno, durata, etaMinima, dataOrario, costo, postiDisponibili);
     }

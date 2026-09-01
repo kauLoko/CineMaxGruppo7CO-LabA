@@ -21,10 +21,10 @@ public class Menu
     {
         System.out.println("-- LOGIN --");
         // Ottengo username
-        System.out.println("Username: ");
+        System.out.print("Username: ");
         String username = scanner.nextLine().trim();
         // Ottengo password
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         String password = scanner.nextLine().trim();
         // Passo i dati al metodo eseguilogin vero e proprio
         return Utente.eseguiLogin(username, password);
@@ -80,7 +80,7 @@ public class Menu
                         {
                             datiProiezioni.visualizzaProiezione(scanner, risultati);
                         }
-                        System.out.println("Vuoi effettuare una prenotazione per una di queste proiezioni? (s/n)");
+                        System.out.println("\nVuoi effettuare una prenotazione per una di queste proiezioni? (s/n)");
                         String rispostaPrenotazione = scanner.nextLine().trim().toLowerCase();
                         if (rispostaPrenotazione.equals("s")) 
                         {
@@ -98,10 +98,10 @@ public class Menu
                     ClienteRegistrato.eliminaPrenotazione(scanner, listaPrenotazioni);
                     break;
                 case "0":
-                    System.out.println("Logout effettuato");
+                    System.out.println("\nLogout effettuato\n");
                     break;
                 default:
-                    System.out.println("Opzione non valida Inserisci un numero tra 0 e 4");
+                    System.out.println("\nOpzione non valida Inserisci un numero tra 0 e 4");
                     break;
             }
         } 
@@ -278,7 +278,7 @@ public class Menu
 
         String nascita = "";
         boolean dataValida = false;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         while (!dataValida) {
             System.out.print("Data di nascita (gg/mm/aaaa): ");
             nascita = scanner.nextLine().trim();

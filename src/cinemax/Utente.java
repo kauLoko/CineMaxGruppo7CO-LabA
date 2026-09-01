@@ -203,11 +203,11 @@ public class Utente
 
                     if(risultatoRicerca.isEmpty()) 
                     {
-                        System.out.println("Nessuna prenotazione trovata" );
+                        System.out.println("\nNessuna prenotazione trovata" );
                     }
                     else 
                     {
-                        System.out.println(risultatoRicerca.size() + " prenotazioni trovate:");
+                        System.out.println("\n" + risultatoRicerca.size() + " prenotazioni trovate:");
                         
                         for(Prenotazione p: risultatoRicerca) 
                         {

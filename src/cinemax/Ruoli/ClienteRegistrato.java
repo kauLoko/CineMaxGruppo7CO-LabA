@@ -35,22 +35,31 @@ public class ClienteRegistrato extends Utente
      * @param utente Utente che effettua la prenotazione
      * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
-    public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
+public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
-        System.out.println("Inserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
-        String dataOra = scanner.nextLine().trim();
+        System.out.println("\nInserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
+        String dataOraInput = scanner.nextLine().trim();
+        DateTimeFormatter formatoInput = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
+        DateTimeFormatter formatoCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dataOraConvertita = "";
+        try {
+            LocalDateTime dataInserita = LocalDateTime.parse(dataOraInput, formatoInput);
+            dataOraConvertita = dataInserita.format(formatoCSV);
+        } catch (Exception e) {
+            System.out.println("\nErrore di formato. Assicurati di usare gg/mm/aaaa hh:mm (es. 03/07/2027 10:00).");
+            return;
+        }
         boolean proiezioneTrovata = false;
-
         for(Proiezione p: risultatoRicerca) 
         {
-            if(p.getDataOrario().equals(dataOra)) 
+            if(p.getDataOrario().equals(dataOraConvertita)) 
             {
                 proiezioneTrovata = true;
                 int numeroBiglietti = 0;
                 boolean inputValido = false;
                 while(!inputValido) 
                 { 
-                    System.out.println("Quanti biglietti desidera acquistare?");
+                    System.out.print("\nQuanti biglietti desidera acquistare?");
                     try
                     {
                         numeroBiglietti = Integer.parseInt(scanner.nextLine().trim());
@@ -78,12 +87,12 @@ public class ClienteRegistrato extends Utente
                     //crea oggetto prenotazione e aggiungilo alla lista prenotazioni globale 
                     Prenotazione nuovaPrenotazione = new Prenotazione(codiceUnivoco, utente.getNome(), utente.getCognome(), p.getTitolo(), p.getDataOrario(), p.getCosto(), (p.getCosto() * numeroBiglietti), numeroBiglietti);
                     listaPrenotazioni.add(nuovaPrenotazione); 
-                    System.out.println("Prenotazione avvenuta con successo!");
+                    System.out.println("\nPrenotazione avvenuta con successo!");
                     System.out.println(nuovaPrenotazione.toString());
                 }
                 else 
                 {
-                    System.out.println("Prenotazione non riuscita: posti liberi non sufficienti");
+                    System.out.println("\nPrenotazione non riuscita: posti liberi non sufficienti");
                 } break;
             }
         }
@@ -119,7 +128,7 @@ public class ClienteRegistrato extends Utente
                             LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraPrenotazione(), formatter);
                             if(dataPrenotazione.isAfter(dataOggi)) 
                             {
-                                System.out.println("Prenotazione trovata");
+                                System.out.println("\nPrenotazione trovata");
                                 for(Proiezione proiezione: listaProiezioni) 
                                 {
                                     if(proiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim())) 
@@ -127,11 +136,11 @@ public class ClienteRegistrato extends Utente
                                         LocalDateTime opzioni = LocalDateTime.parse(proiezione.getDataOrario(), formatter); 
                                         if(opzioni.isAfter(dataOggi) && !proiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
                                         {
-                                            System.out.println("\n" + proiezione.getDataOrario());
+                                            System.out.println("\n- " + proiezione.getDataOrario() +"\n");
                                         }
                                     }
                                 }
-                                System.out.println("Inserire la data in cui desideri spostare la preontazione (yyyy-MM-dd HH:mm:ss): ");
+                                System.out.println("Inserire la data in cui desideri spostare la prenotazione (yyyy-MM-dd HH:mm:ss): ");
                                 LocalDateTime dataNuova = null;
                                 String inputUtente = "";
                                 boolean formatoValido = false;
@@ -180,7 +189,7 @@ public class ClienteRegistrato extends Utente
                                 }
                                 if(!nuovaTrovata) 
                                 {
-                                    System.out.println("La data inserita non valida o non corrispondente alkle opzioni");
+                                    System.out.println("La data inserita non valida o non corrispondente alle opzioni");
                                 } break;
                             }    
                             else 
@@ -205,7 +214,7 @@ public class ClienteRegistrato extends Utente
     {   
         Boolean entrataValida = false;
         while(!entrataValida) {
-            System.out.println("Inserire il codice della prenotazione da eliminare (o 'esci' per annullare): ");
+            System.out.println("\nInserire il codice della prenotazione da eliminare (o 'esci' per annullare): ");
             String codiceUnivoco = scanner.nextLine().trim();
 
             if(codiceUnivoco.equalsIgnoreCase("esci")) break;
@@ -221,11 +230,11 @@ public class ClienteRegistrato extends Utente
                             if(dataPrenotazione.isBefore(dataOggi)) 
                             {
                                 listaPrenotazioni.remove(p);
-                                System.out.println("Prenotazione rimossa con successo");
+                                System.out.println("\nPrenotazione rimossa con successo");
                             }
                             else
                             {
-                                System.out.println("Impossibile rimuovere la prenotazione: la proiezione deve ancora avvenire");
+                                System.out.println("\nImpossibile rimuovere la prenotazione: la proiezione deve ancora avvenire");
                             }
                             break;
                         }

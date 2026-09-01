@@ -33,7 +33,31 @@ public class datiProiezioni
             {
                 if(riga.trim().isEmpty()) 
                     continue;
-                String[] campi = riga.replace("\"", "").split(",");
+                //Uso la lista per accumulare momentaneamente i campi
+                List<String> campiList = new ArrayList<>();
+                StringBuilder campoAttuale = new StringBuilder();
+                boolean dentroVirgolette = false;
+                //Scorro la riga carattere per carattere
+                for (int i = 0; i < riga.length(); i++) {
+                    char c = riga.charAt(i);
+                    if (c == '"') {
+                        // Trovata una virgoletta: accendiamo o spegniamo l'interruttore
+                        dentroVirgolette = !dentroVirgolette;
+                    } 
+                    else if (c == ',' && !dentroVirgolette) {
+                        //Se trova la virgola fuori dalle virgolette il campo è finito e lo aggiungo alla lista
+                        campiList.add(campoAttuale.toString().trim());
+                        campoAttuale.setLength(0); //Svuoto lo string builder per evitare di riutilizzarlo per il prossimo campo
+                    } 
+                    else {
+                        //Carattere normale o virgola non di separazione campo viene aggiunto al campo come carattere
+                        campoAttuale.append(c);
+                    }
+                }
+                //Rimane l'ultimo campo da aggiungere dopo l'ultimo ciclo che non finisce con la virgola, quindi lo facciamo manualmente
+                campiList.add(campoAttuale.toString().trim());
+                // Converto la lista nell'array
+                String[] campi = campiList.toArray(new String[0]);
                 String dataOrario = campi[0].trim();
                 String titolo = campi[1].trim();
                 String genere = campi[2].trim(); 
@@ -170,7 +194,7 @@ public class datiProiezioni
 
         if (risposta.equals("s"))
         {
-            DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("d/M/yyyy");
             System.out.println("Puoi inserire un intervallo temporale, altrimenti premere invio");
             boolean inizioValido = false;
             while(!inizioValido) 
@@ -291,7 +315,7 @@ public class datiProiezioni
             }
         }
 
-        System.out.print("Filtri impostati. Inizio la ricerca...");
+        System.out.println("\nFiltri impostati. Inizio la ricerca...");
         
         LocalDateTime dataOggi = LocalDateTime.now();
 
@@ -355,13 +379,13 @@ public class datiProiezioni
             {
                 titoliTrovati.add(p.getTitolo());              
             }        
-            System.out.println("Trovate " + risultatoRicerca.size() + " proiezioni distribuite su " + titoliTrovati.size() + " film:");
+            System.out.println("\nTrovate " + risultatoRicerca.size() + " proiezioni distribuite su " + titoliTrovati.size() + " film:");
             for(String t: titoliTrovati) 
             {
                 System.out.println("- " + t);
             }
         }
-        System.out.println("--------------------------------"); //Per staccare quando verra' chiamato un altro metodo 
+        System.out.println("\n--------------------------------\n"); //Per staccare quando verra' chiamato un altro metodo 
         return risultatoRicerca;
     }
 
@@ -372,7 +396,7 @@ public class datiProiezioni
      */
     public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
     {
-        System.out.print("Inserisci il titolo della proiezione da visualizzare: ");
+        System.out.print("\nInserisci il titolo della proiezione da visualizzare: ");
         String titolo = scanner.nextLine().trim();
         boolean trovato = false;
 

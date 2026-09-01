@@ -52,12 +52,13 @@ public class CineMax {
           Menu.menuGuest(scanner, listaProiezioni);
           break;
         case "4":
-          System.out.println("Grazie per aver usato CineMax, arrivederci!");
+          System.out.println("\nGrazie per aver usato CineMax, arrivederci!");
+          System.out.println("\n--------------------------------\n");
           datiProiezioni.salvaModificheProiezioni(listaProiezioni);
           Prenotazione.salvaModifichePrenotazioni(listaPrenotazioni);
-          break;
+          return; // Esci dal programma
         default:
-          System.out.println("Scelta non valida!");
+          System.out.println("\nScelta non valida!\n");
       } 
     }
     scanner.close();

@@ -165,7 +165,7 @@ public class Proiezionista extends Utente
         }
 
         // ciclo per richiesta data e orario, da capire se farne due divisi o uno unico
-        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dataOra = null;
@@ -598,7 +598,7 @@ public class Proiezionista extends Utente
             System.out.println("- Data e ora: " + proiezione.getDataOrario());
         }
         //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
-        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Proiezione proiezioneDaEliminare = null;
