@@ -166,7 +166,7 @@ public class Proiezionista extends Utente
 
         // ciclo per richiesta data e orario, da capire se farne due divisi o uno unico
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("H:mm");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dataOra = null;
         boolean dataOraValida = false;
@@ -194,7 +194,7 @@ public class Proiezionista extends Utente
             boolean oraValida = false;
             while(!oraValida) 
             {
-                System.out.println("Inserisci l'ora della proiezione (HH:mm)");
+                System.out.println("Inserisci l'ora della proiezione (H:mm)");
                 try 
                 {
                     ora = LocalTime.parse(scanner.nextLine().trim(), oraFormat);
@@ -202,7 +202,7 @@ public class Proiezionista extends Utente
                 }
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usare esattamente HH:mm (es. 21:30)");
+                    System.out.println("Errore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)");
                 }
             }
             dataOra = LocalDateTime.of(data, ora);
@@ -292,7 +292,7 @@ public class Proiezionista extends Utente
         }
         //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("H:m");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Proiezione proiezioneModificata = null;
         boolean selezioneValida = false;
@@ -323,7 +323,7 @@ public class Proiezionista extends Utente
             boolean oraValida = false;
             while(!oraValida) 
             {
-                System.out.println("Seleziona l'ora esatta (HH:mm): ");
+                System.out.println("Seleziona l'ora esatta (H:mm): ");
                 try 
                 {
                     oraScelta= LocalTime.parse(scanner.nextLine().trim(), oraFormat);
@@ -331,7 +331,7 @@ public class Proiezionista extends Utente
                 }    
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 21:30)");
+                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 9:30 oppure 21:30)");
                 }
             }
 
@@ -496,7 +496,7 @@ public class Proiezionista extends Utente
                         boolean oraValida = false;
                         while(!oraValida) 
                         {
-                            System.out.println("Inserisci l'ora della proiezione (HH:mm)");
+                            System.out.println("Inserisci l'ora della proiezione (H:mm)");
                             try 
                             {
                                 ora = LocalTime.parse(scanner.nextLine().trim(), oraFormat);
@@ -504,7 +504,7 @@ public class Proiezionista extends Utente
                             }
                             catch (Exception e) 
                             {
-                                System.out.println("Errore di formato: usare esattamente HH:mm (es. 21:30)");
+                                System.out.println("Errore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)");
                             }
                         }
                         //Unisco
@@ -599,7 +599,7 @@ public class Proiezionista extends Utente
         }
         //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
         DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("H:mm");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Proiezione proiezioneDaEliminare = null;
         boolean selezioneValida = false;
@@ -630,7 +630,7 @@ public class Proiezionista extends Utente
             boolean oraValida = false;
             while(!oraValida) 
             {
-                System.out.println("Seleziona l'ora esatta (HH:mm): ");
+                System.out.println("Seleziona l'ora esatta (H:mm): ");
                 try 
                 {
                     oraScelta= LocalTime.parse(scanner.nextLine().trim(), oraFormat);
@@ -638,7 +638,7 @@ public class Proiezionista extends Utente
                 }    
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 21:30)");
+                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 9:30 oppure 21:30)");
                 }
             }
 

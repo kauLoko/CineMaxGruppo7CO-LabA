@@ -92,7 +92,6 @@ public class Utente
     {
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fileUtenti, true)))) {
             pw.println(nome + "," + cognome + "," + username + "," + password + "," + nascita + "," + domicilio + "," + ruolo);
-            System.out.println(">> Utente registrato e salvato con successo!");
         } 
         catch (IOException e) 
         {
@@ -141,10 +140,10 @@ public class Utente
         }    
         catch (IOException e) 
         {
-            System.err.println("Errore durante la lettura del file utenti: " + e.getMessage());
+            System.err.println("\nErrore durante la lettura del file utenti: " + e.getMessage());
         }
 
-        System.out.println("\nCredenziali errate o utente non trovato.");
+        System.out.println("\nCredenziali errate o utente non trovato.\n");
         return null;
     }
 

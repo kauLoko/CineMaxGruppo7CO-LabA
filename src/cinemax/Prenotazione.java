@@ -127,14 +127,14 @@ public class Prenotazione
 
                 try 
                 {
-                    String codicePrenotazione = campi[0];
-                    String nomeCliente = campi[1];
-                    String cognomeCliente = campi[2];
-                    String titoloFilm = campi[3];
-                    String dataOraProiezione = campi[4];
-                    Double costoUnitario = Double.parseDouble(campi[5]);
-                    Double costoTotale = Double.parseDouble(campi[6]);
-                    int numeroBiglietti = Integer.parseInt(campi[7]);
+                    String codicePrenotazione = campi[0].trim();
+                    String nomeCliente = campi[1].trim();
+                    String cognomeCliente = campi[2].trim();
+                    String titoloFilm = campi[3].trim();
+                    String dataOraProiezione = campi[4].trim();
+                    Double costoUnitario = Double.parseDouble(campi[5].trim());
+                    Double costoTotale = Double.parseDouble(campi[6].trim());
+                    int numeroBiglietti = Integer.parseInt(campi[7].trim());
                     Prenotazione prenotazione = new Prenotazione(codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraProiezione, costoUnitario, costoTotale, numeroBiglietti);
                     listaPrenotazioni.add(prenotazione);
                 } 
@@ -197,8 +197,8 @@ public class Prenotazione
             Cognome cliente: %s
             Titolo film: %s
             Data e ora proiezione: %s
-            Costo unitario: %.2f
-            Costo totale: %.2f
+            Costo unitario: %.2f EUR
+            Costo totale: %.2f EUR
             Numero biglietti: %d
             """, codicePrenotazione, nomeCliente, cognomeCliente, titoloFilm, dataOraPrenotazione, costoUintario, costoTotale, numeroBiglietti);
     }

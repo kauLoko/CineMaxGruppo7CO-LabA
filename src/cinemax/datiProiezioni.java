@@ -199,7 +199,7 @@ public class datiProiezioni
             boolean inizioValido = false;
             while(!inizioValido) 
             {
-                System.out.print("Data iniziale (gg/mm/aaaa)");
+                System.out.print("Data iniziale (gg/mm/aaaa): ");
                 String inizio = scanner.nextLine().trim();
                 if(inizio.isEmpty()) 
                 {
@@ -222,7 +222,7 @@ public class datiProiezioni
             boolean fineValido = false;
             while(!fineValido) 
             {
-                System.out.print("Data finale (gg/mm/aaaa)");
+                System.out.print("Data finale (gg/mm/aaaa) oppure invio per non specificarla: ");
                 String fine = scanner.nextLine().trim();
                 if(fine.isEmpty()) 
                 {
@@ -393,25 +393,37 @@ public class datiProiezioni
      * Visualizza i dettagli di una proiezione specifica in base al titolo inserito dall'utente.
      * @param scanner Lo scanner per leggere l'input dell'utente.
      * @param risultatoRicerca La lista delle proiezioni trovate.
+     * @return true se la proiezione è stata trovata e visualizzata, false se l'utente ha annullato l'operazione.
      */
-    public static void visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
+    public static boolean visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
     {
-        System.out.print("\nInserisci il titolo della proiezione da visualizzare: ");
-        String titolo = scanner.nextLine().trim();
-        boolean trovato = false;
-
-        for (Proiezione proiezione : risultatoRicerca) 
+        boolean trovata = false;
+        while (!trovata) 
         {
-            if (proiezione.getTitolo().equalsIgnoreCase(titolo)) 
+            System.out.println("\nInserisci il titolo della proiezione da visualizzare (o 'esci' per annullare): ");
+            String titoloInserito = scanner.nextLine().trim();
+            if (titoloInserito.equalsIgnoreCase("esci")) 
             {
-                System.out.println(proiezione.toString());
-                trovato = true;
+                return false; // Segnala al menù che l'utente ha annullato
+            }
+            for (Proiezione p : risultatoRicerca) 
+            {
+                if (p.getTitolo().equalsIgnoreCase(titoloInserito)) 
+                {
+                    System.out.println(p.toString()); 
+                    trovata = true;
+                }
+            }
+            if (trovata) 
+            {
+                return true;    
+            }
+            else 
+            {
+                System.out.println("\nNessuna proiezione trovata con il titolo inserito. Riprova.");
             }
         }
-        if (!trovato) 
-        {
-            System.out.println("Proiezione non trovata.");
-        }
+        return false; // Necessario per la sintassi Java, anche se non ci arriverà mai
     }
 
     /**
@@ -422,7 +434,6 @@ public class datiProiezioni
     try (PrintWriter pw = new PrintWriter(new FileWriter(fileProiezioni, false))) {
         pw.println("data_ora_proiezione,titolo_film,genere,regista,anno,durata_minuti,eta_minima,prezzo_biglietto");
         for (Proiezione p : lista) {
-            // Rimettiamo le virgolette per proteggere le virgole nei titoli
             pw.println(p.getDataOrario() + ",\"" + p.getTitolo() + "\",\"" + p.getGenere() + "\",\"" + p.getRegista() + "\"," + p.getAnno() + "," + p.getDurata() + "," + p.getEtaMinima() + "," + p.getCosto());
         }
     } catch (IOException e) {

@@ -35,21 +35,25 @@ public class ClienteRegistrato extends Utente
      * @param utente Utente che effettua la prenotazione
      * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
-public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
+    public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
-        System.out.println("\nInserisci data e ora della proiezione da prenotare (formato: gg/mm/aaaa hh:mm): ");
+        System.out.println("Inserisci data e ora della proiezione da prenotare (formato: d/M/yyyy H:mm): ");
         String dataOraInput = scanner.nextLine().trim();
-        DateTimeFormatter formatoInput = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
+        
+        DateTimeFormatter formatoInput = DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
         DateTimeFormatter formatoCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
         String dataOraConvertita = "";
         try {
             LocalDateTime dataInserita = LocalDateTime.parse(dataOraInput, formatoInput);
             dataOraConvertita = dataInserita.format(formatoCSV);
         } catch (Exception e) {
-            System.out.println("\nErrore di formato. Assicurati di usare gg/mm/aaaa hh:mm (es. 03/07/2027 10:00).");
-            return;
+            System.out.println("Errore di formato. Assicurati di usare d/M/yyyy H:mm (es. 3/7/2027 10:30).");
+            return; 
         }
+
         boolean proiezioneTrovata = false;
+
         for(Proiezione p: risultatoRicerca) 
         {
             if(p.getDataOrario().equals(dataOraConvertita)) 
@@ -59,7 +63,7 @@ public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoR
                 boolean inputValido = false;
                 while(!inputValido) 
                 { 
-                    System.out.print("\nQuanti biglietti desidera acquistare?");
+                    System.out.print("\nQuanti biglietti desidera acquistare? ");
                     try
                     {
                         numeroBiglietti = Integer.parseInt(scanner.nextLine().trim());
@@ -102,7 +106,7 @@ public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoR
         }
     }
 
-    /**
+/**
      * Modifica la data della prenotazione spostandola in una diversa data futura
      * @param scanner Scanner utilizzato per ottenere l'input dell'utente
      * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
@@ -120,87 +124,90 @@ public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoR
 
             for(Prenotazione prenotazione: listaPrenotazioni) 
             {
-                    if(codiceUnivoco.equals(prenotazione.getCodicePrenotazione())) 
+                if(codiceUnivoco.equals(prenotazione.getCodicePrenotazione())) 
+                {
+                    entrataValida = true;
+                    DateTimeFormatter formatoCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    DateTimeFormatter formatoUmano = DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
+                    LocalDateTime dataOggi = LocalDateTime.now();
+                    LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraPrenotazione(), formatoCSV); 
+                    if(dataPrenotazione.isAfter(dataOggi)) 
+                    {
+                        System.out.println("\nPrenotazione trovata. Opzioni alternative:");
+                        for(Proiezione proiezione: listaProiezioni) 
                         {
-                            entrataValida = true;
-                            DateTimeFormatter formatter =   DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                            LocalDateTime dataOggi = LocalDateTime.now();
-                            LocalDateTime dataPrenotazione = LocalDateTime.parse(prenotazione.getDataOraPrenotazione(), formatter);
-                            if(dataPrenotazione.isAfter(dataOggi)) 
+                            if(proiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim())) 
                             {
-                                System.out.println("\nPrenotazione trovata");
-                                for(Proiezione proiezione: listaProiezioni) 
+                                LocalDateTime opzioni = LocalDateTime.parse(proiezione.getDataOrario(), formatoCSV); 
+                                if(opzioni.isAfter(dataOggi) && !proiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
                                 {
-                                    if(proiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim())) 
-                                    {
-                                        LocalDateTime opzioni = LocalDateTime.parse(proiezione.getDataOrario(), formatter); 
-                                        if(opzioni.isAfter(dataOggi) && !proiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
-                                        {
-                                            System.out.println("\n- " + proiezione.getDataOrario() +"\n");
-                                        }
-                                    }
+                                    System.out.println("- " + opzioni.format(formatoUmano));
                                 }
-                                System.out.println("Inserire la data in cui desideri spostare la prenotazione (yyyy-MM-dd HH:mm:ss): ");
-                                LocalDateTime dataNuova = null;
-                                String inputUtente = "";
-                                boolean formatoValido = false;
-                                while(!formatoValido) 
-                                    {
-                                    inputUtente = scanner.nextLine().trim();
-                                    try 
-                                    {
-                                        dataNuova = LocalDateTime.parse(inputUtente, formatter);
-                                        formatoValido = true;
-                                    }
-                                    catch (Exception e) 
-                                    {
-                                        System.out.println("Errore di formato: inserisci la data esattamente come richiesto (yyyy-MM-dd HH:mm:ss)");
-                                    }
-                                }
-                                
-                                boolean nuovaTrovata = false;
-                                int biglietti = prenotazione.getNumeroBiglietti();
-                                for(Proiezione nuovaProiezione: listaProiezioni) 
-                                {
-                                    if(nuovaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && LocalDateTime.parse(nuovaProiezione.getDataOrario(), formatter).equals(dataNuova)) 
-                                    {
-                                        nuovaTrovata = true;
-                                        if(nuovaProiezione.getPostiDisponibili() >= biglietti) 
-                                        {
-                                            nuovaProiezione.decrementaPosti(biglietti);
-                                            
-                                            for(Proiezione vecchiaProiezione: listaProiezioni) 
-                                            {
-                                                if(vecchiaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && vecchiaProiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
-                                                {
-                                                    vecchiaProiezione.setPostiDisponibili(vecchiaProiezione.getPostiDisponibili() + biglietti);
-                                                    break;
-                                                }
-                                            }
-                                            prenotazione.setDataOraPrenotazione(inputUtente); //Passo inputUtente perchè nel blocco precedente col formatter ho già controllato e imposto che sia nel formato corretto, così posso direttamente aggiornarlo 
-                                            System.out.println("Prenotazione modificata con successo");
-                                        }
-                                        else 
-                                        {
-                                            System.out.println("Errore: posti insufficienti nella nuova data");
-                                        } break;
-                                    }
-                                    
-                                }
-                                if(!nuovaTrovata) 
-                                {
-                                    System.out.println("La data inserita non valida o non corrispondente alle opzioni");
-                                } break;
-                            }    
-                            else 
-                            {
-                                System.out.println("Non puoi modificare una prenotazione passata. Riprova");
                             }
                         }
+                        System.out.println("\nInserire la data in cui desideri spostare la prenotazione (d/M/yyyy H:mm): ");
+                        LocalDateTime dataNuova = null;
+                        String inputUtente = "";
+                        boolean formatoValido = false;
+                        while(!formatoValido) 
+                        {
+                            inputUtente = scanner.nextLine().trim();
+                            try 
+                            {
+                                dataNuova = LocalDateTime.parse(inputUtente, formatoUmano);
+                                formatoValido = true;
+                            }
+                            catch (Exception e) 
+                            {
+                                System.out.println("\nErrore di formato: inserisci la data esattamente come mostrato (es. 3/7/2027 10:30)\n");
+                            }
+                        }
+                        
+                        boolean nuovaTrovata = false;
+                        int biglietti = prenotazione.getNumeroBiglietti();
+                        
+                        for(Proiezione nuovaProiezione: listaProiezioni) 
+                        {
+                            if(nuovaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && LocalDateTime.parse(nuovaProiezione.getDataOrario(), formatoCSV).equals(dataNuova)) 
+                            {
+                                nuovaTrovata = true;
+                                if(nuovaProiezione.getPostiDisponibili() >= biglietti) 
+                                {
+                                    nuovaProiezione.decrementaPosti(biglietti);
+                                    
+                                    for(Proiezione vecchiaProiezione: listaProiezioni) 
+                                    {
+                                        if(vecchiaProiezione.getTitolo().trim().equalsIgnoreCase(prenotazione.getTitoloFilm().trim()) && vecchiaProiezione.getDataOrario().equals(prenotazione.getDataOraPrenotazione())) 
+                                        {
+                                            vecchiaProiezione.setPostiDisponibili(vecchiaProiezione.getPostiDisponibili() + biglietti);
+                                            break;
+                                        }
+                                    }
+                                    prenotazione.setDataOraPrenotazione(dataNuova.format(formatoCSV)); 
+                                    System.out.println("\nPrenotazione modificata con successo!\n");
+                                }
+                                else 
+                                {
+                                    System.out.println("\nErrore: posti insufficienti nella nuova data\n");
+                                } 
+                                break;
+                            }
+                        }
+                        if(!nuovaTrovata) 
+                        {
+                            System.out.println("\nLa data inserita non è valida o non corrisponde alle opzioni\n");
+                        } 
+                        break;
+                    }    
+                    else 
+                    {
+                        System.out.println("\nNon puoi modificare una prenotazione passata. Riprova\n");
+                    }
+                }
             }
             if(!entrataValida) 
             {
-                System.out.println("Il codice prenotazione inserito non è valido");
+                System.out.println("\nIl codice prenotazione inserito non è valido. Riprova\n");
             }
         }
     }
@@ -241,7 +248,7 @@ public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoR
             }
             if(!entrataValida) 
             {
-                System.out.println("Il codice prenotazione inserito non è valido. Riprova");
+                System.out.println("\nIl codice prenotazione inserito non è valido. Riprova");
             }
         }
     }

@@ -19,7 +19,7 @@ public class Menu
 
     public static Utente menuEseguiLogin(Scanner scanner) 
     {
-        System.out.println("-- LOGIN --");
+        System.out.println("\n--- LOGIN ---");
         // Ottengo username
         System.out.print("Username: ");
         String username = scanner.nextLine().trim();
@@ -74,17 +74,50 @@ public class Menu
                     List<Proiezione> risultati = datiProiezioni.cercaProiezione(scanner, listaProiezioni);
                     if(risultati != null && !risultati.isEmpty()) 
                     {
-                        System.out.println("Vuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
-                        String risposta = scanner.nextLine().trim().toLowerCase();
-                        if (risposta.equals("s")) 
+                        boolean operazioneAnnullata = false;
+                        while(true) 
                         {
-                            datiProiezioni.visualizzaProiezione(scanner, risultati);
+                            System.out.println("\nVuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
+                            String risposta = scanner.nextLine().trim().toLowerCase();
+                            if (risposta.equals("s")) 
+                            {
+                                boolean visualizzata = datiProiezioni.visualizzaProiezione(scanner, risultati);
+                                if (!visualizzata) 
+                                {
+                                    System.out.println("\nOperazione annullata, ritorno al menù...");
+                                    operazioneAnnullata = true;
+                                }
+                                break;
+                            } 
+                            else if (risposta.equals("n")) 
+                            {
+                                break; 
+                            } 
+                            else 
+                            {
+                                System.out.println("\nOpzione non valida: inserire 's' per sì o 'n' per no\n");
+                            }
                         }
-                        System.out.println("\nVuoi effettuare una prenotazione per una di queste proiezioni? (s/n)");
-                        String rispostaPrenotazione = scanner.nextLine().trim().toLowerCase();
-                        if (rispostaPrenotazione.equals("s")) 
+                        if (!operazioneAnnullata) 
                         {
-                            ClienteRegistrato.creaPrenotazione(scanner, risultati, utente, listaPrenotazioni);
+                            while(true) 
+                            {
+                                System.out.println("\nVuoi effettuare una prenotazione per una di queste proiezioni? (s/n)");
+                                String rispostaPrenotazione = scanner.nextLine().trim().toLowerCase();
+                                if (rispostaPrenotazione.equals("s")) 
+                                {
+                                    ClienteRegistrato.creaPrenotazione(scanner, risultati, utente, listaPrenotazioni);
+                                    break;
+                                } 
+                                else if (rispostaPrenotazione.equals("n")) 
+                                {
+                                    break;
+                                } 
+                                else 
+                                {
+                                    System.out.println("\nOpzione non valida: inserire 's' per sì o 'n' per no\n");
+                                }
+                            }
                         }
                     }
                     break;
@@ -216,10 +249,10 @@ public class Menu
                     break;
                 
                 case "0":
-                    System.out.println("Grazie per aver usato CineMax. Arrivederci!");
+                    System.out.println("\nGrazie per aver usato CineMax. Arrivederci!\n");
                     break;
                 default:
-                    System.out.println("Opzione non valida: inserire un numero tra 0 e 2");
+                    System.out.println("\nOpzione non valida: inserire un numero tra 0 e 2");
             }
         }
         while(!scelta.equals("0"));
