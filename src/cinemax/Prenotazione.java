@@ -1,4 +1,4 @@
-// package cinemax;
+package cinemax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,6 +11,10 @@ import java.util.List;
  * La classe Prenotazione rappresenta una prenotazione per un film in un cinema. 
  * Contiene informazioni sul cliente, il film, la data e l'ora della proiezione, il costo unitario e totale, e il numero di biglietti prenotati. 
  * La classe fornisce metodi per leggere e salvare le prenotazioni da un file CSV, generare codici univoci per le prenotazioni e visualizzare le informazioni della prenotazione.
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
  */
 public class Prenotazione 
 {

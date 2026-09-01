@@ -1,4 +1,6 @@
-// package cinemax.Ruoli;
+package cinemax.Ruoli;
+import cinemax.*;
+
 import java.util.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
@@ -7,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * La classe rappresenta il proiezionista e gestisce l'aggiunta, modifica ed eliminazione di una proiezione
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
  */
 public class Proiezionista extends Utente
 {

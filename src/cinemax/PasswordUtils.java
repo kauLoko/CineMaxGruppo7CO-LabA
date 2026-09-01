@@ -1,9 +1,13 @@
-// package cinemax;
+package cinemax;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 
+ * Utility per la gestione delle password
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
  */
 public class PasswordUtils {
     /**

@@ -1,4 +1,4 @@
-// package cinemax;
+package cinemax;
 public class Film 
 {
     //Campi

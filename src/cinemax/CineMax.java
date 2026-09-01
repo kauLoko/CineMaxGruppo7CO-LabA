@@ -1,7 +1,12 @@
-// package cinemax;
+package cinemax;
+import cinemax.Ruoli.*;
 import java.util.*;
 /**
  * Classe contenente il metodo main
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
  */
 public class CineMax {
   public static void main(String[] args) 

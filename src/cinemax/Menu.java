@@ -1,4 +1,5 @@
-// package cinemax;
+package cinemax;
+import cinemax.Ruoli.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,6 +7,11 @@ import java.util.*;
 
 /**
  * Classe che rappresenta i menù dei diversi ruoli assegnabili all'utente e utilizzati per gestire input e output
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
+ * 
  *  */
 
 public class Menu

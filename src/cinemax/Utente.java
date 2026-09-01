@@ -1,4 +1,4 @@
-// package cinemax;
+package cinemax;
 import java.io.*;
 import java.util.*;
 
@@ -6,6 +6,10 @@ import java.util.*;
  * La classe Utente rappresenta un utente del sistema con i relativi dettagli.
  * Contiene informazioni personali, credenziali di accesso e ruolo dell'utente.
  * Fornisce metodi per la registrazione, il login e la visualizzazione delle prenotazioni.
+ * @author Toppi Davide, Matricola: 765309, Sede: CO
+ * @author Molteni Davide, Matricola: 765300, Sede: CO 
+ * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 
+ * @author Salmazo Bocatto Kauan, Matricola: 767919, Sede: CO 
  */
 public class Utente 
 {
@@ -17,7 +21,9 @@ public class Utente
     private String nascita;
     private String domicilio;
     private Ruolo ruolo;
+
     public static final String fileUtenti = "data/datiUtenti.csv";
+
     public enum Ruolo {cliente, proiezionista, bigliettaio};
 
     /**
