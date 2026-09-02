@@ -22,14 +22,14 @@ public class Proiezione
     
     /**
      * Costruttore della classe Proiezione.
-     * @param titolo Il titolo del film.
-     * @param genere Il genere del film.
-     * @param regista Il regista del film.
-     * @param anno L'anno di uscita del film.
-     * @param durata La durata del film in minuti.
-     * @param etaMinima L'età minima consigliata per la visione del film.
-     * @param dataOrario La data e l'orario della proiezione.
-     * @param costo Il costo del biglietto per la proiezione.
+     * @param <titolo> Il titolo del film.
+     * @param <genere> Il genere del film.
+     * @param <regista> Il regista del film.
+     * @param <anno> L'anno di uscita del film.
+     * @param <durata> La durata del film in minuti.
+     * @param <etaMinima> L'età minima consigliata per la visione del film.
+     * @param <dataOrario> La data e l'orario della proiezione.
+     * @param <costo> Il costo del biglietto per la proiezione.
      */
     public Proiezione(String titolo, String genere, String regista, int anno, int durata, int etaMinima, String dataOrario, double costo) 
     {
@@ -131,6 +131,10 @@ public class Proiezione
         this.costo = costoNuovo;
     }
 
+    /**
+     * Imposta il numero di posti disponibili per la proiezione.
+     * @param <postiDisponibili> Il numero di posti disponibili.
+     */
     public void setPostiDisponibili(int postiDisponibili) 
     {
         this.postiDisponibili = postiDisponibili;
@@ -138,7 +142,7 @@ public class Proiezione
 
     /**
      * Decrementa il numero di posti disponibili per la proiezione in base al numero di biglietti venduti.
-     * @param bigliettiVenduti Il numero di biglietti venduti.
+     * @param <bigliettiVenduti> Il numero di biglietti venduti.
      */
     public void decrementaPosti(int bigliettiVenduti) 
     {

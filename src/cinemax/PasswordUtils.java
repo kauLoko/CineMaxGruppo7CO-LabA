@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordUtils {
     /**
      * Cifra una password in chiaro utilizzando l'algoritmo SHA-256.
-     * @param passwordChiara La password in chiaro da cifrare.
+     * @param <passwordChiara> La password in chiaro da cifrare.
      * @return La password cifrata come stringa esadecimale.
      */
     public static String cifraPassword(String passwordChiara) 

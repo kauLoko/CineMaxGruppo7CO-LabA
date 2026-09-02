@@ -16,12 +16,12 @@ public class ClienteRegistrato extends Utente
 {
     /**
      * Costruttore dell'oggetto ClienteRegistrato
-     * @param nome Nome inserito in fase di registrazione
-     * @param cognome Cognome inserito in fase di registrazione
-     * @param username Username scelto dall'utente in fase di registrazione
-     * @param password Password cifrata
-     * @param nascita Data di nascita inserita in fase di registrazione
-     * @param domicilio Domicilio inserito in fase di registrazione
+     * @param <nome> Nome inserito in fase di registrazione
+     * @param <cognome> Cognome inserito in fase di registrazione
+     * @param <username> Username scelto dall'utente in fase di registrazione
+     * @param <password> Password cifrata
+     * @param <nascita> Data di nascita inserita in fase di registrazione
+     * @param <domicilio> Domicilio inserito in fase di registrazione
      */
     public ClienteRegistrato(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
@@ -30,10 +30,10 @@ public class ClienteRegistrato extends Utente
 
     /**
      * Crea un nuovo oggetto Prenotazione che viene aggiunto all'ArrayList contenente tutte le prenotazioni
-     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
-     * @param risultatoRicerca ArrayList in cui sono stati precedentemente salvati i risultati del metodo cercaProiezione()
-     * @param utente Utente che effettua la prenotazione
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner utilizzato per ottenere l'input dell'utente
+     * @param <risultatoRicerca> ArrayList in cui sono stati precedentemente salvati i risultati del metodo cercaProiezione()
+     * @param <utente> Utente che effettua la prenotazione
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void creaPrenotazione(Scanner scanner, List<Proiezione> risultatoRicerca, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {
@@ -108,9 +108,9 @@ public class ClienteRegistrato extends Utente
 
 /**
      * Modifica la data della prenotazione spostandola in una diversa data futura
-     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner utilizzato per ottenere l'input dell'utente
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void modificaPrenotazione(Scanner scanner, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
@@ -214,8 +214,8 @@ public class ClienteRegistrato extends Utente
 
     /**
      * Permette la cancellazione di una prenotazione per una proiezione già avvenuta
-     * @param scanner Scanner utilizzato per ottenere l'input dell'utente
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner utilizzato per ottenere l'input dell'utente
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void eliminaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 
     {   

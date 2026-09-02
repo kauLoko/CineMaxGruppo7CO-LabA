@@ -31,14 +31,14 @@ public class Prenotazione
 
     /**
      * Costruttore della classe Prenotazione.
-     * @param codicePrenotazione Il codice univoco della prenotazione.
-     * @param nomeCliente Il nome del cliente.
-     * @param cognomeCliente Il cognome del cliente.
-     * @param titoloFilm Il titolo del film prenotato.
-     * @param dataOraPrenotazione La data e l'ora della prenotazione.
-     * @param costoUintario Il costo unitario di un biglietto.
-     * @param costoTotale Il costo totale della prenotazione.
-     * @param numeroBiglietti Il numero di biglietti prenotati.
+     * @param <codicePrenotazione> Il codice univoco della prenotazione.
+     * @param <nomeCliente> Il nome del cliente.
+     * @param <cognomeCliente> Il cognome del cliente.
+     * @param <titoloFilm> Il titolo del film prenotato.
+     * @param <dataOraPrenotazione> La data e l'ora della prenotazione.
+     * @param <costoUintario> Il costo unitario di un biglietto.
+     * @param <costoTotale> Il costo totale della prenotazione.
+     * @param <numeroBiglietti> Il numero di biglietti prenotati.
      */
     public Prenotazione(String codicePrenotazione, String nomeCliente, String cognomeCliente, String titoloFilm, String dataOraPrenotazione, Double costoUintario, Double costoTotale, int numeroBiglietti) 
     {
@@ -154,7 +154,7 @@ public class Prenotazione
 
     /**
      * Salva le modifiche apportate alla lista delle prenotazioni nel file CSV.
-     * @param lista La lista delle prenotazioni da salvare.
+     * @param <lista> La lista delle prenotazioni da salvare.
      */
     public static void salvaModifichePrenotazioni(List<Prenotazione> lista) 
     {
