@@ -41,33 +41,48 @@ public class Proiezionista extends Utente
         String titolo = "";
         while(titolo.isEmpty()) 
         {
-            System.out.print("Inserisci il titolo della proiezione: ");
+            System.out.print("Inserisci il titolo della proiezione (o inserire 'esci' per annullare): ");
             titolo = scanner.nextLine().trim();
             if(titolo.isEmpty()) 
             {
-                System.out.println("Errore: la proiezione deve avere un titolo");
+                System.out.println("\nErrore: la proiezione deve avere un titolo\n");
+            }
+            else if(titolo.equalsIgnoreCase("esci")) 
+            {
+                System.out.println("\nOperazione annullata");
+                return; //Esco dal metodo senza fare nulla
             }
         }
 
         String genere = "";
         while(genere.isEmpty()) 
         {
-            System.out.print("Inserisci il genere della proiezione: ");
+            System.out.print("Inserisci il genere della proiezione (o inserire 'esci' per annullare): ");
             genere = scanner.nextLine().trim();
             if(genere.isEmpty()) 
             {
-                System.out.println("Errore: la proiezione deve avere un genere");
+                System.out.println("\nErrore: la proiezione deve avere un genere\n");
+            }
+            else if(genere.equalsIgnoreCase("esci")) 
+            {
+                System.out.println("\nOperazione annullata");
+                return; //Esco dal metodo senza fare nulla
             }
         }
 
         String regista = "";
         while(regista.isEmpty()) 
         {
-            System.out.print("Inserisci il regista della proiezione: ");
+            System.out.print("Inserisci il regista della proiezione (o inserire 'esci' per annullare): ");
             regista = scanner.nextLine().trim();
             if(regista.isEmpty()) 
             {
-                System.out.println("Errore: la proiezione deve avere un regista");
+                System.out.println("\nErrore: la proiezione deve avere un regista\n");
+            }
+            else if(regista.equalsIgnoreCase("esci")) 
+            {
+                System.out.println("\nOperazione annullata");
+                return; //Esco dal metodo senza fare nulla
             }
         }
 
@@ -75,7 +90,7 @@ public class Proiezionista extends Utente
         boolean annoValido = false;
         while (!annoValido)
         {
-            System.out.println("Inserisci l'anno di uscita del film: ");
+            System.out.print("Inserisci l'anno di uscita del film (o inserire -1 per annullare): ");
             try 
             {
                 anno = Integer.parseInt(scanner.nextLine().trim()); //Legge stringa e converte in int, più comodo e sicuro di avere nextInt e debuffer
@@ -83,14 +98,19 @@ public class Proiezionista extends Utente
                 {
                     annoValido = true; //Se legge un input valido esce dal ciclo while
                 }
+                else if(anno == -1) 
+                {
+                    System.out.println("\nOperazione annullata");
+                    return; //Esco dal metodo senza fare nulla
+                }
                 else 
                 {
-                    System.out.println("Errore: l'anno non può essere precedente al 1895");
+                    System.out.println("\nErrore: l'anno non può essere precedente al 1895\n");
                 }
             } 
             catch (NumberFormatException e) 
             {
-                System.out.println("Errore: inserisci un numero intero valido");
+                System.out.println("\nErrore: inserisci un numero intero valido\n");
             }
         }
 
@@ -98,7 +118,7 @@ public class Proiezionista extends Utente
         boolean durataValida = false;
         while (!durataValida) 
         {
-            System.out.println("Inserisci la durata del film (in minuti): ");
+            System.out.print("Inserisci la durata del film (in minuti, o -1 per annullare): ");
             try 
             {
                 durata = Integer.parseInt(scanner.nextLine().trim());
@@ -106,14 +126,19 @@ public class Proiezionista extends Utente
                 {
                     durataValida = true;
                 }
+                else if(durata == -1) 
+                {
+                    System.out.println("\nOperazione annullata");
+                    return;
+                }
                 else 
                 {
-                    System.out.println("Errore: la durata non può essere negativa");
+                    System.out.println("\nErrore: la durata non può essere negativa\n");
                 }
             } 
             catch (NumberFormatException e) 
             {
-                System.out.println("Errore: inserisci un numero intero valido");
+                System.out.println("\nErrore: inserisci un numero intero valido\n");
             }
         }
 
@@ -121,7 +146,7 @@ public class Proiezionista extends Utente
         boolean etaValida = false;
         while (!etaValida) 
         {
-            System.out.println("Inserisci l'età minima per la visione del film: ");
+            System.out.print("Inserisci l'età minima per la visione del film (o inserire -1 per annullare): ");
             try 
             {
                 etaMin = Integer.parseInt(scanner.nextLine().trim());
@@ -129,14 +154,19 @@ public class Proiezionista extends Utente
                 {
                     etaValida = true;
                 }
+                else if(etaMin == -1) 
+                {
+                    System.out.println("\nOperazione annullata");
+                    return;
+                }
                 else 
                 {
-                    System.out.println("Errore: l'età minima non può essere negativa");
+                    System.out.println("\nErrore: l'età minima non può essere negativa\n");
                 }
             } 
             catch (NumberFormatException e) 
             {
-                System.out.println("Errore: inserisci un numero intero valido");
+                System.out.println("\nErrore: inserisci un numero intero valido\n");
             }
         }    
         
@@ -144,7 +174,7 @@ public class Proiezionista extends Utente
         boolean costoValido = false;
         while (!costoValido) 
         {
-            System.out.println("Inserisci il prezzo di un biglietto (per i decimali usare il punto, es. 8.50): ");
+            System.out.print("Inserisci il prezzo di un biglietto (per i decimali usare il punto, es. 8.50, o -1 per annullare): ");
             try 
             {
                 costo = Double.parseDouble(scanner.nextLine().trim().replace(",", "."));
@@ -152,14 +182,19 @@ public class Proiezionista extends Utente
                 {
                     costoValido= true;
                 }
+                else if(costo == -1) 
+                {
+                    System.out.println("\nOperazione annullata");
+                    return;
+                }
                 else 
                 {
-                    System.out.println("Errore: il costo di un biglietto non può essere negativo");
+                    System.out.println("\nErrore: il costo di un biglietto non può essere negativo\n");
                 }
             } 
             catch (NumberFormatException e) 
             {
-                System.out.println("Errore: inserisci un numero valido");
+                System.out.println("\nErrore: inserisci un numero valido\n");
             }
         
         }
@@ -179,36 +214,48 @@ public class Proiezionista extends Utente
             boolean dataValida = false;
             while(!dataValida) 
             {
-                System.out.println("Inserisci la data della proiezione (gg/mm/aaaa)");
+                System.out.println("Inserisci la data della proiezione (gg/mm/aaaa) oppure inserire 'esci' per annullare");
                 try 
                 {
-                    data = LocalDate.parse(scanner.nextLine().trim(), dataFormat);
+                    String input = scanner.nextLine().trim();
+                    if(input.equalsIgnoreCase("esci")) 
+                    {
+                        System.out.println("\nOperazione annullata");
+                        return;
+                    }
+                    data = LocalDate.parse(input, dataFormat);
                     dataValida = true;
                 }
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usare esattamenente gg/mm/aaaa (es. 12/10/2026)");
+                    System.out.println("\nErrore di formato: usare esattamenente gg/mm/aaaa (es. 12/10/2026)\n");
                 }
             }
 
             boolean oraValida = false;
             while(!oraValida) 
             {
-                System.out.println("Inserisci l'ora della proiezione (H:mm)");
+                System.out.println("Inserisci l'ora della proiezione (H:mm) oppure inserire 'esci' per annullare");
                 try 
                 {
-                    ora = LocalTime.parse(scanner.nextLine().trim(), oraFormat);
+                    String input = scanner.nextLine().trim();
+                    if(input.equalsIgnoreCase("esci")) 
+                    {
+                        System.out.println("\nOperazione annullata");
+                        return;
+                    }
+                    ora = LocalTime.parse(input, oraFormat);
                     oraValida = true;
                 }
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)");
+                    System.out.println("\nErrore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)\n");
                 }
             }
             dataOra = LocalDateTime.of(data, ora);
             if(dataOra.isBefore(LocalDateTime.now())) 
             {
-                System.out.println("Impossibile programmare una proiezione nel passato. Scegliere una data futura");
+                System.out.println("\nImpossibile programmare una proiezione nel passato. Scegliere una data futura\n");
             }
             else 
             {
@@ -226,7 +273,7 @@ public class Proiezionista extends Utente
                     if(dataOra.isBefore(fineProiezione) && inizioProiezione.isBefore(fineFilm)) 
                     {
                         sovrapposizione = true;
-                        System.out.println("Errore: rilevata una sovrapposizione");
+                        System.out.println("\nErrore: rilevata una sovrapposizione");
                         System.out.println("La sala è già occupata dal film '" + proiezione.getTitolo() + "'");
                         System.out.println("dalle " + inizioProiezione.format(DateTimeFormatter.ofPattern("HH:mm")) + " alle " + fineProiezione.format(DateTimeFormatter.ofPattern("HH:mm")));
                         System.out.println("Scegli un altro orario");
@@ -244,7 +291,7 @@ public class Proiezionista extends Utente
         //Finito di acquisire i parametri, credo nuovo oggetto e faccio add alla lista
         Proiezione nuovaProiezione = new Proiezione(titolo, genere, regista, anno, durata, etaMin, dataOrarioStringa, costo);
         listaProiezioni.add(nuovaProiezione);
-        System.out.println("Proiezione aggiunta con successo");
+        System.out.println("\nProiezione aggiunta con successo!");
     }
 
     /**
@@ -259,28 +306,28 @@ public class Proiezionista extends Utente
 
         while(titolo.isEmpty() && risultatoParziale.isEmpty()) 
         {
-            System.out.println("Inserire il titolo della proiezione da modificare (oppure 'esci' per annullare): ");
+            System.out.println("\nInserire il titolo della proiezione da modificare (oppure 'esci' per annullare): ");
             titolo = scanner.nextLine().trim(); 
             if(titolo.equalsIgnoreCase("esci")) 
             {
-                System.out.println("Operazione annullata");
+                System.out.println("\nOperazione annullata");
                 return; //Uso return e non break perchè devo saltare anche le fasi successive, altrimenti stamperebbe '0 proiezioni trovate' a vuoto
             }
             if(titolo.isEmpty()) 
             {
-                System.out.println("Errore: il titolo della proiezione non può essere vuoto");
+                System.out.println("\nErrore: il titolo della proiezione non può essere vuoto");
                 continue; //Uso il continue perchè se è vuoto non ha senso scansionare tutta la lista, riparto direttamente dall'inizio del metodo
             }
             for(Proiezione proiezione: listaProiezioni) 
             {
-                if(titolo.equalsIgnoreCase(proiezione.getTitolo())) 
+                if(titolo.equalsIgnoreCase(proiezione.getTitolo().trim())) 
                 {
                     risultatoParziale.add(proiezione);
                 }
             }
             if(risultatoParziale.isEmpty()) 
             {
-                System.out.println("Nessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
+                System.out.println("\nNessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
                 titolo = ""; //Reset del titolo per poter tornare ad inizio metodo senza input residui
             }
         }
@@ -291,8 +338,8 @@ public class Proiezionista extends Utente
             System.out.println("- Data e ora: " + proiezione.getDataOrario());
         }
         //Riutilizzo il codice del metodo precedente per inserire data e ora, la logica è la stessa
-        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("H:m");
+        DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+        DateTimeFormatter oraFormat = DateTimeFormatter.ofPattern("H:mm");
         DateTimeFormatter formatCSV = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Proiezione proiezioneModificata = null;
         boolean selezioneValida = false;
@@ -387,7 +434,7 @@ public class Proiezionista extends Utente
                     if(!titoloNuovo.isEmpty()) 
                     {
                         proiezioneModificata.setTitolo(titoloNuovo);
-                        System.out.println("Titolo aggiornato");
+                        System.out.println("\nTitolo aggiornato\n");
                     }
                     break;
                 case "2":
@@ -396,7 +443,7 @@ public class Proiezionista extends Utente
                     if(!genereNuovo.isEmpty()) 
                     {
                         proiezioneModificata.setGenere(genereNuovo);
-                        System.out.println("Genere aggiornato");
+                        System.out.println("\nGenere aggiornato\n");
                     }
                     break;
                 case "3":
@@ -405,7 +452,7 @@ public class Proiezionista extends Utente
                     if(!registaNuovo.isEmpty()) 
                     {
                         proiezioneModificata.setRegista(registaNuovo);
-                        System.out.println("Regista aggiornato");
+                        System.out.println("\nRegista aggiornato\n");
                     }
                     break;
                 case "4":
@@ -416,16 +463,16 @@ public class Proiezionista extends Utente
                         if(annoNuovo > 1895) 
                         {
                             proiezioneModificata.setAnno(annoNuovo);
-                            System.out.println("Anno aggiornato");
+                            System.out.println("\nAnno aggiornato\n");
                         }
                         else 
                         {
-                            System.out.println("Errore: il valore inserito deve essere maggiore di 1895");
+                            System.out.println("\nErrore: il valore inserito deve essere maggiore di 1895\n");
                         }
                     }
                     catch (NumberFormatException e) 
                     {
-                        System.out.println("Errore: inserisci un numero valido");
+                        System.out.println("\nErrore: inserisci un numero valido\n");
                     }
                     break;
                 case "5":
@@ -436,16 +483,16 @@ public class Proiezionista extends Utente
                         if(durataNuova > 0) 
                         {
                             proiezioneModificata.setDurata(durataNuova);
-                            System.out.println("Durata aggiornata");
+                            System.out.println("\nDurata aggiornata\n");
                         }
                         else 
                         {
-                            System.out.println("Errore: il valore inserito deve essere positivo");
+                            System.out.println("\nErrore: il valore inserito deve essere positivo\n");
                         }
                     }
                     catch (NumberFormatException e) 
                     {
-                        System.out.println("Errore: inserisci un numero valido");
+                        System.out.println("\nErrore: inserisci un numero valido\n");
                     }
                     break;
                 case "6":
@@ -456,16 +503,16 @@ public class Proiezionista extends Utente
                         if(etaMinNuova >= 0) 
                         {
                             proiezioneModificata.setEtaMin(etaMinNuova);
-                            System.out.println("Età minima aggiornata");
+                            System.out.println("\nEtà minima aggiornata\n");
                         }
                         else 
                         {
-                            System.out.println("Errore: il valore inserito deve essere positivo");
+                            System.out.println("\nErrore: il valore inserito deve essere positivo\n");
                         }
                     }
                     catch (NumberFormatException e) 
                     {
-                        System.out.println("Errore: inserisci un numero valido");
+                        System.out.println("\nErrore: inserisci un numero valido\n");
                     }
                     break;
                 case "7":
@@ -489,7 +536,7 @@ public class Proiezionista extends Utente
                             }
                             catch (Exception e) 
                             {
-                                System.out.println("Errore di formato: usare esattamenente gg/mm/aaaa (es. 12/10/2026)");
+                                System.out.println("\nErrore di formato: usare esattamenente gg/mm/aaaa (es. 12/10/2026)\n");
                             }
                         }
                         //Chiedo ora
@@ -504,14 +551,14 @@ public class Proiezionista extends Utente
                             }
                             catch (Exception e) 
                             {
-                                System.out.println("Errore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)");
+                                System.out.println("\nErrore di formato: usare esattamente HH:mm (es. 9:30 oppure 21:30)\n");
                             }
                         }
                         //Unisco
                         nuovaDataOra = LocalDateTime.of(data, ora);
                         if(nuovaDataOra.isBefore(LocalDateTime.now())) 
                         {
-                            System.out.println("Errore: impossibile riprogrammare una proiezione nel passato. Scegliere una data futura");
+                            System.out.println("\nErrore: impossibile riprogrammare una proiezione nel passato. Scegliere una data futura\n");
                         }
                         else 
                         {
@@ -519,7 +566,7 @@ public class Proiezionista extends Utente
                         }
                     }
                     proiezioneModificata.setDataOra(nuovaDataOra.format(formatCSV));
-                    System.out.println("Data e orario aggiornati");
+                    System.out.println("\nData e orario aggiornati\n");
                     break;
                 case "8":
                     System.out.println("Inserisci il nuovo prezzo di un biglietto per la proiezione");
@@ -529,28 +576,28 @@ public class Proiezionista extends Utente
                         if(costoNuovo > 0) 
                         {
                             proiezioneModificata.setCosto(costoNuovo);
-                            System.out.println("Prezzo aggiornato");
+                            System.out.println("\nPrezzo aggiornato\n");
                         }
                         else 
                         {
-                            System.out.println("Errore: il valore inserito deve essere positivo");
+                            System.out.println("\nErrore: il valore inserito deve essere positivo\n");
                         }
                     }
                     catch (NumberFormatException e) 
                     {
-                        System.out.println("Errore: inserisci un numero valido (per i decimali usa il punto, es. '8.50')");
+                        System.out.println("\nErrore: inserisci un numero valido (per i decimali usa il punto, es. '8.50')\n");
                     }
                     break;
                 case "0":
-                    System.out.println("Uscita dal menù di modifica");
+                    System.out.println("\nUscita dal menù di modifica");
                     modificando = false;
                     break;           
                 default:
-                    System.out.println("Scelta non valida: inserisci un numero da 0 a 8");
+                    System.out.println("\nScelta non valida: inserisci un numero da 0 a 8\n");
                     break;
             }
         }
-        System.out.println("Modifiche salvate in memoria");
+        System.out.println("Modifiche salvate in memoria\n");
     }
 
     /**
@@ -566,28 +613,28 @@ public class Proiezionista extends Utente
 
         while(titolo.isEmpty() && risultatoParziale.isEmpty()) 
         {
-            System.out.println("Inserire il titolo della proiezione da modificare (oppure 'esci' per annullare): ");
+            System.out.println("\nInserire il titolo della proiezione da eliminare (oppure 'esci' per annullare): ");
             titolo = scanner.nextLine().trim(); 
             if(titolo.equalsIgnoreCase("esci")) 
             {
-                System.out.println("Operazione annullata");
+                System.out.println("\nOperazione annullata");
                 return; //Uso return e non break perchè devo saltare anche le fasi successive, altrimenti stamperebbe '0 proiezioni trovate' a vuoto
             }
             if(titolo.isEmpty()) 
             {
-                System.out.println("Errore: il titolo della proiezione non può essere vuoto");
+                System.out.println("\nErrore: il titolo della proiezione non può essere vuoto");
                 continue; //Uso il continue perchè se è vuoto non ha senso scansionare tutta la lista, riparto direttamente dall'inizio del metodo
             }
             for(Proiezione proiezione: listaProiezioni) 
             {
-                if(titolo.equalsIgnoreCase(proiezione.getTitolo())) 
+                if(titolo.equalsIgnoreCase(proiezione.getTitolo().trim())) 
                 {
                     risultatoParziale.add(proiezione);
                 }
             }
             if(risultatoParziale.isEmpty()) 
             {
-                System.out.println("Nessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
+                System.out.println("\nNessuna proiezione trovata con il titolo '" + titolo + "'. Riprova");
                 titolo = ""; //Reset del titolo per poter tornare ad inizio metodo senza input residui
             }
         }
@@ -606,7 +653,7 @@ public class Proiezionista extends Utente
 
         while(!selezioneValida) 
         {
-            System.out.println("-- Seleziona la proiezione esatta --");
+            System.out.println("\n--- Seleziona la proiezione esatta ---");
             LocalDate dataScelta = null;
             LocalTime oraScelta = null;
 
@@ -622,7 +669,7 @@ public class Proiezionista extends Utente
                 }    
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usa esattamente gg/mm/aaaa (es. 12/10/2026)");
+                    System.out.println("\nErrore di formato: usa esattamente gg/mm/aaaa (es. 12/10/2026)\n");
                 }
             }
 
@@ -638,7 +685,7 @@ public class Proiezionista extends Utente
                 }    
                 catch (Exception e) 
                 {
-                    System.out.println("Errore di formato: usa esattamente HH:mm (es. 9:30 oppure 21:30)");
+                    System.out.println("\nErrore di formato: usa esattamente HH:mm (es. 9:30 oppure 21:30)\n");
                 }
             }
 
@@ -656,16 +703,17 @@ public class Proiezionista extends Utente
             }
             if(!selezioneValida) 
             {
-                System.out.println("Nessuna proiezione corrisponde a questa data e ora");
+                System.out.println("\nNessuna proiezione corrisponde a questa data e ora\n");
             }
         }
 
         //Controllo se tutti i posti sono liberi per capire se ci sono prenotazioni per questa proiezione
         if(proiezioneDaEliminare.getPostiDisponibili() < 200) 
         {
-            System.out.println("Errore: impossibile modificare questa proiezione. Dei biglietti sono già stati venduti");
+            System.out.println("\nErrore: impossibile eliminare questa proiezione. Dei biglietti sono già stati venduti\n");
             return; //esci subito dal metodo
         }
         listaProiezioni.remove(proiezioneDaEliminare);
+        System.out.println("\nProiezione rimossa con successo!");
     }
 }
