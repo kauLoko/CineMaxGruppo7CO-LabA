@@ -170,7 +170,7 @@ public class Menu
                     Proiezionista.eliminaProiezione(scanner, listaProiezioni);
                     break;
                 case "0":
-                    System.out.println("Logout effettuato");
+                    System.out.println("\nLogout effettuato");
                     break;
                 default:
                     System.out.println("Opzione non valida: inserisci un numero tra 0 e 3");
@@ -205,10 +205,10 @@ public class Menu
                     Bigliettaio.visualizzaPrenotazione(scanner, utente, listaPrenotazioni);;
                     break;
                 case "0":
-                    System.out.println("Logout effettuato");
+                    System.out.println("\nLogout effettuato");
                     break;
                 default:
-                    System.out.println("Opzione non valida: inserisci un numero tra 0 e 2");
+                    System.out.println("\nOpzione non valida: inserisci un numero tra 0 e 2");
                     break;
             }
         } 
@@ -236,11 +236,31 @@ public class Menu
                     List<Proiezione> risultati = datiProiezioni.cercaProiezione(scanner, listaProiezioni);
                     if(risultati != null && !risultati.isEmpty()) 
                     {
-                        System.out.println("Vuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
-                        String risposta = scanner.nextLine().trim().toLowerCase();
-                        if (risposta.equals("s")) 
+                        while(true) 
                         {
-                            datiProiezioni.visualizzaProiezione(scanner, risultati);
+                            System.out.println("Vuoi visualizzare i dettagli di una di queste proiezioni? (s/n)");
+                            String risposta = scanner.nextLine().trim().toLowerCase();
+                            if (risposta.equals("s")) 
+                            {
+                                boolean visualizzata = datiProiezioni.visualizzaProiezione(scanner, risultati);
+                                if (visualizzata) 
+                                {
+                                    System.out.println("\nPer effetttuare una prenotazione devi registrarti come cliente o effettuare il login");
+                                }
+                                else 
+                                {
+                                    System.out.println("\nOperazione annullata, ritorno al menù");
+                                } break;
+                            }
+                            else if (risposta.equals("n")) 
+                            {
+                                System.out.println("\nOperazione annullata, ritorno al menù");
+                                break; 
+                            } 
+                            else 
+                            {
+                                System.out.println("\nOpzione non valida: inserire 's' per sì o 'n' per no\n");
+                            }
                         }
                     }
                     break;
@@ -264,7 +284,7 @@ public class Menu
      */
     public static void menuRegistrazioneUtente(Scanner scanner) 
     {
-        System.out.println("-- REGISTRAZIONE CLIENTE --");
+        System.out.println("\n--- REGISTRAZIONE CLIENTE ---");
         String nome = "";
         while (nome.isEmpty()) 
         {
@@ -299,14 +319,18 @@ public class Menu
         }
 
         String passwordChiara = "";
-        while (passwordChiara.isEmpty()) 
+        while (passwordChiara.length() < 8)
         {
-            System.out.print("Password: ");
+            System.out.print("Password (minimo 8 caratteri): ");
             passwordChiara = scanner.nextLine().trim();
             if (passwordChiara.isEmpty()) 
             {
-                System.out.println("Errore: la password non può essere vuoto.");
+                System.out.println("Errore: la password non può essere vuota.");
             } 
+            else if(passwordChiara.length() < 8) 
+            {
+                System.out.println("Errore: la password deve contenere almeno 8 caratteri.");
+            }
         }
 
         String nascita = "";

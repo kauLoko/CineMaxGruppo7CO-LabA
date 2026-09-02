@@ -63,9 +63,13 @@ public class Bigliettaio extends Utente
 
                         while(codicePrenotazione.isEmpty()) 
                         {
-                            System.out.println("Inserisci il codice della prenotazione da cercare: ");
-
+                            System.out.println("\nInserisci il codice della prenotazione da cercare (o 'esci' per tornare al menu): ");
                             codicePrenotazione = scanner.nextLine().trim();
+                            if(codicePrenotazione.equalsIgnoreCase("esci")) 
+                            {
+                                System.out.println("\nTornando al menu principale...");
+                                return risultatoRicerca;
+                            }
                             boolean trovato = false;
 
                             for(Prenotazione prenotazione : listaPrenotazioni) 
@@ -82,7 +86,7 @@ public class Bigliettaio extends Utente
 
                             if(!trovato) 
                             {
-                                System.out.println("Prenotazione non trovata");
+                                System.out.println("\nPrenotazione non trovata");
                                 codicePrenotazione = "";
                             }
                         }
@@ -93,8 +97,13 @@ public class Bigliettaio extends Utente
 
                         while(nomeCognomeCliente.isEmpty()) 
                         {
-                            System.out.println("\nInserisci il nome e cognome del cliente da cercare: ");
+                            System.out.println("\nInserisci il nome e cognome del cliente da cercare (o 'esci' per tornare al menu): ");
                             nomeCognomeCliente = scanner.nextLine().trim();
+                            if(nomeCognomeCliente.equalsIgnoreCase("esci")) 
+                            {
+                                System.out.println("\nTornando al menu principale...");
+                                return risultatoRicerca;
+                            }
                             boolean trovato = false;
 
                             for(Prenotazione prenotazione : listaPrenotazioni) 
@@ -112,7 +121,7 @@ public class Bigliettaio extends Utente
 
                             if(!trovato) 
                             {
-                                System.out.println("Prenotazione non trovata");
+                                System.out.println("\nPrenotazione non trovata");
                                 nomeCognomeCliente = "";
                             }
                         }
@@ -123,8 +132,13 @@ public class Bigliettaio extends Utente
 
                         while(titolo.isEmpty()) 
                         {
-                            System.out.println("\nInserisci il titolo del film da cercare: ");
+                            System.out.println("\nInserisci il titolo del film da cercare (o 'esci' per tornare al menu): ");
                             titolo = scanner.nextLine().trim();
+                            if(titolo.equalsIgnoreCase("esci")) 
+                            {
+                                System.out.println("\nTornando al menu principale...");
+                                return risultatoRicerca;
+                            }
                             boolean trovato = false;
 
                             for(Prenotazione prenotazione : listaPrenotazioni) 
@@ -140,7 +154,7 @@ public class Bigliettaio extends Utente
 
                             if(!trovato) 
                             {
-                                System.out.println("Prenotazione non trovata");
+                                System.out.println("\nPrenotazione non trovata");
                                 titolo = "";
                             }
                         }
@@ -150,15 +164,20 @@ public class Bigliettaio extends Utente
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
                         LocalDate dataInizio = null;
                         LocalDate dataFine = null;
-                        System.out.println("Puoi inserire un intervallo, altrimenti premere invio");
+                        System.out.println("Puoi inserire un intervallo, premere invio per visualizzare tutte le prenotazioni o inserire 'esci' per tornare al menu");
                         boolean inizioValido = false;
                         while(!inizioValido) 
                         {
-                            System.out.print("Data iniziale (gg/mm/aaaa)");
+                            System.out.print("Data iniziale (gg/mm/aaaa) o 'esci' per tornare al menu: ");
                             String inizio = scanner.nextLine().trim();
                             if(inizio.isEmpty()) 
                             {
                                 inizioValido = true; 
+                            }
+                            else if(inizio.equalsIgnoreCase("esci")) 
+                            {
+                                System.out.println("\nTornando al menu principale...");
+                                return risultatoRicerca;
                             }
                             else 
                             {
@@ -169,7 +188,7 @@ public class Bigliettaio extends Utente
                                 } 
                                 catch (Exception e) 
                                 {
-                                    System.out.println("Errore di formato: assicurati di usare esattamente gg/mm/aaaa");
+                                    System.out.println("\nErrore di formato: assicurati di usare esattamente gg/mm/aaaa");
                                 }
                             }
                         }
@@ -189,7 +208,7 @@ public class Bigliettaio extends Utente
                                     dataFine = LocalDate.parse(fine, formatter);
                                     if(dataInizio != null && dataFine.isBefore(dataInizio)) 
                                     {
-                                        System.out.println("Errore: la data finale non può essere precedente alla data iniziale");
+                                        System.out.println("\nErrore: la data finale non può essere precedente alla data iniziale");
                                     }
                                     else 
                                     {
@@ -198,7 +217,7 @@ public class Bigliettaio extends Utente
                                 } 
                                 catch (Exception e) 
                                 {
-                                    System.out.println("Errore di formato: assicurati di usare esattamente gg/mm/aaaa");
+                                    System.out.println("\nErrore di formato: assicurati di usare esattamente gg/mm/aaaa");
                                 }
                             }
                         }
@@ -219,16 +238,18 @@ public class Bigliettaio extends Utente
                         }
                         if(!dataTrovata) 
                         {
-                            System.out.println("Nessuna prenotazione trovata in questo periodo");
+                            System.out.println("\nNessuna prenotazione trovata in questo periodo");
                         }
                     inputValido = true;
                     break;
+                    default:
+                        System.out.println("\nScelta non valida, inserisci un numero tra 1 e 4");
                 }
             }                
         } 
         catch (Exception e) 
         {
-            System.out.println("Errore durante la ricerca della prenotazione: " + e.getMessage());
+            System.out.println("\nErrore durante la ricerca della prenotazione: " + e.getMessage());
         }
         return risultatoRicerca;
     }

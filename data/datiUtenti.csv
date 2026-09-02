@@ -1,15 +1,8 @@
 nome,cognome,username,password,nascita,domicilio,ruolo
-Mattia,Lanza,Tia22,Caciocavallo,22/08/2006,Erba,cliente
-Michelangelo,Bellucci
-Giuseppe,Esposito
-Roberto,Milani
-Emilio,Genovese
-Dino,Longo
-Damiano,Ferri
-Dario,Toscani
-Mattia,Lanza,Tia22,741e95c4afbb323ee48aa18e49f7c33b5a8c78511fd22e7b57d107dfdec65c09,22/08/2006,Erba,cliente
-Davide,Toppi,dav_,740f51d1eb5cfbd258f0f270fc1fe20b5665c34da4c8a860d82935a949ec1483,3/4/2006,Cant�,cliente
-Matteo,Paccagnella,Teox,ed252c2e4657f11b6784774f425f24222ad1172ab6f0d1287359947000de4a54,30/04/2006,Lentate,cliente
-Davide,Molteni,davmolteni17,e8f29a6966b1413e77790ab3b445d49129b50f19692b2e00c1d5f894587ff11d,24/6/1852,Como,cliente
-Giovanni,Brambilla,giobram23,06dafc506b36e81185af8bdcec51ff0a0418d0eb811ad0cf76fec1d45ec43104,31/10/2000,Varese,clienteAlessio,Turturro,Turtix,8b95aa25112f0710db65e4874381a8b59976cc58302c40f7434d379166939b78,07/01/2006,Vicenza,cliente
-Alessio,Turturro,Turtix,8b95aa25112f0710db65e4874381a8b59976cc58302c40f7434d379166939b78,14/10/2006,Vicenza,cliente
+Matteo,Paccagnella,Teox,ed252c2e4657f11b6784774f425f24222ad1172ab6f0d1287359947000de4a54,30/03/2006,Copreno,bigliettaio
+Giovanni,Fasana,Fasa10,0aa3ddf8e4717d6d0be41f5d8708cdb510c318a09b28f42e114688bb97cf9090,20/7/1977,Como,bigliettaio
+Nicoletta,Cenni,Cennik,62dab1715545277cc100c2de5aed551acdaa922b243b333bbb8db5cdda36a58a,1/1/1990,Cant�,proiezionista
+Mirko,Alessandrini,Mirko89,479eabd89e3ee29b6f3a3a87624a8aae5d5346734d0aae6a2281993632e8358b,8/8/1989,Roma,bigliettaio
+Mattia,Lanza,TiaLan,356b47a2ce29946ea5e9d1aceef7b09ce202e1925dd7ed508c4d7a811bb58f87,12/12/2006,Ponte Lambro,bigliettaio
+Luciano,Turri,Lucky,8bb5505f8056b9fb35c4740fc1b2ba28a1c1f19c93a8ee9dafb4013052b7ce28,7/8/2006,Carugo,bigliettaio
+Michele,Spettacolo,Mikes,b8e45dc228ea3072922e3f085a49f076b2df8bbfff5e5262ba2422e7057ee54b,10/9/1992,Roma,proiezionista
