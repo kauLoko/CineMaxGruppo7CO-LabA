@@ -173,7 +173,7 @@ public class Menu
                     System.out.println("\nLogout effettuato");
                     break;
                 default:
-                    System.out.println("Opzione non valida: inserisci un numero tra 0 e 3");
+                    System.out.println("\nOpzione non valida: inserisci un numero tra 0 e 3");
                     break;
             }
         } 
