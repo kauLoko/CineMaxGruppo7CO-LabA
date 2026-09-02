@@ -18,12 +18,12 @@ public class Bigliettaio extends Utente
 {
     /**
      * Costruttore della classe Bigliettaio
-     * @param nome Nome inserito in fase di registrazione
-     * @param cognome Cognome inserito in fase di registrazione
-     * @param username Username scelto dall'utente in fase di registrazione
-     * @param password Password cifrata
-     * @param nascita Data di nascita inserita in fase di registrazione
-     * @param domicilio Domicilio inserito in fase di registrazione
+     * @param <nome> Nome inserito in fase di registrazione
+     * @param <cognome> Cognome inserito in fase di registrazione
+     * @param <username> Username scelto dall'utente in fase di registrazione
+     * @param <password> Password cifrata
+     * @param <nascita> Data di nascita inserita in fase di registrazione
+     * @param <domicilio> Domicilio inserito in fase di registrazione
      */
     public Bigliettaio(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
@@ -32,8 +32,8 @@ public class Bigliettaio extends Utente
 
     /**
      * Crea un ArrayList contenente tutte le prenotazioni che rispondono ai criteri inseriti dall'utente che sarà utilizzato per il metodo di visualizzazione della prenotazione
-     * @param scanner Scanner utilizzato per ottenere l'input dell'utente 
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner utilizzato per ottenere l'input dell'utente 
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      * @return ArrayList contenente tutte le prenotazioni che rispondono ai criteri inseriti dall'utente 
      */
     public static List<Prenotazione> cercaPrenotazione(Scanner scanner, List<Prenotazione> listaPrenotazioni) 

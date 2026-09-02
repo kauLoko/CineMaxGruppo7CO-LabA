@@ -32,7 +32,7 @@ public class Menu
 
     /**
      * Mostra il menù principale all'avvio del programma
-     * @param scanner Scanner per raccogliere l'input dell'utente
+     * @param <scanner> Scanner per raccogliere l'input dell'utente
      * @return La scelta dell'utente 
      */
     public static String mostraMenuPrincipale(Scanner scanner) 
@@ -52,10 +52,10 @@ public class Menu
 
     /**
      * Mostra il menù del cliente registrato una volta eseguito il login
-     * @param scanner Scanner per ottenere l'input dell'utente
-     * @param utente Profilo dell'utente utilizzato per modifcare le sue prenotazioni
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente
+     * @param <utente> Profilo dell'utente utilizzato per modifcare le sue prenotazioni
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void menuUtenteLoggato(Scanner scanner, Utente utente, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
@@ -143,10 +143,10 @@ public class Menu
     
     /**
      * Mostra il menù del proiezionista una volta eseguito il login
-     * @param scanner Scanner per ottenere l'input dell'utente 
-     * @param utente Profilo del proiezionista
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente 
+     * @param <utente> Profilo del proiezionista
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void menuProiezionista(Scanner scanner, Utente utente, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
@@ -182,10 +182,10 @@ public class Menu
 
     /**
      * Mostra il menù del bigliettaio una volta eseguito il login
-     * @param scanner Scanner per ottenere l'input dell'utente
-     * @param utente Profilo del bigliettaio
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
-     * @param listaPrenotazioni Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente
+     * @param <utente> Profilo del bigliettaio
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <listaPrenotazioni> Array list contenente tutte le prenotazioni contenute all'interno del file 'prenotazioni.csv'
      */
     public static void menuBigliettaio(Scanner scanner, Utente utente, List<Proiezione> listaProiezioni, List<Prenotazione> listaPrenotazioni) 
     {
@@ -217,8 +217,8 @@ public class Menu
 
     /**
      * Mostra il menù dell'utente guest non registrato offrendo la possibilità di registrarsi o visualizzare una proiezione
-     * @param scanner Scanner per ottenere l'input dell'utente
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
      */
     public static void menuGuest(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
@@ -280,7 +280,7 @@ public class Menu
 
     /**
      * Mostra il menù per effettuare la registrazione di un nuovo utente e raccoglie i dati 
-     * @param scanner Scanner per ottenere l'input dell'utente
+     * @param <scanner> Scanner per ottenere l'input dell'utente
      */
     public static void menuRegistrazioneUtente(Scanner scanner) 
     {

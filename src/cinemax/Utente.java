@@ -28,13 +28,13 @@ public class Utente
 
     /**
      * Costruttore della classe Utente.
-     * @param nome Il nome dell'utente.
-     * @param cognome Il cognome dell'utente.
-     * @param username Lo username scelto dall'utente.
-     * @param password La password cifrata dell'utente.
-     * @param nascita La data di nascita dell'utente.
-     * @param domicilio Il domicilio dell'utente.
-     * @param ruolo Il ruolo dell'utente nel sistema (cliente, proiezionista, bigliettaio).
+     * @param <nome> Il nome dell'utente.
+     * @param <cognome> Il cognome dell'utente.
+     * @param <username> Lo username scelto dall'utente.
+     * @param <password> La password cifrata dell'utente.
+     * @param <nascita> La data di nascita dell'utente.
+     * @param <domicilio> Il domicilio dell'utente.
+     * @param <ruolo> Il ruolo dell'utente nel sistema (cliente, proiezionista, bigliettaio).
      */
     public Utente(String nome, String cognome, String username, String password, String nascita, String domicilio, Ruolo ruolo) 
     {
@@ -102,8 +102,8 @@ public class Utente
     /**
      * Esegue il login dell'utente confrontando le credenziali inserite con quelle presenti nel file CSV.
      * Cifra la password inserita e verifica se esiste un utente con lo stesso username e password cifrata.
-     * @param username Lo username inserito dall'utente.
-     * @param passwordChiara La password in chiaro inserita dall'utente.
+     * @param <username> Lo username inserito dall'utente.
+     * @param <passwordChiara> La password in chiaro inserita dall'utente.
      * @return Un oggetto Utente se il login ha successo, altrimenti null.
      */
     public static Utente eseguiLogin(String username, String passwordChiara) 
@@ -149,12 +149,12 @@ public class Utente
 
     /**
      * Metodo che gestisce la logica della registrazione di un nuovo cliente cifrando la password, creando l'oggetto Utente e aggiornando il file csv
-     * @param nome Il nome dell'utente
-     * @param cognome Il cognome dell'utente
-     * @param username Lo username scelto dall'utente
-     * @param passwordChiara La password inserita dall'utente prima di essere cifrata
-     * @param nascita La data di nascita inserita dall'utente
-     * @param domicilio Il domicilio inserito dall'utente
+     * @param <nome> Il nome dell'utente
+     * @param <cognome> Il cognome dell'utente
+     * @param <username> Lo username scelto dall'utente
+     * @param <passwordChiara> La password inserita dall'utente prima di essere cifrata
+     * @param <nascita> La data di nascita inserita dall'utente
+     * @param <domicilio> Il domicilio inserito dall'utente
      * @return true se la registrazione è avvenuta con successo
      */
     public static boolean registraNuovoCliente(String nome, String cognome, String username, String passwordChiara, String nascita, String domicilio) 
@@ -173,9 +173,9 @@ public class Utente
      * Visualizza le prenotazioni dell'utente in base al suo ruolo.
      * I clienti possono visualizzare le proprie prenotazioni, mentre i bigliettai possono cercare e visualizzare prenotazioni specifiche.
      * I proiezionisti non hanno accesso alla gestione delle prenotazioni.
-     * @param scanner Lo scanner per leggere l'input dell'utente.
-     * @param utente L'oggetto Utente che rappresenta l'utente attualmente loggato.
-     * @param listaPrenotazioni La lista delle prenotazioni disponibili nel sistema.
+     * @param <scanner> Lo scanner per leggere l'input dell'utente.
+     * @param <utente> L'oggetto Utente che rappresenta l'utente attualmente loggato.
+     * @param <listaPrenotazioni> La lista delle prenotazioni disponibili nel sistema.
      */
     public static void visualizzaPrenotazione(Scanner scanner, Utente utente, List<Prenotazione> listaPrenotazioni) 
     {

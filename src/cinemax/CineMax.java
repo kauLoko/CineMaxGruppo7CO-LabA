@@ -1,7 +1,8 @@
 package cinemax;
 import java.util.*;
 /**
- * Classe contenente il metodo main
+ * Classe contenente il metodo main. Gestisce il flusso principale del programma, inclusi il caricamento dei dati, la gestione del menu principale e l'interazione con gli utenti in base ai loro ruoli.
+ * Contiene anche la logica per aggiornare i posti disponibili nelle proiezioni in base alle prenotazioni esistenti e per salvare le modifiche apportate alle proiezioni e alle prenotazioni prima di uscire dal programma.
  * @author Toppi Davide, Matricola: 765309, Sede: CO
  * @author Molteni Davide, Matricola: 765300, Sede: CO 
  * @author Lanza Mattia Antonio, Matricola: 766287, Sede: CO 

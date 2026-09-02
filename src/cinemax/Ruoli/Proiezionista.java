@@ -18,12 +18,12 @@ public class Proiezionista extends Utente
 {
     /**
      * Costruttore della classe Proiezionista
-     * @param nome Nome inserito in fase di registrazione
-     * @param cognome Cognome inserito in fase di registrazione
-     * @param username Username scelto dall'utente in fase di registrazione
-     * @param password Password cifrata
-     * @param nascita Data di nascita inserita in fase di registrazione
-     * @param domicilio Domicilio inserito in fase di registrazione
+     * @param <nome Nome inserito in fase di registrazione
+     * @param <cognome Cognome inserito in fase di registrazione
+     * @param <username> Username scelto dall'utente in fase di registrazione
+     * @param <password> Password cifrata
+     * @param <nascita> Data di nascita inserita in fase di registrazione
+     * @param <domicilio> Domicilio inserito in fase di registrazione
      */
     public Proiezionista(String nome, String cognome, String username, String password, String nascita, String domicilio) 
     {
@@ -32,8 +32,8 @@ public class Proiezionista extends Utente
 
     /**
      * Crea un oggetto Proiezione con i parametri inseriti dall'utente e lo aggiunge a List<Proiezione> listaProiezioni
-     * @param scanner Scanner per ottenere l'input dell'utente 
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente 
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
      */
     public static void aggiungiProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
@@ -296,8 +296,8 @@ public class Proiezionista extends Utente
 
     /**
      * Permette di modificare i dettagli di una Proiezione e aggiorna l'oggetto in List<Proiezione> listaProiezioni se non sono state effettuate prenotazione
-     * @param scanner Scanner per ottenere l'input dell'utente 
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente 
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
      */
     public static void modificaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
@@ -602,8 +602,8 @@ public class Proiezionista extends Utente
 
     /**
      * Permette di eliminare una Proiezione da List<Proiezione> listaProiezioni se non sono state effettuate prenotazione 
-     * @param scanner Scanner per ottenere l'input dell'utente 
-     * @param listaProiezioni Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
+     * @param <scanner> Scanner per ottenere l'input dell'utente 
+     * @param <listaProiezioni> Array list contenente tutte le proiezioni contenute all'interno del file 'proiezioni.csv'
      */
     public static void eliminaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {

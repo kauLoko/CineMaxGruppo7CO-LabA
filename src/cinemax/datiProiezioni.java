@@ -80,8 +80,8 @@ public class datiProiezioni
     
     /**
      * Calcola il numero di posti liberi per una determinata proiezione.
-     * @param proiezione La proiezione per cui calcolare i posti liberi.
-     * @param listaPrenotazioni La lista delle prenotazioni.
+     * @param <proiezione> La proiezione per cui calcolare i posti liberi.
+     * @param <listaPrenotazioni> La lista delle prenotazioni.
      * @return Il numero di posti liberi.
      */
     public static int calcoloPostiLiberi(Proiezione proiezione, List<Prenotazione> listaPrenotazioni) 
@@ -99,8 +99,8 @@ public class datiProiezioni
     }
     /**
      * Cerca una proiezione in base ai criteri specificati dall'utente.
-     * @param scanner Lo scanner per leggere l'input dell'utente.
-     * @param listaProiezioni La lista delle proiezioni disponibili.
+     * @param <scanner> Lo scanner per leggere l'input dell'utente.
+     * @param <listaProiezioni> La lista delle proiezioni disponibili.
      * @return Una lista di proiezioni che corrispondono ai criteri di ricerca.
      */
     public static List<Proiezione> cercaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
@@ -391,8 +391,8 @@ public class datiProiezioni
 
     /**
      * Visualizza i dettagli di una proiezione specifica in base al titolo inserito dall'utente.
-     * @param scanner Lo scanner per leggere l'input dell'utente.
-     * @param risultatoRicerca La lista delle proiezioni trovate.
+     * @param <scanner> Lo scanner per leggere l'input dell'utente.
+     * @param <risultatoRicerca> La lista delle proiezioni trovate.
      * @return true se la proiezione è stata trovata e visualizzata, false se l'utente ha annullato l'operazione.
      */
     public static boolean visualizzaProiezione(Scanner scanner, List<Proiezione> risultatoRicerca) 
@@ -428,7 +428,7 @@ public class datiProiezioni
 
     /**
      * Salva le modifiche apportate alla lista delle proiezioni nel file CSV.
-     * @param lista La lista delle proiezioni da salvare.
+     * @param <lista> La lista delle proiezioni da salvare.
      */
     public static void salvaModificheProiezioni(List<Proiezione> lista) {
     try (PrintWriter pw = new PrintWriter(new FileWriter(fileProiezioni, false))) {
