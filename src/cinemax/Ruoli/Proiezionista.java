@@ -608,7 +608,7 @@ public class Proiezionista extends Utente
     public static void eliminaProiezione(Scanner scanner, List<Proiezione> listaProiezioni) 
     {
         //La selezione della proiezione da eliminare è uguale alla ricerca della proiezione da modificare del metodo precedente
-        List<Proiezione>  risultatoParziale = new ArrayList<>(); //Per salvare i risultati parziali
+        List<Proiezione>  risultatoParziale = new ArrayList<>(); //salvo i risultati parziali
         String titolo = "";
 
         while(titolo.isEmpty() && risultatoParziale.isEmpty()) 

@@ -41,7 +41,7 @@ public class datiProiezioni
                 for (int i = 0; i < riga.length(); i++) {
                     char c = riga.charAt(i);
                     if (c == '"') {
-                        // Trovata una virgoletta: accendiamo o spegniamo l'interruttore
+                        // Trova una virgoletta quindi si inverte
                         dentroVirgolette = !dentroVirgolette;
                     } 
                     else if (c == ',' && !dentroVirgolette) {
